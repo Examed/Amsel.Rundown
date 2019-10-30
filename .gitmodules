@@ -1,9 +1,0 @@
-[submodule "ingress"]
-	path = ingress
-	url = https://github.com/Examed/Amsel.Rundown.Ingress
-[submodule "dto"]
-	path = dto
-	url = https://github.com/Examed/Amsel.Rundown.dto
-[submodule "resources"]
-	path = resources
-	url = https://github.com/Examed/Amsel.Rundown.Resources
