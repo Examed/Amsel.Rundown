@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Amsel.DTO.Rundown.Enums
+namespace Amsel.Enums.Rundown.Enums
 {
     [Flags]
     public enum ERundownFlags

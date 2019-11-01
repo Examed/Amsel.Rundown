@@ -1,4 +1,4 @@
-﻿using Amsel.DTO.Rundown.Enums;
+﻿using Amsel.Enums.Rundown.Enums;
 
 namespace Amsel.DTO.Rundown.Models
 {

@@ -1,8 +1,8 @@
 ﻿using System.Threading;
-using Amsel.DTO.Rundown.Enums;
+using Amsel.Enums.Rundown.Enums;
 using TracerAttributes;
 
-namespace Amsel.DTO.Rundown.Helper
+namespace Amsel.Enums.Rundown.Helper
 {
     [NoTrace]
     public static class RundownSequenceHelper

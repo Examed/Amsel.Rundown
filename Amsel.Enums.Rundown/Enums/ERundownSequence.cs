@@ -1,4 +1,4 @@
-﻿namespace Amsel.DTO.Rundown.Enums
+﻿namespace Amsel.Enums.Rundown.Enums
 {
     public enum ERundownSequence
     {
