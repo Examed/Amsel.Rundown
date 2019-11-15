@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NLog" Version="4.6.7" />
-    <PackageReference Include="Tracer.4NLog.Fody" Version="3.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Amsel.Enums.Rundown\Amsel.Enums.Rundown.csproj" />
   </ItemGroup>
 

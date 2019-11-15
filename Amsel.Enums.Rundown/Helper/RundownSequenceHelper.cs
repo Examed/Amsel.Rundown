@@ -7,6 +7,8 @@ namespace Amsel.Enums.Rundown.Helper
     [NoTrace]
     public static class RundownSequenceHelper
     {
+        #region Public Methods
+
         public static bool DoNotExcecuteSequence(this ERundownSequence sequence, CancellationToken cancellationToken,
             bool rundownSetIsVisible = true)
         {
@@ -31,9 +33,20 @@ namespace Amsel.Enums.Rundown.Helper
             return false;
         }
 
+        public static bool IsAfterTransitionOut(this ERundownSequence sequence)
+        {
+            return sequence.CompareTo(ERundownSequence.TRANSITION_OUT_STOP) > 0;
+        }
+
         public static bool IsBeforeTransitionIn(this ERundownSequence sequence)
         {
             return sequence.CompareTo(ERundownSequence.TRANSITION_IN) < 0;
+        }
+
+        public static bool IsBetweenTransitions(this ERundownSequence sequence)
+        {
+            return sequence.CompareTo(ERundownSequence.TRANSITION_IN_STOP) > 0 &&
+                   sequence.CompareTo(ERundownSequence.TRANSITION_OUT_LOAD) < 0;
         }
 
         public static bool IsTransitionIn(this ERundownSequence sequence)
@@ -42,23 +55,12 @@ namespace Amsel.Enums.Rundown.Helper
                    sequence.CompareTo(ERundownSequence.TRANSITION_IN_STOP) <= 0;
         }
 
-
-        public static bool IsBetweenTransitions(this ERundownSequence sequence)
-        {
-            return sequence.CompareTo(ERundownSequence.TRANSITION_IN_STOP) > 0 &&
-                   sequence.CompareTo(ERundownSequence.TRANSITION_OUT_LOAD) < 0;
-        }
-
         public static bool IsTransitionOut(this ERundownSequence sequence)
         {
             return sequence.CompareTo(ERundownSequence.TRANSITION_OUT_LOAD) >= 0 &&
                    sequence.CompareTo(ERundownSequence.TRANSITION_OUT_STOP) <= 0;
         }
 
-
-        public static bool IsAfterTransitionOut(this ERundownSequence sequence)
-        {
-            return sequence.CompareTo(ERundownSequence.TRANSITION_OUT_STOP) > 0;
-        }
+        #endregion Public Methods
     }
 }
