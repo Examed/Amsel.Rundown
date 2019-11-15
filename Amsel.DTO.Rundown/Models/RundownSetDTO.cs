@@ -3,7 +3,7 @@ using Amsel.Enums.Rundown.Enums;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownSetDTO 
+    public class RundownSetDTO
     {
         public ERundownFlags AllocatedFlags { get; set; }
 

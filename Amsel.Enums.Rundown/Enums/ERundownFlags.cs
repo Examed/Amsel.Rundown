@@ -12,7 +12,7 @@ namespace Amsel.Enums.Rundown.Enums
         NO_CAM = (1 << 2) & ~CAM,
 
         CHROMA = CAM | (1 << 3),
-        NO_CHROMA = (1 << 4) & ~CHROMA,
+        NO_CHROMA = (1    << 4) & ~CHROMA,
 
         DUO = 1 << 5,
         NO_DUO = (1 << 6) & ~DUO,

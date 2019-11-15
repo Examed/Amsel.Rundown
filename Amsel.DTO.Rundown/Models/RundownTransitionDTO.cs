@@ -2,7 +2,7 @@
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownTransitionDTO 
+    public class RundownTransitionDTO
     {
         public IList<RundownCollectionDTO> Collections { get; set; }
 

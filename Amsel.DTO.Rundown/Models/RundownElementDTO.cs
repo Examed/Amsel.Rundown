@@ -2,7 +2,7 @@
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownElementDTO 
+    public class RundownElementDTO
     {
         public string Parameters { get; set; }
 
