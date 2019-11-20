@@ -38,7 +38,7 @@ namespace Amsel.Enums.Rundown.Helper
         }
 
         public static bool IsBetweenTransitions(this ERundownSequence sequence) {
-            return sequence.CompareTo(ERundownSequence.TRANSITION_IN_STOP)  > 0 &&
+            return sequence.CompareTo(ERundownSequence.TRANSITION_IN_STOP) > 0 &&
                    sequence.CompareTo(ERundownSequence.TRANSITION_OUT_LOAD) < 0;
         }
 

@@ -6,7 +6,5 @@
           logger="Tracer.NLog.Adapters.LoggerAdapter"
           staticLogger="Tracer.NLog.Log"
           traceConstructors="true"
-          traceProperties="false">
-    <TraceOn class="private" method="private" />
-  </Tracer>
+          traceProperties="false"><TraceOn class="private" method="private" /></Tracer>
 </Weavers>
