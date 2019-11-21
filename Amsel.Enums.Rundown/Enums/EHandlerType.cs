@@ -2,6 +2,7 @@
 {
     public enum EHandlerType
     {
+        NONE,
         STREAMLABS_OBS
     }
 }
