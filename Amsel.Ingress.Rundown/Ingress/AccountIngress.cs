@@ -39,7 +39,7 @@ namespace Amsel.Ingress.Authentication.Ingress
         #endregion
 
         [NotNull]
-        public async Task<bool> QueueConnection(EHandlerType handlerType, [NotNull] string functionName, [NotNull] Dictionary<string, string> values)
+        public async void QueueConnection(EHandlerType handlerType, [NotNull] string functionName, [NotNull] Dictionary<string, string> values)
         {
             if (functionName == null) throw new ArgumentNullException(nameof(functionName));
             if (values == null) throw new ArgumentNullException(nameof(values));
@@ -49,9 +49,7 @@ namespace Amsel.Ingress.Authentication.Ingress
             var data = new RundownConnectionDTO(handlerType, functionName, values);
             var json = JsonConvert.SerializeObject(data);
             var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await PostAsync(GetByConnection, stringContent);
-            return response.IsSuccessStatusCode;
+            await PostAsync(GetByConnection, stringContent);
         }
     }
 }

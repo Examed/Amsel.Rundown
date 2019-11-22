@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using Amsel.Enums.Rundown.Enums;
-using TracerAttributes;
+using Amsel.Framework.Logging.Methods;
 
 namespace Amsel.Enums.Rundown.Helper
 {
