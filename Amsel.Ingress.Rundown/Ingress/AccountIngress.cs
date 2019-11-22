@@ -25,7 +25,7 @@ namespace Amsel.Ingress.Authentication.Ingress
         [NotNull]
         private static readonly APIAddress GetByConnection = new APIAddress(RundownEndpointResources.ENDPOINT,
             RundownEndpointResources.RUNDOWN_SET,
-            RundownSetControllerResources.GET_BY_CONNECTION, true);
+            RundownSetControllerResources.ENQUEUE_BY_CONNECTION, true);
 
         #endregion
 

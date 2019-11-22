@@ -8,7 +8,7 @@
         public const string GET_ALL = "all";
         public const string GET_BY_NAME = "getByName/{name}";
         public const string GET_BY_ID = "get/{id}";
-        public const string GET_BY_CONNECTION = "get";
+        public const string ENQUEUE_BY_CONNECTION = "enqueue/connection";
 
         #endregion
     }
