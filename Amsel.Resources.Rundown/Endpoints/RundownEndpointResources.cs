@@ -1,4 +1,4 @@
-﻿namespace Amsel.Resources.Authentication.Endpoints
+﻿namespace Amsel.Resources.Rundown.Endpoints
 {
     public static class RundownEndpointResources
     {

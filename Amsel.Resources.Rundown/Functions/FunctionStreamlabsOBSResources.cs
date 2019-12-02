@@ -1,4 +1,4 @@
-﻿namespace Amsel.Resources.Authentication.Endpoints
+﻿namespace Amsel.Resources.Rundown.Functions
 {
     public static class FunctionStreamlabsOBSResources
     {

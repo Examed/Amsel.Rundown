@@ -1,9 +1,9 @@
-﻿namespace Amsel.Resources.Authentication.Controller
+﻿namespace Amsel.Resources.Rundown.Controller
 {
     public static class RundownSetControllerResources
     {
         #region STATICS, CONST and FIELDS
-        
+
         public const string CREATE = "create";
         public const string GET_ALL = "all";
         public const string GET_BY_NAME = "getByName/{name}";

@@ -9,9 +9,9 @@
         TRANSITION_IN = 25,
         TRANSITION_IN_STOP = 30,
 
-        WHILE_Pre = 40,
+        WHILE_PRE = 40,
         WHILE = 50,
-        WHILE_Post = 60,
+        WHILE_POST = 60,
 
         WAIT = 65,
 
