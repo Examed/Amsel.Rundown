@@ -19,11 +19,14 @@ namespace Amsel.DTO.Rundown.Models
         public virtual RundownSetDTO RundownSet { get; set; }
         public virtual ERundownStatus Status { get; set; }
 
+        #region Nested type: ValueDTO
+
         public class ValueDTO
         {
             public virtual string Parameter { get; set; }
             public virtual string Value { get; set; }
-
         }
+
+        #endregion
     }
 }
