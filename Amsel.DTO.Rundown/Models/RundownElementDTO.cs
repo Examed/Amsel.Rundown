@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Amsel.Enums.Rundown.Enums;
-using JetBrains.Annotations;
 
 namespace Amsel.DTO.Rundown.Models
 {
@@ -16,7 +15,7 @@ namespace Amsel.DTO.Rundown.Models
         public virtual string Description { get; set; }
         public virtual ERundownSequence Sequence { get; set; }
         public virtual string Title { get; set; }
-    public virtual List<ValueDTO> Values { get; set; }
+        public virtual List<ValueDTO> Values { get; set; }
         public virtual RundownSetDTO RundownSet { get; set; }
         public virtual ERundownStatus Status { get; set; }
 

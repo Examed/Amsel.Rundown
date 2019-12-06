@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using Amsel.Enums.Rundown.Enums;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Amsel.DTO.Rundown.Models
 {
