@@ -9,6 +9,8 @@ using Amsel.Enums.Rundown.Enums;
 using Amsel.Framework.Infrastruktur.Application.Interfaces;
 using Amsel.Framework.Infrastruktur.Application.Models.Address;
 using Amsel.Framework.Infrastruktur.Application.Service;
+using Amsel.Ingress.Authentication.Ingress;
+using Amsel.Resources.Authentication.Controller;
 using Amsel.Resources.Rundown.Controller;
 using Amsel.Resources.Rundown.Endpoints;
 using JetBrains.Annotations;
@@ -16,7 +18,7 @@ using Newtonsoft.Json;
 
 namespace Amsel.Ingress.Rundown.Ingress
 {
-    public class RundownSetIngress : GenericIngress
+    public class RundownSetIngress : CRUDIngress<RundownSetDTO>
     {
         #region STATICS, CONST and FIELDS
 
@@ -43,5 +45,25 @@ namespace Amsel.Ingress.Rundown.Ingress
             StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
             return PostAsync(GetByConnection, stringContent);
         }
+
+        /// <inheritdoc />
+        protected override APIAddress ReadAddress  => new APIAddress(RundownEndpointResources.ENDPOINT,
+                                                                    RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.READ);
+
+
+        /// <inheritdoc />
+        protected override APIAddress InsertAddress  => new APIAddress(RundownEndpointResources.ENDPOINT,
+                                                                       RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.INSERT);
+
+
+        /// <inheritdoc />
+        protected override APIAddress UpdateAddress  => new APIAddress(RundownEndpointResources.ENDPOINT,
+                                                                       RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.UPDATE);
+
+
+        /// <inheritdoc />
+        protected override APIAddress RemoveAddress  => new APIAddress(RundownEndpointResources.ENDPOINT,
+                                                                       RundownEndpointResources.RUNDOWN_SET,  CRUDControllerResources.REMOVE);
+
     }
 }
