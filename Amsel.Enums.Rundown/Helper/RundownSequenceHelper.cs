@@ -1,10 +1,9 @@
 ﻿using System.Threading;
 using Amsel.Enums.Rundown.Enums;
-using Amsel.Framework.Logging.Attribute;
 
 namespace Amsel.Enums.Rundown.Helper
 {
-    [NoTrace]
+
     public static class RundownSequenceHelper
     {
         public static bool DoNotExcecuteSequence(this ERundownSequence sequence, CancellationToken cancellationToken, bool rundownSetIsVisible = true) {
