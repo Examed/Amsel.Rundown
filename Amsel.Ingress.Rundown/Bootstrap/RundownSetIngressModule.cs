@@ -8,7 +8,7 @@ namespace Amsel.Ingress.Rundown.Bootstrap
     {
         protected override void Load(ContainerBuilder builder) {
             builder.RegisterType<RundownSetIngress>();
-
+            builder.RegisterType<RundownElementIngress>();
             base.Load(builder);
         }
     }
