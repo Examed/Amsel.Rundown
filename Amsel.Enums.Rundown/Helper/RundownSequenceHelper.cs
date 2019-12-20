@@ -3,7 +3,6 @@ using Amsel.Enums.Rundown.Enums;
 
 namespace Amsel.Enums.Rundown.Helper
 {
-
     public static class RundownSequenceHelper
     {
         public static bool DoNotExcecuteSequence(this ERundownSequence sequence, CancellationToken cancellationToken, bool rundownSetIsVisible = true) {

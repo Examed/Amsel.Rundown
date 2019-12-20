@@ -33,6 +33,21 @@ namespace Amsel.Ingress.Rundown.Ingress
 
         #endregion
 
+        /// <inheritdoc />
+        protected override APIAddress ReadAddress => new APIAddress(RundownEndpointResources.ENDPOINT, RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.READ);
+
+
+        /// <inheritdoc />
+        protected override APIAddress InsertAddress => new APIAddress(RundownEndpointResources.ENDPOINT, RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.INSERT);
+
+
+        /// <inheritdoc />
+        protected override APIAddress UpdateAddress => new APIAddress(RundownEndpointResources.ENDPOINT, RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.UPDATE);
+
+
+        /// <inheritdoc />
+        protected override APIAddress RemoveAddress => new APIAddress(RundownEndpointResources.ENDPOINT, RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.REMOVE);
+
         public Task<HttpResponseMessage> QueueConnectionAsync(EHandlerType handlerType, [NotNull] string functionName, [NotNull] Dictionary<string, string> values) {
             if (functionName == null) throw new ArgumentNullException(nameof(functionName));
             if (values == null) throw new ArgumentNullException(nameof(values));
@@ -44,25 +59,5 @@ namespace Amsel.Ingress.Rundown.Ingress
             StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
             return PostAsync(GetByConnection, stringContent);
         }
-
-        /// <inheritdoc />
-        protected override APIAddress ReadAddress  => new APIAddress(RundownEndpointResources.ENDPOINT,
-                                                                    RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.READ);
-
-
-        /// <inheritdoc />
-        protected override APIAddress InsertAddress  => new APIAddress(RundownEndpointResources.ENDPOINT,
-                                                                       RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.INSERT);
-
-
-        /// <inheritdoc />
-        protected override APIAddress UpdateAddress  => new APIAddress(RundownEndpointResources.ENDPOINT,
-                                                                       RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.UPDATE);
-
-
-        /// <inheritdoc />
-        protected override APIAddress RemoveAddress  => new APIAddress(RundownEndpointResources.ENDPOINT,
-                                                                       RundownEndpointResources.RUNDOWN_SET,  CRUDControllerResources.REMOVE);
-
     }
 }

@@ -6,7 +6,7 @@ namespace Amsel.DTO.Rundown.Models
 {
     public class RundownSetDTO
     {
-        [Key, Display(Name = nameof(Id))]
+        [Key] [Display(Name = nameof(Id))]
         public virtual Guid Id { get; set; }
 
         [Display(Name = nameof(Description))]
@@ -15,7 +15,7 @@ namespace Amsel.DTO.Rundown.Models
         public List<RundownElementDTO> Elements { get; set; }
         public List<RundownWidgetDTO> Widgets { get; set; }
 
-        [Display(Name = nameof(Name)), Required(ErrorMessage = "Field should not be empty")]
+        [Display(Name = nameof(Name))] [Required(ErrorMessage = "Field should not be empty")]
         public virtual string Name { get; set; }
 
         [Display(Name = nameof(Priority))]

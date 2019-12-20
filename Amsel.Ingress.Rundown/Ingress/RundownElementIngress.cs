@@ -9,8 +9,6 @@ namespace Amsel.Ingress.Rundown.Ingress
 {
     public class RundownElementIngress : CRUDIngress<RundownElementDTO>
     {
-       
-
         #region  CONSTRUCTORS
 
         public RundownElementIngress(IAuthService authenticationService) : base(authenticationService) { }
@@ -18,23 +16,18 @@ namespace Amsel.Ingress.Rundown.Ingress
         #endregion
 
         /// <inheritdoc />
-        protected override APIAddress ReadAddress  => new APIAddress(RundownEndpointResources.ENDPOINT,
-            RundownEndpointResources.RUNDOWN_ELEMENT, CRUDControllerResources.READ);
+        protected override APIAddress ReadAddress => new APIAddress(RundownEndpointResources.ENDPOINT, RundownEndpointResources.RUNDOWN_ELEMENT, CRUDControllerResources.READ);
 
 
         /// <inheritdoc />
-        protected override APIAddress InsertAddress  => new APIAddress(RundownEndpointResources.ENDPOINT,
-            RundownEndpointResources.RUNDOWN_ELEMENT, CRUDControllerResources.INSERT);
+        protected override APIAddress InsertAddress => new APIAddress(RundownEndpointResources.ENDPOINT, RundownEndpointResources.RUNDOWN_ELEMENT, CRUDControllerResources.INSERT);
 
 
         /// <inheritdoc />
-        protected override APIAddress UpdateAddress  => new APIAddress(RundownEndpointResources.ENDPOINT,
-            RundownEndpointResources.RUNDOWN_ELEMENT, CRUDControllerResources.UPDATE);
+        protected override APIAddress UpdateAddress => new APIAddress(RundownEndpointResources.ENDPOINT, RundownEndpointResources.RUNDOWN_ELEMENT, CRUDControllerResources.UPDATE);
 
 
         /// <inheritdoc />
-        protected override APIAddress RemoveAddress  => new APIAddress(RundownEndpointResources.ENDPOINT,
-            RundownEndpointResources.RUNDOWN_ELEMENT,  CRUDControllerResources.REMOVE);
-
+        protected override APIAddress RemoveAddress => new APIAddress(RundownEndpointResources.ENDPOINT, RundownEndpointResources.RUNDOWN_ELEMENT, CRUDControllerResources.REMOVE);
     }
 }
