@@ -9,6 +9,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Amsel.Framework\Amsel.Framework.Structure\Amsel.Framework.Structure\Amsel.Framework.Structure.csproj" />
     <ProjectReference Include="..\..\Amsel.Authentication\Amsel.Ingress.Authentication\Amsel.Ingress.Authentication.csproj" />
     <ProjectReference Include="..\Amsel.DTO.Rundown\Amsel.DTO.Rundown.csproj" />
     <ProjectReference Include="..\Amsel.Enums.Rundown\Amsel.Enums.Rundown.csproj" />
