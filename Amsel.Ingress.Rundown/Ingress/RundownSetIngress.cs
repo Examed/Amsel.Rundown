@@ -55,9 +55,8 @@ namespace Amsel.Ingress.Rundown.Ingress
                 throw new InvalidEnumArgumentException(nameof(handlerType), (int) handlerType, typeof(EHandlerType));
 
             RundownConnectionDTO data = new RundownConnectionDTO(handlerType, functionName, values);
-            string json = JsonConvert.SerializeObject(data);
-            StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-            return PostAsync(GetByConnection, stringContent);
+          
+            return PostAsync(GetByConnection, GetJsonContent(data));
         }
     }
 }
