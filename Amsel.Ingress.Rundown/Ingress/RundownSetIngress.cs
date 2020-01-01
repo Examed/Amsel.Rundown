@@ -21,9 +21,7 @@ namespace Amsel.Ingress.Rundown.Ingress
     {
         #region STATICS, CONST and FIELDS
 
-        [NotNull]
-        private static readonly APIAddress GetByConnection = new APIAddress(RundownEndpointResources.ENDPOINT,
-                                                                            RundownEndpointResources.RUNDOWN_SET, RundownSetControllerResources.ENQUEUE_BY_CONNECTION);
+        [NotNull] private APIAddress GetByConnection => new APIAddress(Endpoint,Resource, RundownSetControllerResources.ENQUEUE_BY_CONNECTION);
 
         #endregion
 
@@ -33,30 +31,23 @@ namespace Amsel.Ingress.Rundown.Ingress
 
         #endregion
 
-        /// <inheritdoc />
-        protected override APIAddress ReadAddress => new APIAddress(RundownEndpointResources.ENDPOINT, RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.READ);
 
-
-        /// <inheritdoc />
-        protected override APIAddress InsertAddress => new APIAddress(RundownEndpointResources.ENDPOINT, RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.INSERT);
-
-
-        /// <inheritdoc />
-        protected override APIAddress UpdateAddress => new APIAddress(RundownEndpointResources.ENDPOINT, RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.UPDATE);
-
-
-        /// <inheritdoc />
-        protected override APIAddress RemoveAddress => new APIAddress(RundownEndpointResources.ENDPOINT, RundownEndpointResources.RUNDOWN_SET, CRUDControllerResources.REMOVE);
-
-        public Task<HttpResponseMessage> QueueConnectionAsync(EHandlerType handlerType, [NotNull] string functionName, [NotNull] Dictionary<string, string> values) {
+        public Task<HttpResponseMessage> QueueConnectionAsync(EHandlerType handlerType, [NotNull] string functionName, [NotNull] Dictionary<string, string> values)
+        {
             if (functionName == null) throw new ArgumentNullException(nameof(functionName));
             if (values == null) throw new ArgumentNullException(nameof(values));
             if (!Enum.IsDefined(typeof(EHandlerType), handlerType))
-                throw new InvalidEnumArgumentException(nameof(handlerType), (int) handlerType, typeof(EHandlerType));
+                throw new InvalidEnumArgumentException(nameof(handlerType), (int)handlerType, typeof(EHandlerType));
 
             RundownConnectionDTO data = new RundownConnectionDTO(handlerType, functionName, values);
-          
+
             return PostAsync(GetByConnection, GetJsonContent(data));
         }
+
+        /// <inheritdoc />
+        protected override string Endpoint => RundownEndpointResources.ENDPOINT;
+
+        /// <inheritdoc />
+        protected override string Resource => RundownEndpointResources.RUNDOWN_SET;
     }
 }
