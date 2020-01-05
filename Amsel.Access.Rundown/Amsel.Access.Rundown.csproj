@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -10,7 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Amsel.Framework\Amsel.Framework.Structure\Amsel.Framework.Structure\Amsel.Framework.Structure.csproj" />
-    <ProjectReference Include="..\..\Amsel.Authentication\Amsel.Ingress.Authentication\Amsel.Ingress.Authentication.csproj" />
+    <ProjectReference Include="..\..\Amsel.Authentication\Amsel.Access.Authentication\Amsel.Access.Authentication.csproj" />
     <ProjectReference Include="..\Amsel.DTO.Rundown\Amsel.DTO.Rundown.csproj" />
     <ProjectReference Include="..\Amsel.Enums.Rundown\Amsel.Enums.Rundown.csproj" />
     <ProjectReference Include="..\Amsel.Resources.Rundown\Amsel.Resources.Rundown.csproj" />

@@ -1,15 +1,15 @@
-﻿using Amsel.DTO.Rundown.Models;
+﻿using Amsel.Access.Authentication.Services;
+using Amsel.DTO.Rundown.Models;
 using Amsel.Framework.Structure.Interfaces;
-using Amsel.Ingress.Authentication.Ingress;
 using Amsel.Resources.Rundown.Endpoints;
 
-namespace Amsel.Ingress.Rundown.Ingress
+namespace Amsel.Access.Rundown.Services
 {
-    public class RundownElementIngress : CRUDIngress<RundownElementDTO>
+    public class RundownElementAccess : CRUDAccess<RundownElementDTO>
     {
         #region  CONSTRUCTORS
 
-        public RundownElementIngress(IAuthService authenticationService) : base(authenticationService) { }
+        public RundownElementAccess(IAuthService authenticationService) : base(authenticationService) { }
 
         #endregion
 

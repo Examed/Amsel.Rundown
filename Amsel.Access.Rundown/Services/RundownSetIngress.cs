@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Amsel.Access.Authentication.Services;
 using Amsel.DTO.Rundown.Models;
 using Amsel.Enums.Rundown.Enums;
 using Amsel.Framework.Structure.Interfaces;
 using Amsel.Framework.Structure.Models.Address;
-using Amsel.Ingress.Authentication.Ingress;
 using Amsel.Resources.Rundown.Controller;
 using Amsel.Resources.Rundown.Endpoints;
 using JetBrains.Annotations;
 
-namespace Amsel.Ingress.Rundown.Ingress
+namespace Amsel.Access.Rundown.Services
 {
-    public class RundownSetIngress : CRUDIngress<RundownSetDTO>
+    public class RundownSetAccess : CRUDAccess<RundownSetDTO>
     {
         #region  CONSTRUCTORS
 
-        public RundownSetIngress(IAuthService authenticationService) : base(authenticationService) { }
+        public RundownSetAccess(IAuthService authenticationService) : base(authenticationService) { }
 
         #endregion
 
