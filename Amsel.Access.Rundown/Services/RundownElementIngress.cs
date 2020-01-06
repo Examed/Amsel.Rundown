@@ -17,6 +17,6 @@ namespace Amsel.Access.Rundown.Services
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
 
         /// <inheritdoc />
-        protected override string Resource => RundownEndpointResources.RUNDOWN_ELEMENT;
+        protected override string Resource => RundownEndpointResources.ELEMENT;
     }
 }
