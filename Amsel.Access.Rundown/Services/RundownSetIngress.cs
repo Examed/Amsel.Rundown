@@ -30,7 +30,7 @@ namespace Amsel.Access.Rundown.Services
 
         /// <inheritdoc />
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
-
+        protected override bool Local =>true;
         /// <inheritdoc />
         protected override string Resource => RundownEndpointResources.SET;
 
