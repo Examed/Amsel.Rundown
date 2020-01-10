@@ -15,12 +15,15 @@ namespace Amsel.DTO.Rundown.Models
         public List<RundownElementDTO> Elements { get; set; }
         public List<RundownWidgetDTO> Widgets { get; set; }
 
+
         [Display(Name = nameof(Name))] [Required(ErrorMessage = "Field should not be empty")]
         public virtual string Name { get; set; }
 
-        [Display(Name = nameof(Priority))]
-        public virtual float Priority { get; set; }
+        // TODO add to Blazor
+        [Range(0,100)]
+        [Display(Name = nameof(Priority))] public virtual float Priority { get; set; } = 10;
 
+        [Required]
         public virtual RundownQueueDTO Queue { get; set; }
         public virtual ERundownStatus Status { get; set; }
     }
