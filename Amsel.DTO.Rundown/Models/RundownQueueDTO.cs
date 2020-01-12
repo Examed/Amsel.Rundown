@@ -9,7 +9,7 @@ namespace Amsel.DTO.Rundown.Models
 
         [Required]
         public virtual string Name { get; set; }
-      
+
         public virtual bool StopOnNew { get; set; }
     }
 }

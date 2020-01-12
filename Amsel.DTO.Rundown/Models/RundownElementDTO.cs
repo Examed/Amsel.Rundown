@@ -7,6 +7,15 @@ namespace Amsel.DTO.Rundown.Models
 {
     public class RundownElementDTO
     {
+        public RundownElementDTO([NotNull] RundownFunctionDTO function, ERundownSequence sequence = ERundownSequence.WHILE, int delay = 0, bool canTrigger = false) {
+            Function = function;
+            CanTriggerRundownSet = canTrigger;
+            Title = function.Title + "_" + Id;
+            Delay = delay;
+            Sequence = sequence;
+        }
+
+        public RundownElementDTO() { }
         public virtual Guid Id { get; set; }
         public virtual bool CanTriggerRundownSet { get; set; }
         public virtual int Delay { get; set; }
@@ -19,29 +28,19 @@ namespace Amsel.DTO.Rundown.Models
         public virtual RundownSetDTO RundownSet { get; set; }
         public virtual ERundownStatus Status { get; set; }
 
-        public RundownElementDTO([NotNull] RundownFunctionDTO function, ERundownSequence sequence = ERundownSequence.WHILE, int delay = 0, bool canTrigger = false)
-        {
-            Function = function;
-            CanTriggerRundownSet = canTrigger;
-            Title = function.Title + "_" + Id;
-            Delay = delay;
-            Sequence = sequence;
-        }
-
-        public RundownElementDTO(){}
+        #region Nested type: ValueDTO
 
         public class ValueDTO
         {
-            public ValueDTO([NotNull] RundownParameterDTO parameter, string value)
-            {
+            public ValueDTO([NotNull] RundownParameterDTO parameter, string value) {
                 Parameter = parameter ?? throw new ArgumentNullException(nameof(parameter));
                 Value = value;
             }
 
-            public virtual RundownParameterDTO Parameter{ get; set; }
+            public virtual RundownParameterDTO Parameter { get; set; }
             public virtual string Value { get; set; }
         }
 
+        #endregion
     }
-
 }
