@@ -18,7 +18,7 @@ namespace Amsel.Access.Rundown.Services
     {
         #region  CONSTRUCTORS
 
-        public RundownSetAccess(IAuthService authenticationService) : base(authenticationService) { }
+        public RundownSetAccess(IAuthenticationService authenticationService) : base(authenticationService) { }
 
         #endregion
 
