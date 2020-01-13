@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Amsel.Enums.Rundown.Enums;
-using Amsel.Framework.Utilities.Extentions.Guids;
 
 namespace Amsel.DTO.Rundown.Models
 {
-
-    public class GuidEntityDTO
-    {
-        [Key]
-        [Display(Name = nameof(Id))]
-        public Guid Id { get; set; } = SequentialGuid.NewMySqlGuid();
-
-    }
     public class RundownSetDTO : GuidEntityDTO
     {
 
