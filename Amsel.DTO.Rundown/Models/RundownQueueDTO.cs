@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownQueueDTO:GuidEntityDTO
+    public class RundownQueueDTO : GuidEntityDTO
     {
 
         [Required]

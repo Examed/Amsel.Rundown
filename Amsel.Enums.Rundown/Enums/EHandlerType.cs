@@ -5,4 +5,11 @@
         NONE,
         STREAMLABS_OBS
     }
+
+    public enum EParameterType
+    {
+        STRING,
+        BOOLEAN,
+        NUMERIC,
+    }
 }

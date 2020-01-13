@@ -20,10 +20,10 @@ namespace Amsel.DTO.Rundown.Models
 
         // TODO add to Blazor
         [Range(0, 100)]
-        [Display(Name = nameof(Priority))] public virtual float Priority { get; set; } = 10;
+        [Display(Name = nameof(Priority))] public virtual int Priority { get; set; } = 10;
 
         [Required]
-        public virtual RundownQueueDTO Queue { get; set; }
+        public virtual string QueueName { get; set; }
 
         public virtual ERundownStatus Status { get; set; }
     }
