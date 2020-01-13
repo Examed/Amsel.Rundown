@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownParameterDTO
+    public class RundownParameterDTO:GuidEntityDTO
     {
         private string valueBase;
 
@@ -22,8 +22,7 @@ namespace Amsel.DTO.Rundown.Models
             Editable = true;
         }
 
-        protected RundownParameterDTO() { }
-        public Guid Id { get; set; }
+        public RundownParameterDTO() { }
         public string Description { get; set; }
         public Type Type { get; set; }
 

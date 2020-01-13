@@ -48,19 +48,4 @@ namespace Amsel.Access.Rundown.Services
             return PostAsync(GetByConnection, GetJsonContent(data));
         }
     }
-
-    public class RundownQueueAccess : CRUDAccess<RundownQueueDTO>
-    {
-        #region  CONSTRUCTORS
-
-        public RundownQueueAccess(IAuthService authenticationService) : base(authenticationService) { }
-
-        #endregion
-
-        /// <inheritdoc />
-        protected override string Endpoint => RundownEndpointResources.ENDPOINT;
-
-        /// <inheritdoc />
-        protected override string Resource => RundownEndpointResources.QUEUE;
-    }
 }

@@ -5,18 +5,8 @@ using JetBrains.Annotations;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownElementDTO
+    public class RundownElementDTO :GuidEntityDTO
     {
-        public RundownElementDTO([NotNull] RundownFunctionDTO function, ERundownSequence sequence = ERundownSequence.WHILE, int delay = 0, bool canTrigger = false) {
-            Function = function;
-            CanTriggerRundownSet = canTrigger;
-            Title = function.Title + "_" + Id;
-            Delay = delay;
-            Sequence = sequence;
-        }
-
-        public RundownElementDTO() { }
-        public virtual Guid Id { get; set; }
         public virtual bool CanTriggerRundownSet { get; set; }
         public virtual int Delay { get; set; }
         public virtual int Duration { get; set; }

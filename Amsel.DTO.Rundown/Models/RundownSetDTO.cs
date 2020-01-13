@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Amsel.Enums.Rundown.Enums;
+using Amsel.Framework.Utilities.Extentions.Guids;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownSetDTO
+
+    public class GuidEntityDTO
     {
-        [Key] [Display(Name = nameof(Id))]
-        public virtual Guid Id { get; set; }
+        [Key]
+        [Display(Name = nameof(Id))]
+        public Guid Id { get; set; } = SequentialGuid.NewMySqlGuid();
+
+    }
+    public class RundownSetDTO : GuidEntityDTO
+    {
 
         [Display(Name = nameof(Description))]
         public virtual string Description { get; set; }
@@ -16,7 +24,8 @@ namespace Amsel.DTO.Rundown.Models
         public List<RundownWidgetDTO> Widgets { get; set; }
 
 
-        [Display(Name = nameof(Name))] [Required(ErrorMessage = "Field should not be empty")]
+        [Display(Name = nameof(Name))]
+        [Required(ErrorMessage = "Field should not be empty")]
         public virtual string Name { get; set; }
 
         // TODO add to Blazor

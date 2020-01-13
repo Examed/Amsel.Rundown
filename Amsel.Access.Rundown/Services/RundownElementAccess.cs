@@ -1,4 +1,4 @@
-﻿using Amsel.Access.Authentication.Services;
+using Amsel.Access.Authentication.Services;
 using Amsel.DTO.Rundown.Models;
 using Amsel.Framework.Structure.Interfaces;
 using Amsel.Resources.Rundown.Endpoints;

@@ -10,6 +10,8 @@ namespace Amsel.Access.Rundown.Bootstrap
             builder.RegisterType<RundownSetAccess>();
             builder.RegisterType<RundownQueueAccess>();
             builder.RegisterType<RundownElementAccess>();
+            builder.RegisterType<RundownFunctionAccess>();
+            
             base.Load(builder);
         }
     }

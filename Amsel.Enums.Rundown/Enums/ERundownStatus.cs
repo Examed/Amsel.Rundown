@@ -1,4 +1,4 @@
-﻿namespace Amsel.DTO.Rundown.Models
+﻿namespace Amsel.Enums.Rundown.Enums
 {
     public enum ERundownStatus
     {
