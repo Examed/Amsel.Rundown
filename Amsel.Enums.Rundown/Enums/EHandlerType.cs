@@ -2,8 +2,8 @@
 {
     public enum EHandlerType
     {
-        NONE,
-        STREAMLABS_OBS
+        RUNDOWN,
+        STREAMLABS
     }
 
     public enum EParameterType

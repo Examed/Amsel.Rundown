@@ -10,7 +10,7 @@ namespace Amsel.DTO.Rundown.Models
     {
         private string valueBase;
         public string Description { get; set; }
-        public EParameterType Type { get; set; }
+        public EParameterType Type { get; set; } = EParameterType.STRING;
 
         public string Value {
             get => valueBase;
