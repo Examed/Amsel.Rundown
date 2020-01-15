@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Amsel.Enums.Rundown.Enums;
 using JetBrains.Annotations;
@@ -9,8 +10,10 @@ namespace Amsel.DTO.Rundown.Models
     public class RundownFunctionDTO:GuidEntityDTO
     {
         public virtual string Description { get; set; }
+        [Required]
         public virtual EHandlerType HandlerName { get; set; }
         public virtual string Icon { get; set; }
+        // TODO Revert
         public virtual RundownFunctionDTO RevertFunction { get; set; }
         public virtual string Title { get; set; }
 
