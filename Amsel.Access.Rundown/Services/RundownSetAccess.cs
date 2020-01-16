@@ -24,7 +24,7 @@ namespace Amsel.Access.Rundown.Services
 
         #region STATICS, CONST and FIELDS
 
-        [NotNull] private APIAddress GetByConnection => new APIAddress(Endpoint, Resource, RundownSetControllerResources.ENQUEUE_BY_CONNECTION);
+        [NotNull] private APIAddress GetByConnection => new APIAddress(Endpoint, Resource, RundownSetControllerResources.ENQUEUE);
 
         #endregion
 
