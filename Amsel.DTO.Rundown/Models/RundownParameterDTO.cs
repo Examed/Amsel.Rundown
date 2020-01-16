@@ -11,9 +11,7 @@ namespace Amsel.DTO.Rundown.Models
     {
         private string valueBase;
         public string Description { get; set; }
-        [Required]
-        public string Type { get; set; } = nameof(EParameterType.STRING);
-        // public EParameterType? Type { get; set; } = EParameterType.STRING;
+        public string Type { get; set; } = nameof(EParameterType.TEXTBOX);
 
         public string Value
         {

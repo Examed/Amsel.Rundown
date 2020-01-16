@@ -43,7 +43,7 @@ namespace Amsel.Access.Rundown.Services
             if (!Enum.IsDefined(typeof(EHandlerType), handlerType))
                 throw new InvalidEnumArgumentException(nameof(handlerType), (int) handlerType, typeof(EHandlerType));
 
-            RundownConnectionDTO data = new RundownConnectionDTO(handlerType, functionName, values);
+            RundownTriggerDTO data = new RundownTriggerDTO(handlerType,  values);
 
             return PostAsync(GetByConnection, GetJsonContent(data));
         }

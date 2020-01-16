@@ -8,8 +8,8 @@
 
     public enum EParameterType
     {
-        STRING,
-        BOOLEAN,
+        TEXTBOX,
+        CHECKBOX,
         NUMERIC,
     }
 }

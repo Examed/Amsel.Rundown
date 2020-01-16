@@ -7,7 +7,6 @@ namespace Amsel.DTO.Rundown.Models
 {
     public class RundownElementDTO :GuidEntityDTO
     {
-        public virtual bool CanTriggerRundownSet { get; set; }
         public virtual int Delay { get; set; }
         public virtual int Duration { get; set; }
         public virtual string Notes { get; set; }
