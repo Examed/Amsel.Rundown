@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Amsel.Framework.Utilities.Extentions.Guids;
+using Amsel.Framework.Utilities.Extensions.Guids;
 
 namespace Amsel.DTO.Rundown.Models
 {
