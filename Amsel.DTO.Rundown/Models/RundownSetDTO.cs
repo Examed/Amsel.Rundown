@@ -10,8 +10,7 @@ namespace Amsel.DTO.Rundown.Models
         [Display(Name = nameof(Description))]
         public virtual string Description { get; set; }
 
-        public List<RundownElementDTO> Elements { get; set; }
-        public List<RundownWidgetDTO> Widgets { get; set; }
+        public List<RundownSequenceDTO> Sequences { get; set; }
 
 
         [Display(Name = nameof(Name))]

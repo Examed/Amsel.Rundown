@@ -9,8 +9,7 @@ namespace Amsel.DTO.Rundown.Models
     {
         public virtual int Delay { get; set; }
         public virtual int Duration { get; set; }
-        public virtual string Notes { get; set; }
-        public virtual ERundownSequence Sequence { get; set; }
+        public virtual RundownSequenceDTO Sequence { get; set; }
         public virtual string Title { get; set; }
         [NotNull] public virtual IList<ValueDTO> Values { get; protected set; } = new List<ValueDTO>();
         public virtual RundownFunctionDTO Function { get; set; }

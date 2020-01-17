@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Amsel.Framework\Amsel.Framework.Utilities\Amsel.Framework.Utilities.csproj" />
+    <ProjectReference Include="..\..\Amsel.Authentication\Amsel.DTO.Authentication\Amsel.DTO.Authentication.csproj" />
     <ProjectReference Include="..\Amsel.Enums.Rundown\Amsel.Enums.Rundown.csproj" />
   </ItemGroup>
 
