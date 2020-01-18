@@ -5,11 +5,4 @@
         RUNDOWN,
         STREAMLABS
     }
-
-    public enum EParameterType
-    {
-        TEXTBOX,
-        CHECKBOX,
-        NUMERIC,
-    }
 }

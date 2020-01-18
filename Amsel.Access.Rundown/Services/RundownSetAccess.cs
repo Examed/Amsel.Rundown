@@ -37,13 +37,14 @@ namespace Amsel.Access.Rundown.Services
         protected override string Resource => RundownEndpointResources.SET;
 
 
-        public Task<HttpResponseMessage> QueueConnectionAsync(EHandlerType handlerType, [NotNull] string functionName, [NotNull] Dictionary<string, string> values) {
+        public Task<HttpResponseMessage> QueueConnectionAsync(EHandlerType handlerType, [NotNull] string functionName, [NotNull] Dictionary<string, string> values)
+        {
             if (functionName == null) throw new ArgumentNullException(nameof(functionName));
             if (values == null) throw new ArgumentNullException(nameof(values));
             if (!Enum.IsDefined(typeof(EHandlerType), handlerType))
                 throw new InvalidEnumArgumentException(nameof(handlerType), (int) handlerType, typeof(EHandlerType));
 
-            RundownTriggerDTO data = new RundownTriggerDTO(handlerType,  values);
+            RundownTriggerDTO data = new RundownTriggerDTO(handlerType, values);
 
             return PostAsync(GetByConnection, GetJsonContent(data));
         }

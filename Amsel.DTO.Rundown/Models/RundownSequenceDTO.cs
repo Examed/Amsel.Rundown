@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Amsel.DTO.Authentication.Models;
 using Amsel.Enums.Rundown.Enums;
+using Amsel.Interfaces.Authentication;
 
 namespace Amsel.DTO.Rundown.Models
 {
@@ -12,6 +13,11 @@ namespace Amsel.DTO.Rundown.Models
 
         [Required] public virtual string Name { get; set; }
         [Required] public virtual ERundownSequence Sequence { get; set; }
+
+        #region ITenantDTO Members
+
         public virtual TenantDTO Tenant { get; set; }
+
+        #endregion
     }
 }

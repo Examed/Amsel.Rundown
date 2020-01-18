@@ -6,9 +6,7 @@ namespace Amsel.DTO.Rundown.Models
 {
     public class RundownSetDTO : GuidEntityDTO
     {
-
-        [Display(Name = nameof(Description))]
-        public virtual string Description { get; set; }
+        [Display(Name = nameof(Description))] public virtual string Description { get; set; }
 
         public List<RundownSequenceDTO> Sequences { get; set; }
 
@@ -19,10 +17,10 @@ namespace Amsel.DTO.Rundown.Models
 
         // TODO add to Blazor
         [Range(0, 100)]
-        [Display(Name = nameof(Priority))] public virtual int Priority { get; set; } = 10;
+        [Display(Name = nameof(Priority))]
+        public virtual int Priority { get; set; } = 10;
 
-        [Required]
-        public virtual string QueueName { get; set; }
+        [Required] public virtual string QueueName { get; set; }
 
         public virtual ERundownStatus Status { get; set; }
     }

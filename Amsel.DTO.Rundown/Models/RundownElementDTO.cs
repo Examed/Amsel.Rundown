@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownElementDTO :GuidEntityDTO
+    public class RundownElementDTO : GuidEntityDTO
     {
         public virtual int Delay { get; set; }
         public virtual int Duration { get; set; }
@@ -20,7 +20,8 @@ namespace Amsel.DTO.Rundown.Models
 
         public class ValueDTO
         {
-            public ValueDTO([NotNull] RundownParameterDTO parameter, string value) {
+            public ValueDTO([NotNull] RundownParameterDTO parameter, string value)
+            {
                 Parameter = parameter ?? throw new ArgumentNullException(nameof(parameter));
                 Value = value;
             }
