@@ -5,7 +5,7 @@ using Amsel.Enums.Rundown.Enums;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownSequenceDTO : GuidEntityDTO
+    public class RundownSequenceDTO : GuidEntityDTO, ITenantDTO
     {
         public virtual string Description { get; set; }
         public virtual List<RundownElementDTO> Elements { get; set; } = new List<RundownElementDTO>();

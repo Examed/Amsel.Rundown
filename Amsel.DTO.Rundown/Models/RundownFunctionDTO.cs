@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Amsel.DTO.Authentication.Models;
 using Amsel.Enums.Rundown.Enums;
 using JetBrains.Annotations;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownFunctionDTO:GuidEntityDTO
+    public class RundownFunctionDTO : GuidEntityDTO, ITenantDTO
     {
         public virtual string Description { get; set; }
         [Required]
@@ -19,8 +20,7 @@ namespace Amsel.DTO.Rundown.Models
         public virtual bool IsTrigger {get; set; }
 
         public virtual List<RundownParameterDTO> Parameters { get; protected set; } = new List<RundownParameterDTO>();
-
-
+        public virtual TenantDTO Tenant { get; set; }
         public virtual void AddParameter([NotNull] RundownParameterDTO parameter) {
             if (parameter == null) throw new ArgumentNullException(nameof(parameter));
             RundownParameterDTO parameterValue = Parameters?.FirstOrDefault(x => x?.Name != null && x.Name.Equals(parameter.Name, StringComparison.OrdinalIgnoreCase));
