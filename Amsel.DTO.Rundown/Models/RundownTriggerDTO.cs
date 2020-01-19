@@ -13,7 +13,7 @@ namespace Amsel.DTO.Rundown.Models
             HandlerType = handlerType;
         }
 
-        [NotNull] public Dictionary<string, string> Values { get; set; } = new Dictionary<string, string>();
+        [NotNull] public Dictionary<string, string> Values { get; set; }
         public EHandlerType HandlerType { get; set; }
     }
 }

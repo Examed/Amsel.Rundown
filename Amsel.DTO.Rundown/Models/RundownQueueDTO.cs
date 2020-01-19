@@ -1,19 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Amsel.DTO.Authentication.Models;
-using Amsel.Interfaces.Authentication;
+using Amsel.Framework.Base.DTO;
+using Amsel.Framework.Base.Interfaces;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownQueueDTO : GuidEntityDTO, ITenantDTO
+    public class RundownQueueDTO : ShareTenantEntityDTO
     {
-        [Required] public virtual string Name { get; set; }
+        [Required] public  string Name { get; set; }
 
-        public virtual bool StopOnNew { get; set; }
+        public  bool StopOnNew { get; set; }
 
-        #region ITenantDTO Members
-
-        public virtual TenantDTO Tenant { get; set; }
-
-        #endregion
     }
 }
