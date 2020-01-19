@@ -9,10 +9,10 @@ namespace Amsel.DTO.Rundown.Models
 {
     public class RundownSequenceDTO : ShareTenantEntityDTO
     {
-        public  string Description { get; set; }
-        public  List<RundownElementDTO> Elements { get; set; } = new List<RundownElementDTO>();
-
-        [Required] public  string Name { get; set; }
-        [Required] public  ERundownSequence Sequence { get; set; }
+        public string Description { get; set; }
+        public List<RundownElementDTO> Elements { get; set; } = new List<RundownElementDTO>();
+        public bool IsBaseSequence { get; set; }
+        public string Name { get; set; }
+        [Required] public ERundownSequence Sequence { get; set; }
     }
 }

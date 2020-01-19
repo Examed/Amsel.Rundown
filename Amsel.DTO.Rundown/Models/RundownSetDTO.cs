@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Amsel.DTO.Authentication.Models;
 using Amsel.Enums.Rundown.Enums;
 using Amsel.Framework.Base.DTO;
+using Amsel.Framework.Utilities.Extensions.Guids;
 
 namespace Amsel.DTO.Rundown.Models
 {
