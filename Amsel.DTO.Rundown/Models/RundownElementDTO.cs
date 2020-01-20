@@ -13,7 +13,7 @@ namespace Amsel.DTO.Rundown.Models
         public  RundownSequenceDTO Sequence { get; set; }
         public  string Title { get; set; }
         [NotNull] public  IList<ValueDTO> Values { get; protected set; } = new List<ValueDTO>();
-        public  RundownFunctionDTO Function { get; set; }
+
         public  RundownSetDTO RundownSet { get; set; }
         public  ERundownStatus Status { get; set; }
 

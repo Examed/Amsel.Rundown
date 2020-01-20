@@ -10,7 +10,7 @@ namespace Amsel.DTO.Rundown.Models
 {
 
 
-    public class RundownSetDTO : GuidEntityDTO
+    public class RundownSetDTO : TenantEntityDTO
     {
         [Display(Name = nameof(Description))] public  string Description { get; set; }
 
