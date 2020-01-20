@@ -9,7 +9,8 @@
         public const string ELEMENT = "element";
         public const string QUEUE = "queue";
         public const string FUNCTION = "function";
-
+        public const string SEQUENCE = "sequence";
         #endregion
+
     }
 }
