@@ -1,4 +1,5 @@
-﻿using Amsel.Enums.Rundown.Enums;
+﻿using System;
+using Amsel.Enums.Rundown.Enums;
 using Amsel.Framework.Base.DTO;
 
 namespace Amsel.DTO.Rundown.Models
@@ -21,7 +22,6 @@ namespace Amsel.DTO.Rundown.Models
 
         public string Name { get; set; }
         public bool Editable { get; set; }
-
 
     }
 }

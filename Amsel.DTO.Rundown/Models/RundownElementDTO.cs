@@ -8,14 +8,14 @@ namespace Amsel.DTO.Rundown.Models
 {
     public class RundownElementDTO : GuidEntityDTO
     {
-        public  int Delay { get; set; }
-        public  int Duration { get; set; }
-        public  RundownSequenceDTO Sequence { get; set; }
-        public  string Title { get; set; }
-        [NotNull] public  IList<ValueDTO> Values { get; protected set; } = new List<ValueDTO>();
+        public int Delay { get; set; }
+        public int Duration { get; set; }
+        public RundownSequenceDTO Sequence { get; set; }
+        public string Title { get; set; }
+        [NotNull] public IList<ValueDTO> Values { get; protected set; } = new List<ValueDTO>();
 
-        public  RundownSetDTO RundownSet { get; set; }
-        public  ERundownStatus Status { get; set; }
+        public RundownSetDTO RundownSet { get; set; }
+        public ERundownStatus Status { get; set; }
 
         #region Nested type: ValueDTO
 
@@ -27,8 +27,8 @@ namespace Amsel.DTO.Rundown.Models
                 Value = value;
             }
 
-            public  RundownParameterDTO Parameter { get; set; }
-            public  string Value { get; set; }
+            public RundownParameterDTO Parameter { get; set; }
+            public string Value { get; set; }
         }
 
         #endregion
