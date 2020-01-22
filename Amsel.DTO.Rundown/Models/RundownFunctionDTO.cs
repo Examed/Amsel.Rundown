@@ -20,7 +20,7 @@ namespace Amsel.DTO.Rundown.Models
 
         // TODO Revert
         public  RundownFunctionDTO RevertFunction { get; set; }
-        public  string Title { get; set; }
+        public  string Name { get; set; }
         public  bool IsTrigger { get; set; }
 
         public  List<RundownParameterDTO> Parameters { get; protected set; } = new List<RundownParameterDTO>();

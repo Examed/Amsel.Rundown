@@ -9,6 +9,7 @@ namespace Amsel.Access.Rundown.Bootstrap
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<RundownSetAccess>();
+            builder.RegisterType<RundownSetExtendedAccess>();
             builder.RegisterType<RundownQueueAccess>();
             builder.RegisterType<RundownElementAccess>();
             builder.RegisterType<RundownFunctionAccess>();

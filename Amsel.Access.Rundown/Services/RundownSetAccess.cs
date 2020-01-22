@@ -14,6 +14,43 @@ using JetBrains.Annotations;
 
 namespace Amsel.Access.Rundown.Services
 {
+    public class RundownSetExtendedAccess : CRUDAccess<RundownSetExtendedDTO>
+    {
+        #region  CONSTRUCTORS
+
+        public RundownSetExtendedAccess(IAuthenticationService authenticationService) : base(authenticationService) { }
+
+        #endregion
+
+        #region STATICS, CONST and FIELDS
+
+        [NotNull] private APIAddress GetByConnection => new APIAddress(Endpoint, Resource, RundownSetControllerResources.ENQUEUE);
+
+        #endregion
+
+        /// <inheritdoc />
+        protected override string Endpoint => RundownEndpointResources.ENDPOINT;
+
+        protected override bool Local => true;
+
+        /// <inheritdoc />
+        protected override string Resource => RundownEndpointResources.SET_EXTENDED;
+
+
+        public void QueueConnectionAsync(EHandlerType handlerType, [NotNull] string functionName,
+            [NotNull] Dictionary<string, string> values)
+        {
+            if (functionName == null) throw new ArgumentNullException(nameof(functionName));
+            if (values == null) throw new ArgumentNullException(nameof(values));
+            if (!Enum.IsDefined(typeof(EHandlerType), handlerType))
+                throw new InvalidEnumArgumentException(nameof(handlerType), (int) handlerType, typeof(EHandlerType));
+
+            RundownTriggerDTO data = new RundownTriggerDTO(handlerType, values);
+
+            PostAsync(GetByConnection, GetJsonContent(data));
+        }
+    }
+
     public class RundownSetAccess : CRUDAccess<RundownSetDTO>
     {
         #region  CONSTRUCTORS
@@ -31,7 +68,7 @@ namespace Amsel.Access.Rundown.Services
         /// <inheritdoc />
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
 
-        protected override bool Local => false;
+        protected override bool Local => true;
 
         /// <inheritdoc />
         protected override string Resource => RundownEndpointResources.SET;

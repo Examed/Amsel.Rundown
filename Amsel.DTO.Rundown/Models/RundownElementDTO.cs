@@ -11,10 +11,9 @@ namespace Amsel.DTO.Rundown.Models
         public int Delay { get; set; }
         public int Duration { get; set; }
         public RundownSequenceDTO Sequence { get; set; }
-        public string Title { get; set; }
+        public string Name { get; set; }
         [NotNull] public IList<ValueDTO> Values { get; protected set; } = new List<ValueDTO>();
 
-        public RundownSetDTO RundownSet { get; set; }
         public ERundownStatus Status { get; set; }
 
         #region Nested type: ValueDTO

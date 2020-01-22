@@ -8,26 +8,26 @@ using Amsel.Framework.Utilities.Extensions.Guids;
 
 namespace Amsel.DTO.Rundown.Models
 {
-
-
     public class RundownSetDTO : TenantEntityDTO
     {
-        [Display(Name = nameof(Description))] public  string Description { get; set; }
-
-        public List<RundownSequenceDTO> Sequences { get; set; }
-
-
-        [Display(Name = nameof(Name))]
-        [Required(ErrorMessage = "Field should not be empty")]
-        public  string Name { get; set; }
-
         // TODO add to Blazor
         [Range(0, 100)]
         [Display(Name = nameof(Priority))]
-        public  int Priority { get; set; } = 10;
+        public int Priority { get; set; } = 10;
 
-        [Required] public  string QueueName { get; set; }
+        [Required] public string QueueName { get; set; }
 
-        public  ERundownStatus Status { get; set; }
+        public ERundownStatus Status { get; set; }
+        [Display(Name = nameof(Name))]
+        [Required(ErrorMessage = "Field should not be empty")]
+        public string Name { get; set; }
+        [Display(Name = nameof(Description))] public string Description { get; set; }
+
+    }
+
+    public class RundownSetExtendedDTO : RundownSetDTO
+    {
+        public List<RundownSequenceDTO> Sequences { get; set; }
+
     }
 }
