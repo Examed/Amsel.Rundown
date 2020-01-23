@@ -5,14 +5,11 @@ namespace Amsel.Enums.Rundown.Helper
 {
     public static class RundownSequenceHelper
     {
-        public static bool DoNotExcecuteSequence(this ERundownSequence sequence, CancellationToken cancellationToken, bool rundownSetIsVisible = true)
+        public static bool DoNotPlaySequence(this ERundownSequence sequence, CancellationToken cancellationToken, bool rundownSetIsVisible = true)
         {
             if (cancellationToken.IsCancellationRequested && !sequence.IsAfterTransitionOut())
             {
                 if (sequence.IsBeforeTransitionIn())
-                    return true;
-
-                if (sequence.IsBetweenTransitions())
                     return true;
 
                 if (sequence.IsTransitionIn())
@@ -28,9 +25,19 @@ namespace Amsel.Enums.Rundown.Helper
             return false;
         }
 
+        public static bool IsTransitionIn(this ERundownSequence sequence)
+        {
+            return sequence == ERundownSequence.TRANSITION_IN;
+        }
+
+        public static bool IsTransitionOut(this ERundownSequence sequence)
+        {
+            return sequence == ERundownSequence.TRANSITION_OUT;
+        }
+
         public static bool IsAfterTransitionOut(this ERundownSequence sequence)
         {
-            return sequence.CompareTo(ERundownSequence.TRANSITION_OUT_STOP) > 0;
+            return sequence.CompareTo(ERundownSequence.TRANSITION_OUT) > 0;
         }
 
         public static bool IsBeforeTransitionIn(this ERundownSequence sequence)
@@ -38,19 +45,7 @@ namespace Amsel.Enums.Rundown.Helper
             return sequence.CompareTo(ERundownSequence.TRANSITION_IN) < 0;
         }
 
-        public static bool IsBetweenTransitions(this ERundownSequence sequence)
-        {
-            return sequence.CompareTo(ERundownSequence.TRANSITION_IN_STOP) > 0 && sequence.CompareTo(ERundownSequence.TRANSITION_OUT_LOAD) < 0;
-        }
 
-        public static bool IsTransitionIn(this ERundownSequence sequence)
-        {
-            return sequence.CompareTo(ERundownSequence.TRANSITION_IN_LOAD) >= 0 && sequence.CompareTo(ERundownSequence.TRANSITION_IN_STOP) <= 0;
-        }
 
-        public static bool IsTransitionOut(this ERundownSequence sequence)
-        {
-            return sequence.CompareTo(ERundownSequence.TRANSITION_OUT_LOAD) >= 0 && sequence.CompareTo(ERundownSequence.TRANSITION_OUT_STOP) <= 0;
-        }
     }
 }
