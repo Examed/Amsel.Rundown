@@ -21,6 +21,8 @@ namespace Amsel.DTO.Rundown.Models
         }
 
         public string Name { get; set; }
+        public string DisplayName { get; set; }
+        public string ArgumentName { get; set; }
         public bool Editable { get; set; }
 
     }
