@@ -5,7 +5,7 @@ namespace Amsel.Enums.Rundown.Helper
 {
     public static class RundownSequenceHelper
     {
-        public static bool DoNotPlaySequence(this ERundownSequence sequence, CancellationToken cancellationToken, bool rundownSetIsVisible = true)
+        public static bool DoNotPlaySequence(this ERundownSequenceType sequence, CancellationToken cancellationToken, bool rundownSetIsVisible = true)
         {
             if (cancellationToken.IsCancellationRequested && !sequence.IsAfterTransitionOut())
             {
@@ -18,31 +18,31 @@ namespace Amsel.Enums.Rundown.Helper
                 if (sequence.IsTransitionOut() && !rundownSetIsVisible)
                     return true;
 
-                if (sequence.CompareTo(ERundownSequence.WAIT) == 0)
+                if (sequence.CompareTo(ERundownSequenceType.WAIT) == 0)
                     return true;
             }
 
             return false;
         }
 
-        public static bool IsTransitionIn(this ERundownSequence sequence)
+        public static bool IsTransitionIn(this ERundownSequenceType sequence)
         {
-            return sequence == ERundownSequence.TRANSITION_IN;
+            return sequence == ERundownSequenceType.TRANSITION_IN;
         }
 
-        public static bool IsTransitionOut(this ERundownSequence sequence)
+        public static bool IsTransitionOut(this ERundownSequenceType sequence)
         {
-            return sequence == ERundownSequence.TRANSITION_OUT;
+            return sequence == ERundownSequenceType.TRANSITION_OUT;
         }
 
-        public static bool IsAfterTransitionOut(this ERundownSequence sequence)
+        public static bool IsAfterTransitionOut(this ERundownSequenceType sequence)
         {
-            return sequence.CompareTo(ERundownSequence.TRANSITION_OUT) > 0;
+            return sequence.CompareTo(ERundownSequenceType.TRANSITION_OUT) > 0;
         }
 
-        public static bool IsBeforeTransitionIn(this ERundownSequence sequence)
+        public static bool IsBeforeTransitionIn(this ERundownSequenceType sequence)
         {
-            return sequence.CompareTo(ERundownSequence.TRANSITION_IN) < 0;
+            return sequence.CompareTo(ERundownSequenceType.TRANSITION_IN) < 0;
         }
 
 

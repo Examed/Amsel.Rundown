@@ -13,6 +13,6 @@ namespace Amsel.DTO.Rundown.Models
         public List<RundownElementDTO> Elements { get; set; } = new List<RundownElementDTO>();
         public bool IsBaseSequence { get; set; }
         public string Name { get; set; }
-        [Required] public ERundownSequence Sequence { get; set; }
+        [Required] public ERundownSequenceType SequenceType { get; set; }
     }
 }

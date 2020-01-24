@@ -1,6 +1,6 @@
 ﻿namespace Amsel.Enums.Rundown.Enums
 {
-    public enum ERundownSequence
+    public enum ERundownSequenceType
     {
         TRIGGER = 5,
         STRUCTURE = 10,
