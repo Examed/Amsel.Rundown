@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Amsel.Enums.Rundown.Enums;
 using Amsel.Framework.Base.DTO;
 using JetBrains.Annotations;
@@ -10,9 +11,9 @@ namespace Amsel.DTO.Rundown.Models
     {
         public int Delay { get; set; }
         public int Duration { get; set; }
-        public string Name { get; set; }
+        [Required] public string Name { get; set; }
         [NotNull] public IList<ValueDTO> Values { get; protected set; } = new List<ValueDTO>();
-
+        [Required] public RundownSequenceType.EType SequenceType { get; set; }
         public ERundownStatus Status { get; set; }
 
         #region Nested type: ValueDTO

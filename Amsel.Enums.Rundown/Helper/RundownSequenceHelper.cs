@@ -5,7 +5,7 @@ namespace Amsel.Enums.Rundown.Helper
 {
     public static class RundownSequenceHelper
     {
-        public static bool DoNotPlaySequence(this ERundownSequenceType sequence, CancellationToken cancellationToken, bool rundownSetIsVisible = true)
+        public static bool DoNotPlaySequence(this RundownSequenceType.EType sequence, CancellationToken cancellationToken, bool rundownSetIsVisible = true)
         {
             if (cancellationToken.IsCancellationRequested && !sequence.IsAfterTransitionOut())
             {
@@ -18,31 +18,31 @@ namespace Amsel.Enums.Rundown.Helper
                 if (sequence.IsTransitionOut() && !rundownSetIsVisible)
                     return true;
 
-                if (sequence.CompareTo(ERundownSequenceType.WAIT) == 0)
+                if (sequence.CompareTo(RundownSequenceType.EType.WAIT) == 0)
                     return true;
             }
 
             return false;
         }
 
-        public static bool IsTransitionIn(this ERundownSequenceType sequence)
+        public static bool IsTransitionIn(this RundownSequenceType.EType sequence)
         {
-            return sequence == ERundownSequenceType.TRANSITION_IN;
+            return sequence == RundownSequenceType.EType.TRANSITION_SHOW;
         }
 
-        public static bool IsTransitionOut(this ERundownSequenceType sequence)
+        public static bool IsTransitionOut(this RundownSequenceType.EType sequence)
         {
-            return sequence == ERundownSequenceType.TRANSITION_OUT;
+            return sequence == RundownSequenceType.EType.TRANSITION_HIDE;
         }
 
-        public static bool IsAfterTransitionOut(this ERundownSequenceType sequence)
+        public static bool IsAfterTransitionOut(this RundownSequenceType.EType sequence)
         {
-            return sequence.CompareTo(ERundownSequenceType.TRANSITION_OUT) > 0;
+            return sequence.CompareTo(RundownSequenceType.EType.TRANSITION_HIDE) > 0;
         }
 
-        public static bool IsBeforeTransitionIn(this ERundownSequenceType sequence)
+        public static bool IsBeforeTransitionIn(this RundownSequenceType.EType sequence)
         {
-            return sequence.CompareTo(ERundownSequenceType.TRANSITION_IN) < 0;
+            return sequence.CompareTo(RundownSequenceType.EType.TRANSITION_SHOW) < 0;
         }
 
 
