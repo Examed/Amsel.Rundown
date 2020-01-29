@@ -16,9 +16,7 @@ namespace Amsel.Enums.Rundown.Enums
             switch (type)
             {
                 case EType.TRIGGER:
-                    return "Trigger";
-                case EType.STRUCTURE:
-                    return "Structure";
+                    return "Trigger";      
                 case EType.LOAD:
                     return "Load";
                 case EType.TRANSITION_SHOW:
@@ -43,8 +41,6 @@ namespace Amsel.Enums.Rundown.Enums
             {
                 case EType.TRIGGER:
                     return "Trigger that can start the RundownSet";
-                case EType.STRUCTURE:
-                    return "Structure of the RundownSet";
                 case EType.LOAD:
                     return "Load Resources of the RundownSet";
                 case EType.TRANSITION_SHOW:
@@ -67,8 +63,7 @@ namespace Amsel.Enums.Rundown.Enums
         public enum EType
         {
             TRIGGER = 0,
-            STRUCTURE = 10,
-            LOAD = 15,
+            LOAD = 10,
 
             TRANSITION_SHOW = 25,
 
