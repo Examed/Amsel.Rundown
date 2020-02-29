@@ -10,4 +10,13 @@
 
         #endregion
     }
+
+    public static class RundownQueueControllerResources
+    {
+        #region STATICS, CONST and FIELDS
+
+        public const string GET_QUEUE_NAMES = "get/names";
+
+        #endregion
+    }
 }

@@ -8,7 +8,7 @@ namespace Amsel.DTO.Rundown.Models
     {
         private string valueBase;
         public string Description { get; set; }
-        public string Type { get; set; } = nameof(EParameterType.TEXTBOX);
+        public EParameterType Type { get; set; } = EParameterType.TEXTBOX;
 
         public string Value
         {

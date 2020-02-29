@@ -1,7 +1,15 @@
-﻿using Amsel.Access.Authentication.Services;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Amsel.Access.Authentication.Services;
 using Amsel.DTO.Rundown.Models;
 using Amsel.Framework.Structure.Interfaces;
+using Amsel.Framework.Structure.Models.Address;
+using Amsel.Framework.Utilities.Extensions.Http;
+using Amsel.Resources.Rundown.Controller;
 using Amsel.Resources.Rundown.Endpoints;
+using JetBrains.Annotations;
 
 namespace Amsel.Access.Rundown.Services
 {
@@ -18,5 +26,12 @@ namespace Amsel.Access.Rundown.Services
 
         /// <inheritdoc />
         protected override string Resource => RundownEndpointResources.QUEUE;
+        [NotNull] protected virtual APIAddress GetQueueNamesAddress => new APIAddress(Endpoint, Resource, RundownQueueControllerResources.GET_QUEUE_NAMES);
+
+        public async Task<IEnumerable<string>> GetQueueNamesAsync()
+        {
+            HttpResponseMessage response = await GetAsync(GetQueueNamesAddress).ConfigureAwait(false);
+            return await response.DeserializeElseThrowAsync<IEnumerable<string>>().ConfigureAwait(false);
+        }
     }
 }
