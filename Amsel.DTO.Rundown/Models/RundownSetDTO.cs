@@ -23,11 +23,6 @@ namespace Amsel.DTO.Rundown.Models
         public string Name { get; set; }
         [Display(Name = nameof(Description))] public string Description { get; set; }
 
-    }
-
-    public class RundownSetExtendedDTO : RundownSetDTO
-    {
-        public List<RundownSequenceDTO> Sequences { get; set; }
-
-    }
+         public List<RundownSequenceDTO> Sequences { get; set; }
+    }  
 }

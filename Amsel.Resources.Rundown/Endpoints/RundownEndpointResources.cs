@@ -6,7 +6,6 @@
 
         public const string ENDPOINT = "rundown";
         public const string SET = "set";
-        public const string SET_EXTENDED = "set/extended/";
         public const string ELEMENT = "element";
         public const string QUEUE = "queue";
         public const string FUNCTION = "function";
