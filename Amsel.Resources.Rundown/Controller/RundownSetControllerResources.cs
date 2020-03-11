@@ -6,6 +6,7 @@
 
         public const string CREATE = "create";
         public const string GET_BY_ID = "get";
+        public const string GET_BY_QUEUE = "get/queue";
         public const string ENQUEUE = "enqueue";
 
         #endregion
