@@ -11,7 +11,7 @@ namespace Amsel.DTO.Rundown.Models
     {
         [Display(Name = nameof(Description))] public string Description { get; set; }
 
-        public string Directory { get; set; }
+        public string Directory { get; set; } = "";
 
         public List<RundownElementDTO> Elements { get; set; } = new List<RundownElementDTO>();
 
