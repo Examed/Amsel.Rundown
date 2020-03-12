@@ -7,11 +7,14 @@ using Amsel.Framework.Base.Interfaces;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownSequenceDTO : ShareTenantEntityDTO
+    public class RundownSequenceDTO : RundownSequenceInfoDTO
+    {
+        public List<RundownElementDTO> Elements { get; set; } = new List<RundownElementDTO>();
+    }
+
+     public class RundownSequenceInfoDTO : ShareTenantEntityDTO
     {
         public string Description { get; set; }
-        public List<RundownElementDTO> Elements { get; set; } = new List<RundownElementDTO>();
-        public bool IsBaseSequence { get; set; }
         public string Name { get; set; }
 
     }
