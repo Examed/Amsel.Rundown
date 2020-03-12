@@ -7,16 +7,17 @@ namespace Amsel.Access.Rundown.Services
 {
     public class RundownFunctionAccess : CRUDAccess<RundownFunctionDTO>
     {
-        #region  CONSTRUCTORS
-
-        public RundownFunctionAccess(IAuthenticationService authenticationService) : base(authenticationService) { }
-
-        #endregion
-
-        /// <inheritdoc />
+        /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.FUNCTION;
+
+        #region  CONSTRUCTORS
+
+        public RundownFunctionAccess(IAuthenticationService authenticationService) : base(authenticationService)
+        {
+        }
+        #endregion
     }
 }

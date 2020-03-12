@@ -11,6 +11,5 @@
         public const string FUNCTION = "function";
         public const string SEQUENCE = "sequence";
         #endregion
-
     }
 }

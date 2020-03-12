@@ -3,7 +3,7 @@ using Autofac;
 
 namespace Amsel.Access.Rundown.Bootstrap
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public class RundownSetAccessModule : Module
     {
         protected override void Load(ContainerBuilder builder)

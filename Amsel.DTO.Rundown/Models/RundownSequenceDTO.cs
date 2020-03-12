@@ -1,21 +1,14 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Amsel.DTO.Authentication.Models;
-using Amsel.Enums.Rundown.Enums;
-using Amsel.Framework.Base.DTO;
-using Amsel.Framework.Base.Interfaces;
+﻿using Amsel.Framework.Base.DTO;
+using System.Collections.Generic;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownSequenceDTO : RundownSequenceInfoDTO
-    {
-        public List<RundownElementDTO> Elements { get; set; } = new List<RundownElementDTO>();
-    }
-
-     public class RundownSequenceInfoDTO : ShareTenantEntityDTO
+    public class RundownSequenceDTO : ShareTenantEntityDTO
     {
         public string Description { get; set; }
-        public string Name { get; set; }
 
+        public List<RundownElementDTO> Elements { get; set; } = new List<RundownElementDTO>();
+
+        public string Name { get; set; }
     }
 }

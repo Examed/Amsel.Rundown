@@ -1,13 +1,23 @@
-﻿using System;
-using Amsel.Enums.Rundown.Enums;
+﻿using Amsel.Enums.Rundown.Enums;
 using Amsel.Framework.Base.DTO;
+using System;
 
 namespace Amsel.DTO.Rundown.Models
 {
     public class RundownParameterDTO : GuidEntityDTO
     {
         private string valueBase;
+
+        public string ArgumentName { get; set; }
+
         public string Description { get; set; }
+
+        public string DisplayName { get; set; }
+
+        public bool Editable { get; set; }
+
+        public string Name { get; set; }
+
         public EParameterType Type { get; set; } = EParameterType.TEXTBOX;
 
         public string Value
@@ -19,11 +29,5 @@ namespace Amsel.DTO.Rundown.Models
                 valueBase = value;
             }
         }
-
-        public string Name { get; set; }
-        public string DisplayName { get; set; }
-        public string ArgumentName { get; set; }
-        public bool Editable { get; set; }
-
     }
 }

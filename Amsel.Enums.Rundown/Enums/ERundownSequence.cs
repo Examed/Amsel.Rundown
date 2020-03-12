@@ -1,22 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Amsel.Enums.Rundown.Enums
 {
-
     public static class RundownSequenceType
     {
         public static readonly IEnumerable<EType> EnumList = Enum.GetValues(typeof(EType)).OfType<EType>();
-  
-        public static string GetName(this EType type)
+
+        #region PUBLIC METHODES
+        public static string GetDesription(this EType type)
         {
-            switch (type)
+            switch(type)
             {
                 case EType.TRIGGER:
-                    return "Trigger";      
+                    return "Trigger that can start the RundownSet";
+                case EType.LOAD:
+                    return "Load Resources of the RundownSet";
+                case EType.TRANSITION_SHOW:
+                    return "Transition to make the RundownSet visible";
+                case EType.ACTIVE:
+                    return "Activities that should be happen during the RundownSet is visible";
+                case EType.WAIT:
+                    return string.Empty;
+                case EType.TRANSITION_HIDE:
+                    return "Transition to hide the RundownSet";
+                case EType.STOP:
+                    return string.Empty;
+                case EType.CLEANUP:
+                    return "Revert actions that should only be active while the RundownSet is active";
+                default:
+                    return string.Empty;
+            }
+        }
+
+        public static string GetName(this EType type)
+        {
+            switch(type)
+            {
+                case EType.TRIGGER:
+                    return "Trigger";
                 case EType.LOAD:
                     return "Load";
                 case EType.TRANSITION_SHOW:
@@ -32,33 +55,10 @@ namespace Amsel.Enums.Rundown.Enums
                 case EType.CLEANUP:
                     return "Cleanup";
                 default:
-                    return "";
+                    return string.Empty;
             }
         }
-        public static string GetDesription(this EType type)
-        {
-            switch (type)
-            {
-                case EType.TRIGGER:
-                    return "Trigger that can start the RundownSet";
-                case EType.LOAD:
-                    return "Load Resources of the RundownSet";
-                case EType.TRANSITION_SHOW:
-                    return "Transition to make the RundownSet visible";
-                case EType.ACTIVE:
-                    return "Activities that should be happen during the RundownSet is visible";
-                case EType.WAIT:
-                    return "";
-                case EType.TRANSITION_HIDE:
-                    return "Transition to hide the RundownSet";
-                case EType.STOP:
-                    return "";
-                case EType.CLEANUP:
-                    return "Revert actions that should only be active while the RundownSet is active";
-                default:
-                    return "";
-            }
-        }
+        #endregion
 
         public enum EType
         {
@@ -76,5 +76,4 @@ namespace Amsel.Enums.Rundown.Enums
             CLEANUP = 100
         }
     }
-
 }
