@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Amsel.Framework.Base.DTO;
+using Amsel.Framework.Structure.Client.Service;
 
 namespace Amsel.Access.Rundown.Services
 {
@@ -21,14 +22,14 @@ namespace Amsel.Access.Rundown.Services
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
 
-        protected override bool Local => false;
+        protected override bool RequestLocal => false;
 
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.SET;
 
         #region  CONSTRUCTORS
 
-        public RundownSetAccess(IAuthenticationService authenticationService) : base(authenticationService) { }
+        public RundownSetAccess(IAuthenticationService authenticationService, MultiTenantName tenant) : base(tenant, authenticationService) { }
 
         #endregion
 
@@ -59,8 +60,9 @@ namespace Amsel.Access.Rundown.Services
 
         #region STATICS, CONST and FIELDS
 
-        [NotNull] private APIAddress GetByConnectionAddress => new APIAddress(Endpoint, Resource, RundownSetControllerResources.ENQUEUE);
-        [NotNull] private APIAddress GetByQueueAddress => new APIAddress(Endpoint, Resource, RundownSetControllerResources.GET_BY_QUEUE);
+        [NotNull] private UriBuilder GetByConnectionAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.ENQUEUE, RequestLocal);
+        [NotNull] private UriBuilder GetByQueueAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_BY_QUEUE, RequestLocal);
+
         #endregion
     }
 }

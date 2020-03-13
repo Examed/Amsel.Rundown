@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Amsel.Framework.Base.DTO;
+using Amsel.Framework.Structure.Client.Service;
 
 namespace Amsel.Access.Rundown.Services
 {
@@ -26,12 +27,14 @@ namespace Amsel.Access.Rundown.Services
 
         #region  CONSTRUCTORS
 
-        public RundownSequenceAccess(IAuthenticationService authenticationService) : base(authenticationService)
-        {
-        }
+        public RundownSequenceAccess(IAuthenticationService authenticationService, MultiTenantName tenant) : base(tenant, authenticationService)
+            {  }
+
         #endregion
 
-        [NotNull] private APIAddress GetByRundownAddress => new APIAddress(Endpoint, Resource, RundownSequenceControllerResources.GET_BY_RUNDOWN);
+        [NotNull] private UriBuilder GetByRundownAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSequenceControllerResources.GET_BY_RUNDOWN, RequestLocal);
+
+        protected override bool RequestLocal => false;
 
         public virtual async Task<IEnumerable<RundownSequenceDTO>> GetSequencesByRundown(Guid id)
         {
