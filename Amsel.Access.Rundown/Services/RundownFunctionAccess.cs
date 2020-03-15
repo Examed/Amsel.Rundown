@@ -3,6 +3,7 @@ using Amsel.DTO.Rundown.Models;
 using Amsel.Framework.Base.DTO;
 using Amsel.Framework.Structure.Client.Service;
 using Amsel.Framework.Structure.Interfaces;
+using Amsel.Framework.Structure.Models;
 using Amsel.Resources.Rundown.Endpoints;
 
 namespace Amsel.Access.Rundown.Services
@@ -17,7 +18,7 @@ namespace Amsel.Access.Rundown.Services
 
         #region  CONSTRUCTORS
         protected override bool RequestLocal => false;
-        public RundownFunctionAccess(IAuthenticationService authenticationService, MultiTenantName tenant) : base(tenant, authenticationService) {  }
+        public RundownFunctionAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService) {  }
         #endregion
     }
 }

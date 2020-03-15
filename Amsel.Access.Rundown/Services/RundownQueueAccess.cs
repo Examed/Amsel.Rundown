@@ -3,6 +3,7 @@ using Amsel.DTO.Rundown.Models;
 using Amsel.Framework.Base.DTO;
 using Amsel.Framework.Structure.Client.Service;
 using Amsel.Framework.Structure.Interfaces;
+using Amsel.Framework.Structure.Models;
 using Amsel.Framework.Structure.Models.Address;
 using Amsel.Framework.Utilities.Extensions.Http;
 using Amsel.Resources.Rundown.Controller;
@@ -27,7 +28,7 @@ namespace Amsel.Access.Rundown.Services
 
         protected override bool RequestLocal =>false;
 
-        public RundownQueueAccess(IAuthenticationService authenticationService, MultiTenantName tenant) : base(tenant, authenticationService) { }
+        public RundownQueueAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService) { }
 
         #region PUBLIC METHODES
         public async Task<IEnumerable<GuidNameEntityDTO>> GetQueueNamesAsync()

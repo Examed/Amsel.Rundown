@@ -14,6 +14,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Amsel.Framework.Base.DTO;
 using Amsel.Framework.Structure.Client.Service;
+using Amsel.Framework.Structure.Models;
 
 namespace Amsel.Access.Rundown.Services
 {
@@ -29,7 +30,7 @@ namespace Amsel.Access.Rundown.Services
 
         #region  CONSTRUCTORS
 
-        public RundownSetAccess(IAuthenticationService authenticationService, MultiTenantName tenant) : base(tenant, authenticationService) { }
+        public RundownSetAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService) { }
 
         #endregion
 
