@@ -28,7 +28,7 @@ namespace Amsel.DTO.Rundown.Models
         [Required] public RundownSequenceType.EType SequenceType { get; set; }
 
         #region PUBLIC METHODES
-        #region IMultiTenantDTO Members
+        #region ITenantDTO Members
 
 
         #endregion
