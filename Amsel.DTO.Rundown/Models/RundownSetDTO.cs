@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownSetDTO : TenantEntityDTO
+    public class RundownSetDTO : TenantEntity
     {
         [Display(Name = nameof(Description))] public string Description { get; set; }
 

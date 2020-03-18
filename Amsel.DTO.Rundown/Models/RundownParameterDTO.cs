@@ -4,7 +4,7 @@ using System;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownParameterDTO : GuidEntityDTO
+    public class RundownParameterDTO : GuidEntity
     {
         private string valueBase;
 

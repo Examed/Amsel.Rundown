@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownFunctionDTO : ShareTenantEntityDTO
+    public class RundownFunctionDTO : ShareTenantEntity
     {
         public string Description { get; set; }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownSequenceDTO : ShareTenantEntityDTO
+    public class RundownSequenceDTO : ShareTenantEntity
     {
         public string Description { get; set; }
 

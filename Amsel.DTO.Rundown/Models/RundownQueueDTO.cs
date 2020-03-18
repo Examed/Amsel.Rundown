@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownQueueDTO : ShareTenantEntityDTO
+    public class RundownQueueDTO : ShareTenantEntity
     {
         [Required] public string Name { get; set; }
 

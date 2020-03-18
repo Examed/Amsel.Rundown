@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownElementDTO : GuidEntityDTO
+    public class RundownElementDTO : GuidEntity
     {
         public int Delay { get; set; }
 
