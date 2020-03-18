@@ -12,8 +12,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Amsel.Framework.Base.DTO;
-using Amsel.Framework.Structure.Client.Service;
 using Amsel.Framework.Structure.Models;
 
 namespace Amsel.Access.Rundown.Services

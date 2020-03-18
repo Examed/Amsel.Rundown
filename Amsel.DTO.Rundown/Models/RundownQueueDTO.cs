@@ -1,5 +1,4 @@
-﻿using Amsel.Framework.Base.DTO;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Amsel.DTO.Rundown.Models
 {

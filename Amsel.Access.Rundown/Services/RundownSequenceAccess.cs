@@ -1,6 +1,5 @@
 ﻿using Amsel.Access.Authentication.Services;
 using Amsel.DTO.Rundown.Models;
-using Amsel.Enums.Rundown.Enums;
 using Amsel.Framework.Structure.Interfaces;
 using Amsel.Framework.Structure.Models.Address;
 using Amsel.Framework.Utilities.Extensions.Http;
@@ -9,11 +8,8 @@ using Amsel.Resources.Rundown.Endpoints;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Amsel.Framework.Base.DTO;
-using Amsel.Framework.Structure.Client.Service;
 using Amsel.Framework.Structure.Models;
 
 namespace Amsel.Access.Rundown.Services

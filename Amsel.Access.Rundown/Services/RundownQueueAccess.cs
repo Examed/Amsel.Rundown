@@ -1,7 +1,6 @@
 ﻿using Amsel.Access.Authentication.Services;
 using Amsel.DTO.Rundown.Models;
-using Amsel.Framework.Base.DTO;
-using Amsel.Framework.Structure.Client.Service;
+using Amsel.Framework.Base.Models;
 using Amsel.Framework.Structure.Interfaces;
 using Amsel.Framework.Structure.Models;
 using Amsel.Framework.Structure.Models.Address;

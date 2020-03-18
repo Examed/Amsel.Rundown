@@ -1,5 +1,5 @@
 ﻿using Amsel.Enums.Rundown.Enums;
-using Amsel.Framework.Base.DTO;
+using Amsel.Framework.Base.Interfaces;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
@@ -7,8 +7,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownElementDTO : GuidEntity
+    public class RundownElementDTO : IGuidEntity
     {
+        public Guid Id { get; set; }
         public int Delay { get; set; }
 
         public int Duration { get; set; }

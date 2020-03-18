@@ -1,9 +1,7 @@
 ﻿using Amsel.Enums.Rundown.Enums;
-using Amsel.Framework.Base.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace Amsel.DTO.Rundown.Models
 {
