@@ -4,9 +4,11 @@ using Amsel.Model.Tenant.TenantModels;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Amsel.Models.Rundown.Models
 {
+    [ComplexType]
     public class RundownSequence : LogicEntity, ISharedTenant, INamedEntity
     {
         public virtual string Description { get; protected set; }

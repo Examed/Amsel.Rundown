@@ -1,5 +1,4 @@
 ﻿using Amsel.Access.Authentication.Services;
-using Amsel.DTO.Rundown.Models;
 using Amsel.Framework.Structure.Interfaces;
 using Amsel.Framework.Structure.Models.Address;
 using Amsel.Framework.Utilities.Extensions.Http;
@@ -11,10 +10,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Amsel.Framework.Structure.Models;
+using Amsel.Models.Rundown.Models;
 
 namespace Amsel.Access.Rundown.Services
 {
-    public class RundownSequenceAccess : CRUDAccess<RundownSequenceDTO>
+    public class RundownSequenceAccess : CRUDAccess<RundownSequence>
     {
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
@@ -33,10 +33,10 @@ namespace Amsel.Access.Rundown.Services
 
         protected override bool RequestLocal => false;
 
-        public virtual async Task<IEnumerable<RundownSequenceDTO>> GetSequencesByRundown(Guid id)
+        public virtual async Task<IEnumerable<RundownSequence>> GetSequencesByRundown(Guid id)
         {
             HttpResponseMessage response = await GetAsync(GetByRundownAddress, (nameof(id), id)).ConfigureAwait(false);
-            return await response.DeserializeOrDefaultAsync<IEnumerable<RundownSequenceDTO>>().ConfigureAwait(false);
+            return await response.DeserializeOrDefaultAsync<IEnumerable<RundownSequence>>().ConfigureAwait(false);
         }
     }
 }

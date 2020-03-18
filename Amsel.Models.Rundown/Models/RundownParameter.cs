@@ -2,9 +2,11 @@
 using Amsel.Framework.Base.Interfaces;
 using JetBrains.Annotations;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Amsel.Models.Rundown.Models
 {
+    [ComplexType]
     public class RundownParameter : IGuidEntity, INamedEntity
     {
         public Guid Id { get; set; }
@@ -21,13 +23,6 @@ namespace Amsel.Models.Rundown.Models
         public  EParameterType Type { get; set; }
         
         public string Value { get; protected set; }
-        public void SetValue(string value)
-        {
-            Editable = string.IsNullOrEmpty(value);
-            Value = value;
-        }
-        
-
 
         #region PUBLIC METHODES
         public  void SetValue(string value)

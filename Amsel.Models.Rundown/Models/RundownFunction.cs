@@ -5,6 +5,7 @@ using Amsel.Model.Tenant.TenantModels;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace Amsel.Models.Rundown.Models
@@ -13,6 +14,7 @@ namespace Amsel.Models.Rundown.Models
     /// <summary>
     /// A representation of a Action
     /// </summary>
+     [ComplexType]
     public class RundownFunction : LogicEntity, ISharedTenant, INamedEntity
     {
         public virtual string Description { get; set; } = string.Empty;

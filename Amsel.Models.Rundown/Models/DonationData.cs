@@ -1,9 +1,11 @@
 ﻿
 using Amsel.Model.Tenant.TenantModels;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Amsel.Endpoint.Rundown.Models
 {
+    [ComplexType]
     public class DonationData : DataEntity
     {
         public virtual double Amount { get; set; }

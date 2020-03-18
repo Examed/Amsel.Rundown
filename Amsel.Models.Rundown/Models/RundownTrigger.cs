@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace Amsel.DTO.Rundown.Models
 {
-    public class RundownTriggerDTO
+    public class RundownTrigger
     {
         public EHandlerType HandlerType { get; set; }
 
         [NotNull] public Dictionary<string, string> Values { get; set; }
 
-        public RundownTriggerDTO(EHandlerType handlerType, Dictionary<string, string> values)
+        public RundownTrigger(EHandlerType handlerType, Dictionary<string, string> values)
         {
             Values = values ?? throw new ArgumentNullException(nameof(values));
             HandlerType = handlerType;

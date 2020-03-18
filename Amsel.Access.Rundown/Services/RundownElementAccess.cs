@@ -1,12 +1,12 @@
 using Amsel.Access.Authentication.Services;
-using Amsel.DTO.Rundown.Models;
 using Amsel.Framework.Structure.Interfaces;
 using Amsel.Framework.Structure.Models;
+using Amsel.Models.Rundown.Models;
 using Amsel.Resources.Rundown.Endpoints;
 
 namespace Amsel.Access.Rundown.Services
 {
-    public class RundownElementAccess : CRUDAccess<RundownElementDTO>
+    public class RundownElementAccess : CRUDAccess<RundownElement>
     {
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;

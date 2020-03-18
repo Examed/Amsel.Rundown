@@ -11,8 +11,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Amsel.Framework\Amsel.Framework.Structure\Amsel.Framework.Structure\Amsel.Framework.Structure.csproj" />
     <ProjectReference Include="..\..\Amsel.Authentication\Amsel.Access.Authentication\Amsel.Access.Authentication.csproj" />
-    <ProjectReference Include="..\Amsel.DTO.Rundown\Amsel.DTO.Rundown.csproj" />
     <ProjectReference Include="..\Amsel.Enums.Rundown\Amsel.Enums.Rundown.csproj" />
+    <ProjectReference Include="..\Amsel.Models.Rundown\Amsel.Models.Rundown.csproj" />
     <ProjectReference Include="..\Amsel.Resources.Rundown\Amsel.Resources.Rundown.csproj" />
   </ItemGroup>
 </Project>

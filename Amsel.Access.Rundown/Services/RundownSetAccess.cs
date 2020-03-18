@@ -13,10 +13,11 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Amsel.Framework.Structure.Models;
+using Amsel.Models.Rundown.Models;
 
 namespace Amsel.Access.Rundown.Services
 {
-    public class RundownSetAccess : CRUDAccess<RundownSetDTO>
+    public class RundownSetAccess : CRUDAccess<RundownSet>
     {
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
@@ -33,11 +34,11 @@ namespace Amsel.Access.Rundown.Services
         #endregion
 
         #region PUBLIC METHODES
-        public virtual async Task<(IEnumerable<RundownSetDTO> value, int count)> GetByQueueAsync(string queueName, int? skip = null, int? take = null)
+        public virtual async Task<(IEnumerable<RundownSet> value, int count)> GetByQueueAsync(string queueName, int? skip = null, int? take = null)
         {
             HttpResponseMessage response = await GetAsync(GetByQueueAddress, (nameof(queueName), queueName), (nameof(skip), skip), (nameof(take), take))
                                                      .ConfigureAwait(false);
-            return await response.DeserializeOrDefaultAsync<(IEnumerable<RundownSetDTO> value, int count)>()
+            return await response.DeserializeOrDefaultAsync<(IEnumerable<RundownSet> value, int count)>()
                              .ConfigureAwait(false);
         }
 
@@ -51,7 +52,7 @@ namespace Amsel.Access.Rundown.Services
             if (!Enum.IsDefined(typeof(EHandlerType), handlerType))
                 throw new InvalidEnumArgumentException(nameof(handlerType), (int)handlerType, typeof(EHandlerType));
 
-            RundownTriggerDTO data = new RundownTriggerDTO(handlerType, values);
+            RundownTrigger data = new RundownTrigger(handlerType, values);
 
             return PostAsync(GetByConnectionAddress, GetJsonContent(data));
         }

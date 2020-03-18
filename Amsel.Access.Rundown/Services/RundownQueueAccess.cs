@@ -1,10 +1,10 @@
 ﻿using Amsel.Access.Authentication.Services;
-using Amsel.DTO.Rundown.Models;
 using Amsel.Framework.Base.Models;
 using Amsel.Framework.Structure.Interfaces;
 using Amsel.Framework.Structure.Models;
 using Amsel.Framework.Structure.Models.Address;
 using Amsel.Framework.Utilities.Extensions.Http;
+using Amsel.Models.Rundown.Models;
 using Amsel.Resources.Rundown.Controller;
 using Amsel.Resources.Rundown.Endpoints;
 using JetBrains.Annotations;
@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Amsel.Access.Rundown.Services
 {
-    public class RundownQueueAccess : CRUDAccess<RundownQueueDTO>
+    public class RundownQueueAccess : CRUDAccess<RundownQueue>
     {
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
