@@ -31,10 +31,10 @@ namespace Amsel.Access.Rundown.Services
         public RundownQueueAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService) { }
 
         #region PUBLIC METHODES
-        public async Task<IEnumerable<GuidNameEntityDTO>> GetQueueNamesAsync()
+        public async Task<IEnumerable<GuidNameEntity>> GetQueueNamesAsync()
         {
             HttpResponseMessage response = await GetAsync(GetQueueNamesAddress).ConfigureAwait(false);
-            return await response.DeserializeElseThrowAsync<IEnumerable<GuidNameEntityDTO>>().ConfigureAwait(false);
+            return await response.DeserializeElseThrowAsync<IEnumerable<GuidNameEntity>>().ConfigureAwait(false);
         }
         #endregion
     }

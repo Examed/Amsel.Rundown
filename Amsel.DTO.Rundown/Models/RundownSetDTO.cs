@@ -24,9 +24,9 @@ namespace Amsel.DTO.Rundown.Models
         [Display(Name = nameof(Priority))]
         public int Priority { get; set; } = 10;
 
-        [Required] public GuidNameEntityDTO Queue { get; set; }
+        [Required] public GuidNameEntity Queue { get; set; }
 
-        public List<GuidNameEntityDTO> Sequences { get; set; } = new List<GuidNameEntityDTO>();
+        public List<GuidNameEntity> Sequences { get; set; } = new List<GuidNameEntity>();
 
         public ERundownStatus Status { get; set; }
     }
