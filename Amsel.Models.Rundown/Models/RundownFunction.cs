@@ -1,5 +1,6 @@
 ﻿using Amsel.Enums.Rundown.Enums;
 using Amsel.Framework.Base.Interfaces;
+using Amsel.Framework.Database.SQL.Context;
 using Amsel.Model.Tenant.Interfaces;
 using Amsel.Model.Tenant.TenantModels;
 using JetBrains.Annotations;
@@ -15,10 +16,11 @@ namespace Amsel.Models.Rundown.Models
     /// A representation of a Action
     /// </summary>
      [ComplexType]
-    public class RundownFunction : LogicEntity, ISharedTenant, INamedEntity
+    public class RundownFunction : LogicEntity, ISharedTenant,INamedEntity
     {
         public virtual string Description { get; set; } = string.Empty;
-
+        
+        [Distinct]
         public virtual EHandlerType HandlerName { get; protected set; }
 
         public virtual string Icon { get; protected set; }
@@ -30,6 +32,8 @@ namespace Amsel.Models.Rundown.Models
         public virtual bool IsSystem { get; set; }
 
         public virtual bool IsTrigger { get; set; }
+
+        [Distinct]
 
         public virtual string Name { get; set; }
 

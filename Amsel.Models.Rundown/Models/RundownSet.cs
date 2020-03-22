@@ -16,7 +16,7 @@ namespace Amsel.Models.Rundown.Models
     /// <summary>
     /// RundownCollection contains a set of RundownElements that get played when the Collection is active
     /// </summary>
-    public class RundownSet : LogicEntity, IMultiTenant, INamedEntity
+    public class RundownSet : LogicEntity, ITenantEntity, INamedEntity
     {
         [Display(Name = nameof(Description))]
         public virtual string Description { get; protected set; }

@@ -14,7 +14,7 @@
 //    {
 //        public RundownDTOMap()
 //        {
-//            CreateMap<IList<MultiTenant>, bool>().ConvertUsing<TenantMappingExtentions.UsedByMultiTenant>();
+//            CreateMap<IList<TenantEntity>, bool>().ConvertUsing<TenantMappingExtentions.UsedByTenantEntity>();
 
 //            #region RundownQueue
 //            this.CreateEntityToGuidAndNameMap<RundownQueue, RundownQueue>();

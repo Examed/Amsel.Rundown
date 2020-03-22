@@ -1,4 +1,5 @@
 ﻿using Amsel.Framework.Base.Interfaces;
+using Amsel.Framework.Database.SQL.Context;
 using Amsel.Model.Tenant.Interfaces;
 using Amsel.Model.Tenant.TenantModels;
 using System;
@@ -15,6 +16,7 @@ namespace Amsel.Models.Rundown.Models
 
         public bool IsSystem { get; set; }
 
+        [Distinct]
         public string Name { get; set; }
         public TenantEntity Tenant { get; set; }
 
