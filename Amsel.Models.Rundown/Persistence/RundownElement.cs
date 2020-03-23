@@ -2,6 +2,7 @@
 using Amsel.Framework.Base.Interfaces;
 using Amsel.Model.Tenant.TenantModels;
 using JetBrains.Annotations;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,13 +16,15 @@ namespace Amsel.Models.Rundown.Models
 
         public int Duration { get; set; }
 
+        
+        public Guid Id { get; set; }
         public string Name { get; set; }
 
         public RundownSequenceType.EType SequenceType { get; set; }
 
         public ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
 
-        [ComplexType]
+        [ComplexType, Owned]
         public class RundownElementValue : IGuidEntity
         {
             protected RundownElementValue() { }

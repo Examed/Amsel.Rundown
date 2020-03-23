@@ -4,6 +4,7 @@ using Amsel.Model.Tenant.TenantModels;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
@@ -57,6 +58,9 @@ namespace Amsel.Models.Rundown.Models
 
             return false;
         }
+
+        [Key]
+        public Guid Id { get; set; }
 
         public virtual bool IsBaseSequence { get; set; }
 

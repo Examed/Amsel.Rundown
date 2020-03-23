@@ -13,15 +13,6 @@ namespace Amsel.Models.Rundown.Models
 {
     [ComplexType]
     /// <summary>
-/// RundownCollection contains a set of RundownElements that get played when the Collection is active
-/// </summary>
-    /// <summary>
-/// RundownCollection contains a set of RundownElements that get played when the Collection is active
-/// </summary>
-    /// <summary>
-    /// RundownCollection contains a set of RundownElements that get played when the Collection is active
-    /// </summary>
-    /// <summary>
     /// RundownCollection contains a set of RundownElements that get played when the Collection is active
     /// </summary>
     public class RundownSet : LogicEntity, ITenantEntity, INamedEntity
@@ -34,7 +25,7 @@ namespace Amsel.Models.Rundown.Models
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Queue = queue;
 
-            if(elementList != null)
+            if (elementList != null)
                 Elements = elementList.ToList();
         }
 
@@ -42,17 +33,17 @@ namespace Amsel.Models.Rundown.Models
 
         public virtual void AddSequences(params RundownSequence[] rundownSequences)
         {
-            foreach(RundownSequence sequence in rundownSequences)
+            foreach (RundownSequence sequence in rundownSequences)
             {
-                if(Sequences.All(x => x.Id != sequence.Id))
+                if (Sequences.All(x => x.Id != sequence.Id))
                     Sequences.Add(sequence);
             }
         }
 
         [Display(Name = nameof(Description))]
-        public virtual string Description { get;  set; }
+        public virtual string Description { get; set; }
 
-        public virtual string Directory { get;  set; }
+        public virtual string Directory { get; set; }
 
         [NotNull]
         [ItemNotNull]
@@ -64,7 +55,7 @@ namespace Amsel.Models.Rundown.Models
 
         [Range(0, 100)]
         [Display(Name = nameof(Priority))]
-        public virtual int Priority { get;  set; }
+        public virtual int Priority { get; set; }
 
         [Required]
         public virtual RundownQueue Queue { get; set; }
@@ -75,6 +66,9 @@ namespace Amsel.Models.Rundown.Models
 
         [NotMapped]
         public ERundownStatus Status { get; set; }
+
+        [Key]
+        public Guid Id { get; set; }
 
         public virtual TenantEntity Tenant { get; set; }
     }

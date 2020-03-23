@@ -6,6 +6,7 @@ using Amsel.Model.Tenant.TenantModels;
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
@@ -45,7 +46,8 @@ namespace Amsel.Models.Rundown.Models
         }
 
         public virtual string Description { get; set; } = string.Empty;
-
+        [Key]
+        public Guid Id { get; set; }
         [Distinct]
         public virtual EHandlerType HandlerName { get; protected set; }
 

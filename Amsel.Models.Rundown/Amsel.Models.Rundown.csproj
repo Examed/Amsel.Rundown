@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Amsel.Framework\Amsel.Framework.Base\Amsel.Framework.Base.csproj" />
     <ProjectReference Include="..\..\Amsel.Tenant\Amsel.Model.Tenant\Amsel.Model.Tenant.csproj" />
     <ProjectReference Include="..\..\Amsel.Tenant\Amsel.Model.Tenant\Amsel.Model.Tenant.csproj" />
