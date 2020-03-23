@@ -1,23 +1,14 @@
-﻿
-using Amsel.Model.Tenant.TenantModels;
+﻿using Amsel.Model.Tenant.TenantModels;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Amsel.Endpoint.Rundown.Models
+namespace Amsel.Models.Rundown.Models
 {
     [ComplexType]
     public class DonationData : DataEntity
     {
-        public virtual double Amount { get; set; }
+        protected DonationData() { }
 
-        public virtual string User { get; set; }
-
-        #region PUBLIC METHODES
-    
-        public override object GetData() => new { Amount, User };
-        #endregion
-
-        #region  CONSTRUCTORS
 
         public DonationData(string user, double amount)
         {
@@ -26,9 +17,11 @@ namespace Amsel.Endpoint.Rundown.Models
             User = user ?? throw new ArgumentNullException(nameof(user));
         }
 
-        protected DonationData()
-        {
-        }
-        #endregion
+
+        public override object GetData() => new { Amount, User };
+
+        public virtual double Amount { get; set; }
+
+        public virtual string User { get; set; }
     }
 }

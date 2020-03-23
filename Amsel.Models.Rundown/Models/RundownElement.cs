@@ -12,15 +12,19 @@ namespace Amsel.Models.Rundown.Models
     public class RundownElementBase : LogicEntity
     {
         public int Delay { get; set; }
+
         public int Duration { get; set; }
+
         public string Name { get; set; }
-        public RundownSequenceType.EType SequenceType { get; protected set; }
+
+        public RundownSequenceType.EType SequenceType { get; set; }
+
         public ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
 
-        #region Nested type: RundownElementValue
         [ComplexType]
         public class RundownElementValue : IGuidEntity
         {
+            protected RundownElementValue() { }
 
             internal RundownElementValue([NotNull] RundownParameter parameter, string value)
             {
@@ -28,17 +32,15 @@ namespace Amsel.Models.Rundown.Models
                 Value = value;
             }
 
-            protected RundownElementValue() { }
+            public void SetValue(string value) => Value = value;
+
+            public Guid Id { get; protected set; }
 
             [NotNull]
             public RundownParameter Parameter { get; protected set; }
-            public Guid Id { get; protected set; }
-            public string Value { get; protected set; }
 
-            public void SetValue(string value) => Value = value;
+            public string Value { get;  set; }
         }
-
-        #endregion
     }
 
 
@@ -49,18 +51,24 @@ namespace Amsel.Models.Rundown.Models
     [ComplexType]
     public class RundownElement : RundownElementBase
     {
-        public RundownFunction Function { get; protected set; }
+        protected RundownElement() { }
 
-        public RundownSequence Sequence { get; set; }
-        #region PUBLIC METHODES
+
+        public RundownElement(RundownFunction function, RundownSequenceType.EType? sequence = null, int delay = 0)
+        {
+            SequenceType = sequence ?? function.SequenceType;
+            Function = function;
+            Name = function.Name;
+            Delay = delay;
+        }
+
         public void AddValue([NotNull] string name, string value)
         {
             List<RundownParameter> parameter = Function.Parameters.Where(x => x.Name == name).ToList();
-            foreach (RundownParameter current in parameter)
+            foreach(RundownParameter current in parameter)
             {
-                RundownElementValue parameterValue = Values.FirstOrDefault(x => (x?.Parameter != null) &&
-                    (x.Parameter.Id == current.Id));
-                if (parameterValue == null)
+                RundownElementValue parameterValue = Values.FirstOrDefault(x => (x?.Parameter != null) && (x.Parameter.Id == current.Id));
+                if(parameterValue == null)
                     parameterValue = new RundownElementValue(current, value);
                 else
                     parameterValue.SetValue(value);
@@ -73,27 +81,14 @@ namespace Amsel.Models.Rundown.Models
         public Dictionary<string, string> GetValues()
         {
             Dictionary<string, string> values = Function.Parameters.ToDictionary(item => item.Name, item => item.Value);
-            foreach (RundownElementValue item in Values)
+            foreach(RundownElementValue item in Values)
                 values[item.Parameter.Name] = item.Value;
 
             return values;
         }
 
-        #endregion
+        public RundownFunction Function { get; protected set; }
 
-        #region  CONSTRUCTORS
-
-        public RundownElement(RundownFunction function, RundownSequenceType.EType? sequence = null, int delay = 0)
-        {
-            SequenceType = sequence ?? function.SequenceType;
-            Function = function;
-            Name = function.Name;
-            Delay = delay;
-        }
-
-        protected RundownElement()
-        {
-        }
-        #endregion
+        public RundownSequence Sequence { get; set; }
     }
 }

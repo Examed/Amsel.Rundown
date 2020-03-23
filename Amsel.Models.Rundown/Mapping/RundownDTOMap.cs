@@ -1,11 +1,11 @@
 ﻿//using Amsel.DTO.Rundown.Models;
 //using Amsel.Framework.Database.SQL.NHibernate.Interfaces;
-//using Amsel.Framework.Database.SQL.NHibernate.Sync.Tenant.Persistence;
+//using Amsel.Framework.Database.SQL.NHibernate.Sync.TenantEntity.Persistence;
 //using Amsel.Models.Rundown.Models;
 //using AutoMapper;
 //using System.Collections.Generic;
 //using System.Linq;
-//using Amsel.Framework.Database.SQL.NHibernate.Sync.Tenant.Mapping;
+//using Amsel.Framework.Database.SQL.NHibernate.Sync.TenantEntity.Mapping;
 //using Amsel.Framework.Database.SQL.Mapping;
 
 //namespace Amsel.Endpoint.Rundown.Utilities.Mapping.DTO

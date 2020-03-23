@@ -1,5 +1,5 @@
-﻿using Amsel.Framework.Base.Interfaces;
-using Amsel.Framework.Database.SQL.Context;
+﻿using Amsel.Framework.Base.Attributs;
+using Amsel.Framework.Base.Interfaces;
 using Amsel.Model.Tenant.Interfaces;
 using Amsel.Model.Tenant.TenantModels;
 using System;
@@ -11,20 +11,8 @@ namespace Amsel.Models.Rundown.Models
     [ComplexType]
     public class RundownQueue : IGuidEntity, ISharedTenant, INamedEntity
     {
-        public Guid Id { get; set; }
-        public bool IsPublic { get; set; }
+        protected RundownQueue() { }
 
-        public bool IsSystem { get; set; }
-
-        [Distinct]
-        public string Name { get; set; }
-        public TenantEntity Tenant { get; set; }
-
-        public ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
-
-        public  bool StopOnNew { get; set; }
-  
-        #region  CONSTRUCTORS
 
         public RundownQueue(string name, bool stopOnNew = false, bool isPublic = false)
         {
@@ -33,9 +21,19 @@ namespace Amsel.Models.Rundown.Models
             IsPublic = isPublic;
         }
 
-        protected RundownQueue()
-        {
-        }
-        #endregion
+        public Guid Id { get; set; }
+
+        public bool IsPublic { get; set; }
+
+        public bool IsSystem { get; set; }
+
+        [Distinct]
+        public string Name { get; set; }
+
+        public bool StopOnNew { get; set; }
+
+        public TenantEntity Tenant { get; set; }
+
+        public ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
     }
 }

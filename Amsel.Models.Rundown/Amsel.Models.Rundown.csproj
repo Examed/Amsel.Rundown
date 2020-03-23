@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Amsel.Framework\Amsel.Framework.Base\Amsel.Framework.Base.csproj" />
     <ProjectReference Include="..\..\Amsel.Tenant\Amsel.Model.Tenant\Amsel.Model.Tenant.csproj" />
+    <ProjectReference Include="..\..\Amsel.Tenant\Amsel.Model.Tenant\Amsel.Model.Tenant.csproj" />
     <ProjectReference Include="..\Amsel.Enums.Rundown\Amsel.Enums.Rundown.csproj" />
   </ItemGroup>
 

@@ -2,28 +2,19 @@
 {
     public static class RundownSetControllerResources
     {
-        #region STATICS, CONST and FIELDS
-
         public const string CREATE = "create";
+        public const string ENQUEUE = "enqueue";
         public const string GET_BY_ID = "get";
         public const string GET_BY_QUEUE = "get/queue";
-        public const string ENQUEUE = "enqueue";
-        #endregion
     }
 
     public static class RundownQueueControllerResources
     {
-        #region STATICS, CONST and FIELDS
-
         public const string GET_NAMES = "get/names";
-        #endregion
     }
 
     public static class RundownSequenceControllerResources
     {
-        #region STATICS, CONST and FIELDS
-
         public const string GET_BY_RUNDOWN = "get/rundown";
-        #endregion
     }
 }
