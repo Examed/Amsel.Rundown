@@ -10,13 +10,14 @@ using System.Linq;
 
 namespace Amsel.Models.Rundown.Models
 {
-    public class RundownElementBase : LogicEntity
+      public class RundownElementBase : LogicEntity
     {
         public int Delay { get; set; }
 
         public int Duration { get; set; }
 
-        
+        public RundownSet RundownSet { get; set; }
+
         public Guid Id { get; set; }
         public string Name { get; set; }
 
@@ -42,7 +43,7 @@ namespace Amsel.Models.Rundown.Models
             [NotNull]
             public RundownParameter Parameter { get; protected set; }
 
-            public string Value { get;  set; }
+            public string Value { get; set; }
         }
     }
 
@@ -68,10 +69,10 @@ namespace Amsel.Models.Rundown.Models
         public void AddValue([NotNull] string name, string value)
         {
             List<RundownParameter> parameter = Function.Parameters.Where(x => x.Name == name).ToList();
-            foreach(RundownParameter current in parameter)
+            foreach (RundownParameter current in parameter)
             {
                 RundownElementValue parameterValue = Values.FirstOrDefault(x => (x?.Parameter != null) && (x.Parameter.Id == current.Id));
-                if(parameterValue == null)
+                if (parameterValue == null)
                     parameterValue = new RundownElementValue(current, value);
                 else
                     parameterValue.SetValue(value);
@@ -84,7 +85,7 @@ namespace Amsel.Models.Rundown.Models
         public Dictionary<string, string> GetValues()
         {
             Dictionary<string, string> values = Function.Parameters.ToDictionary(item => item.Name, item => item.Value);
-            foreach(RundownElementValue item in Values)
+            foreach (RundownElementValue item in Values)
                 values[item.Parameter.Name] = item.Value;
 
             return values;

@@ -33,7 +33,7 @@ namespace Amsel.Models.Rundown.Models
             SequenceType = sequenceType;
         }
 
-        public virtual void AddParameter([NotNull] string name, string value = null, EParameterType type = EParameterType.TEXTBOX, string description = null)
+        public  void AddParameter([NotNull] string name, string value = null, EParameterType type = EParameterType.TEXTBOX, string description = null)
         {
             RundownParameter current = Parameters.FirstOrDefault(x => x.Name == name);
             if(current != null)
@@ -45,34 +45,32 @@ namespace Amsel.Models.Rundown.Models
             Parameters.Add(parameter);
         }
 
-        public virtual string Description { get; set; } = string.Empty;
+        public  string Description { get; set; } = string.Empty;
         [Key]
         public Guid Id { get; set; }
         [Distinct]
-        public virtual EHandlerType HandlerName { get; protected set; }
+        public  EHandlerType HandlerName { get; protected set; }
 
-        public virtual string Icon { get; protected set; }
-
-        /// <inheritdoc/>
-        public virtual bool IsPublic { get; set; }
+        public  string Icon { get; protected set; }
 
         /// <inheritdoc/>
-        public virtual bool IsSystem { get; set; }
+        public  bool IsPublic { get; set; }
 
-        public virtual bool IsTrigger { get; set; }
+        /// <inheritdoc/>
+        public  bool IsSystem { get; set; }
+
+        public  bool IsTrigger { get; set; }
 
         [Distinct]
-
-        public virtual string Name { get; set; }
+        public  string Name { get; set; }
 
         [NotNull]
-        public virtual ICollection<RundownParameter> Parameters { get; protected set; } = new List<RundownParameter>();
+        public  ICollection<RundownParameter> Parameters { get; protected set; } = new List<RundownParameter>();
 
-        public virtual RundownSequenceType.EType SequenceType { get; set; }
+        public  RundownSequenceType.EType SequenceType { get; set; }
 
-        public virtual TenantEntity Tenant { get; set; }
+        public  TenantEntity Tenant { get; set; }
 
-
-        public virtual ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
+        public  ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
     }
 }
