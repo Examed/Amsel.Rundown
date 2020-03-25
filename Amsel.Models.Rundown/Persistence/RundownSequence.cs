@@ -29,7 +29,7 @@ namespace Amsel.Models.Rundown.Models
             IsBaseSequence = false;
         }
 
-        public virtual void AddElements(params RundownElement[] elementList)
+        public  void AddElements(params RundownElement[] elementList)
         {
             foreach (RundownElement element in elementList)
             {
@@ -38,10 +38,10 @@ namespace Amsel.Models.Rundown.Models
             }
         }
 
-        public virtual string Description { get; set; }
+        public  string Description { get; set; }
 
         [NotNull]
-        public virtual ICollection<RundownElement> Elements { get; set; } = new List<RundownElement>();
+        public  ICollection<RundownElement> Elements { get; set; } = new List<RundownElement>();
 
         public bool CanEdit(TenantName tenantName)
         {
@@ -62,17 +62,18 @@ namespace Amsel.Models.Rundown.Models
         [Key]
         public Guid Id { get; set; }
 
-        public virtual bool IsBaseSequence { get; set; }
+        public  bool IsBaseSequence { get; set; }
 
-        public virtual bool IsPublic { get; set; }
+        public  bool IsPublic { get; set; }
 
-        public virtual bool IsSystem { get; set; }
+        public  bool IsSystem { get; set; }
 
-        [NotNull] public virtual string Name { get; set; }
+        [NotNull] public  string Name { get; set; }
 
 
-        public virtual TenantEntity Tenant { get; set; }
+        public  TenantEntity Tenant { get; set; }
 
-        public virtual ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
+        [NotMapped]
+        public  ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
     }
 }

@@ -2,6 +2,7 @@
 using Amsel.Framework.Base.Interfaces;
 using JetBrains.Annotations;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Amsel.Models.Rundown.Models
@@ -45,6 +46,7 @@ namespace Amsel.Models.Rundown.Models
 
         public bool Editable { get; protected set; }
 
+        [Key]
         public Guid Id { get; set; }
 
         public string Name { get; set; }

@@ -13,7 +13,6 @@ namespace Amsel.Models.Rundown.Models
     {
         protected RundownQueue() { }
 
-
         public RundownQueue(string name, bool stopOnNew = false, bool isPublic = false)
         {
             Name = name;
@@ -34,6 +33,7 @@ namespace Amsel.Models.Rundown.Models
 
         public TenantEntity Tenant { get; set; }
 
+        [NotMapped]
         public ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
     }
 }

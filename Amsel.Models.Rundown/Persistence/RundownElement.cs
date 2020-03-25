@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
@@ -17,7 +18,7 @@ namespace Amsel.Models.Rundown.Models
         public int Duration { get; set; }
 
         public RundownSet RundownSet { get; set; }
-
+        [Key]
         public Guid Id { get; set; }
         public string Name { get; set; }
 
@@ -26,7 +27,7 @@ namespace Amsel.Models.Rundown.Models
         public ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
 
         [ComplexType, Owned]
-        public class RundownElementValue : IGuidEntity
+        public class RundownElementValue 
         {
             protected RundownElementValue() { }
 
@@ -38,9 +39,7 @@ namespace Amsel.Models.Rundown.Models
 
             public void SetValue(string value) => Value = value;
 
-            public Guid Id { get; protected set; }
-
-            [NotNull]
+            [Key]
             public RundownParameter Parameter { get; protected set; }
 
             public string Value { get; set; }
@@ -52,7 +51,6 @@ namespace Amsel.Models.Rundown.Models
     /// <summary>
     /// An Implementation of a RundownFunction
     /// </summary>
-    [ComplexType]
     public class RundownElement : RundownElementBase
     {
         protected RundownElement() { }

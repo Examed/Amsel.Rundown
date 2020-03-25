@@ -71,6 +71,7 @@ namespace Amsel.Models.Rundown.Models
 
         public  TenantEntity Tenant { get; set; }
 
+        [NotMapped]
         public  ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
     }
 }
