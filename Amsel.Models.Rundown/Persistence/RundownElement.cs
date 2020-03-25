@@ -11,54 +11,37 @@ using System.Linq;
 
 namespace Amsel.Models.Rundown.Models
 {
-      public class RundownElementBase : LogicEntity
+    [ComplexType]
+    public class RundownSequenceElement : RundownElement
     {
-        public int Delay { get; set; }
 
-        public int Duration { get; set; }
+        public RundownSequence Sequence { get; set; }
+        protected RundownSequenceElement() { }
 
-        public RundownSet RundownSet { get; set; }
-        [Key]
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-
-        public RundownSequenceType.EType SequenceType { get; set; }
-
-        public ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
-
-        [ComplexType, Owned]
-        public class RundownElementValue 
+        public RundownSequenceElement(RundownFunction function, RundownSequenceType.EType? sequenceType = null, int delay = 0) : base(function, sequenceType, delay)
         {
-            protected RundownElementValue() { }
-
-            internal RundownElementValue([NotNull] RundownParameter parameter, string value)
-            {
-                Parameter = parameter;
-                Value = value;
-            }
-
-            public void SetValue(string value) => Value = value;
-
-            [Key]
-            public RundownParameter Parameter { get; protected set; }
-
-            public string Value { get; set; }
         }
     }
 
-
-    /// <inheritdoc cref="GuidEntity"/>
-    /// <summary>
-    /// An Implementation of a RundownFunction
-    /// </summary>
-    public class RundownElement : RundownElementBase
+    [ComplexType]
+    public class RundownSetElement : RundownElement
     {
-        protected RundownElement() { }
+        public RundownSet RundownSet { get; set; }
 
+        protected RundownSetElement() { }
 
-        public RundownElement(RundownFunction function, RundownSequenceType.EType? sequence = null, int delay = 0)
+        public RundownSetElement(RundownFunction function, RundownSequenceType.EType? sequenceType = null, int delay = 0) : base(function, sequenceType, delay)
         {
-            SequenceType = sequence ?? function.SequenceType;
+        }
+    }
+
+    public abstract class RundownElement : IGuidEntity, INamedEntity
+    {
+
+        protected RundownElement() { }
+        public RundownElement(RundownFunction function, RundownSequenceType.EType? sequenceType = null, int delay = 0)
+        {
+            SequenceType = sequenceType ?? function.SequenceType;
             Function = function;
             Name = function.Name;
             Delay = delay;
@@ -69,9 +52,9 @@ namespace Amsel.Models.Rundown.Models
             List<RundownParameter> parameter = Function.Parameters.Where(x => x.Name == name).ToList();
             foreach (RundownParameter current in parameter)
             {
-                RundownElementValue parameterValue = Values.FirstOrDefault(x => (x?.Parameter != null) && (x.Parameter.Id == current.Id));
+                ElementValue parameterValue = Values.FirstOrDefault(x => (x?.Parameter != null) && (x.Parameter.Id == current.Id));
                 if (parameterValue == null)
-                    parameterValue = new RundownElementValue(current, value);
+                    parameterValue = new ElementValue(current, value);
                 else
                     parameterValue.SetValue(value);
 
@@ -83,14 +66,51 @@ namespace Amsel.Models.Rundown.Models
         public Dictionary<string, string> GetValues()
         {
             Dictionary<string, string> values = Function.Parameters.ToDictionary(item => item.Name, item => item.Value);
-            foreach (RundownElementValue item in Values)
+            foreach (ElementValue item in Values)
                 values[item.Parameter.Name] = item.Value;
 
             return values;
         }
 
+        public int Delay { get; set; }
+
+        public int Duration { get; set; }
+
+        [Key] public Guid Id { get; set; }
+
+        public string Name { get; set; }
+
+        public RundownSequenceType.EType SequenceType { get; set; }
+
+
+        public ICollection<ElementValue> Values { get; protected set; } = new List<ElementValue>();
+
         public RundownFunction Function { get; protected set; }
 
-        public RundownSequence Sequence { get; set; }
+
+
+        [Owned]
+        public class ElementValue
+        {
+            protected ElementValue() { }
+
+            internal ElementValue([NotNull] RundownParameter parameter, string value)
+            {
+                Parameter = parameter;
+                Value = value;
+            }
+
+            public void SetValue(string value) => Value = value;
+
+            [Key]
+            public RundownParameter Parameter { get; protected set; }
+
+            public string Value { get; set; }
+
+
+
+        }
+
+
     }
 }
