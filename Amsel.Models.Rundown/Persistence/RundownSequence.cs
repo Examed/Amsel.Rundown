@@ -16,22 +16,22 @@ namespace Amsel.Models.Rundown.Models
         protected RundownSequence() { }
 
 
-        public RundownSequence(params RundownSequenceElement[] elementList)
+        public RundownSequence(params RundownElement[] elementList)
         {
             AddElements(elementList);
             IsBaseSequence = true;
         }
 
-        public RundownSequence(string name, params RundownSequenceElement[] elementList)
+        public RundownSequence(string name, params RundownElement[] elementList)
         {
             AddElements(elementList);
             Name = name ?? throw new ArgumentNullException(nameof(name));
             IsBaseSequence = false;
         }
 
-        public  void AddElements(params RundownSequenceElement[] elementList)
+        public  void AddElements(params RundownElement[] elementList)
         {
-            foreach (RundownSequenceElement element in elementList)
+            foreach (RundownElement element in elementList)
             {
                 //element.Sequence = this;
                 Elements.Add(element);
@@ -41,7 +41,7 @@ namespace Amsel.Models.Rundown.Models
         public  string Description { get; set; }
 
         [NotNull]
-        public  ICollection<RundownSequenceElement> Elements { get; set; } = new List<RundownSequenceElement>();
+        public  ICollection<RundownElement> Elements { get; set; } = new List<RundownElement>();
 
         public bool CanEdit(TenantName tenantName)
         {

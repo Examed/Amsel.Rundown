@@ -11,34 +11,10 @@ using System.Linq;
 
 namespace Amsel.Models.Rundown.Models
 {
-    [ComplexType]
-    public class RundownSequenceElement : RundownElement
+
+    public class RundownElement : IGuidEntity, INamedEntity
     {
-
-        public RundownSequence Sequence { get; set; }
-        protected RundownSequenceElement() { }
-
-        public RundownSequenceElement(RundownFunction function, RundownSequenceType.EType? sequenceType = null, int delay = 0) : base(function, sequenceType, delay)
-        {
-        }
-    }
-
-    [ComplexType]
-    public class RundownSetElement : RundownElement
-    {
-        public RundownSet RundownSet { get; set; }
-
-        protected RundownSetElement() { }
-
-        public RundownSetElement(RundownFunction function, RundownSequenceType.EType? sequenceType = null, int delay = 0) : base(function, sequenceType, delay)
-        {
-        }
-    }
-
-    public abstract class RundownElement : IGuidEntity, INamedEntity
-    {
-
-        protected RundownElement() { }
+        public RundownElement() { }
         public RundownElement(RundownFunction function, RundownSequenceType.EType? sequenceType = null, int delay = 0)
         {
             SequenceType = sequenceType ?? function.SequenceType;
@@ -89,21 +65,31 @@ namespace Amsel.Models.Rundown.Models
 
 
 
-        [Owned]
+
+        [ComplexType]
         public class ElementValue
         {
             protected ElementValue() { }
 
             internal ElementValue([NotNull] RundownParameter parameter, string value)
             {
+                ParameterId = parameter.Id;
                 Parameter = parameter;
                 Value = value;
             }
 
             public void SetValue(string value) => Value = value;
 
-            [Key]
+            [Column(nameof(Parameter))]
+            public Guid ParameterId { get; protected set; }
+            [ForeignKey(nameof(ParameterId))]
             public RundownParameter Parameter { get; protected set; }
+
+
+            [Column(nameof(Element))]
+            public Guid ElementId { get; protected set; }
+            [ForeignKey(nameof(ElementId))]
+            public RundownElement Element { get; protected set; }
 
             public string Value { get; set; }
 

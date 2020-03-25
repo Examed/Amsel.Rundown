@@ -20,7 +20,7 @@ namespace Amsel.Models.Rundown.Models
         protected RundownSet() { }
 
 
-        public RundownSet([NotNull] string name, RundownQueue queue, params RundownSetElement[] elementList)
+        public RundownSet([NotNull] string name, RundownQueue queue, params RundownElement[] elementList)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Queue = queue;
@@ -47,7 +47,7 @@ namespace Amsel.Models.Rundown.Models
 
         [NotNull]
         [ItemNotNull]
-        public virtual ICollection<RundownSetElement> Elements { get; set; } = new List<RundownSetElement>();
+        public virtual ICollection<RundownElement> Elements { get; set; } = new List<RundownElement>();
 
         [Display(Name = nameof(Name))]
         [Required(ErrorMessage = "Field should not be empty")]
