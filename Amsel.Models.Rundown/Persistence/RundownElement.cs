@@ -28,7 +28,7 @@ namespace Amsel.Models.Rundown.Models
             List<RundownParameter> parameter = Function.Parameters.Where(x => x.Name == name).ToList();
             foreach (RundownParameter current in parameter)
             {
-                ElementValue parameterValue = Values.FirstOrDefault(x => (x?.Parameter != null) && (x.Parameter.Id == current.Id));
+                ElementValue parameterValue = Values.FirstOrDefault(x => (x.ParameterName == current.Name));
                 if (parameterValue == null)
                     parameterValue = new ElementValue(current, value);
                 else
@@ -43,7 +43,7 @@ namespace Amsel.Models.Rundown.Models
         {
             Dictionary<string, string> values = Function.Parameters.ToDictionary(item => item.Name, item => item.Value);
             foreach (ElementValue item in Values)
-                values[item.Parameter.Name] = item.Value;
+                values[item.ParameterName] = item.Value;
 
             return values;
         }
@@ -73,18 +73,13 @@ namespace Amsel.Models.Rundown.Models
 
             internal ElementValue([NotNull] RundownParameter parameter, string value)
             {
-                ParameterId = parameter.Id;
-                Parameter = parameter;
+                ParameterName = parameter.Name;
                 Value = value;
             }
 
             public void SetValue(string value) => Value = value;
 
-            [Column(nameof(Parameter))]
-            public Guid ParameterId { get; protected set; }
-            [ForeignKey(nameof(ParameterId))]
-            public RundownParameter Parameter { get; protected set; }
-
+            public string ParameterName { get; protected set; }
 
             [Column(nameof(Element))]
             public Guid ElementId { get; protected set; }

@@ -1,14 +1,15 @@
 ﻿using Amsel.Enums.Rundown.Enums;
 using Amsel.Framework.Base.Interfaces;
 using JetBrains.Annotations;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Amsel.Models.Rundown.Models
 {
-    [ComplexType]
-    public class RundownParameter : IGuidEntity, INamedEntity
+    [ComplexType, Owned]
+    public class RundownParameter : INamedEntity
     {
         protected RundownParameter() { }
 
@@ -46,8 +47,10 @@ namespace Amsel.Models.Rundown.Models
 
         public bool Editable { get; protected set; }
 
-        [Key]
-        public Guid Id { get; set; }
+        [Column(nameof(Function))]
+        public Guid FunctionId { get; protected set; }
+        [ForeignKey(nameof(FunctionId))]
+        public RundownFunction Function { get; protected set; }
 
         public string Name { get; set; }
 
