@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using static Amsel.Models.Rundown.Models.RundownSet;
 
 namespace Amsel.Models.Rundown.Models
 {
@@ -70,10 +71,11 @@ namespace Amsel.Models.Rundown.Models
 
         [NotNull] public string Name { get; set; }
 
-
         public TenantEntity Tenant { get; set; }
 
         [NotMapped]
         public ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
+
+     
     }
 }

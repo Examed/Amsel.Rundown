@@ -11,6 +11,7 @@ using System.Linq;
 
 namespace Amsel.Models.Rundown.Models
 {
+
     [ComplexType]
     /// <summary>
     /// RundownCollection contains a set of RundownElements that get played when the Collection is active
@@ -35,8 +36,7 @@ namespace Amsel.Models.Rundown.Models
         {
             foreach (RundownSequence sequence in rundownSequences)
             {
-                if (Sequences.All(x => x.Id != sequence.Id))
-                    Sequences.Add(sequence);
+                AddSequence(sequence);
             }
         }
 
@@ -62,7 +62,15 @@ namespace Amsel.Models.Rundown.Models
 
         [NotNull]
         [ItemNotNull]
-        public virtual ICollection<RundownSequence> Sequences { get; set; } = new List<RundownSequence>();
+        public virtual ICollection<RundownSetSequences> SequenceUsage { get; set; } = new List<RundownSetSequences>();
+
+        public IEnumerable<Guid> Sequences => SequenceUsage.Select(x => x.RundownSequenceId);
+
+        public void AddSequence(RundownSequence sequence)
+        {
+            if (!Sequences.Contains(sequence.Id))
+                SequenceUsage.Add(new RundownSetSequences(sequence));
+        }
 
         [NotMapped]
         public ERundownStatus Status { get; set; }
@@ -71,5 +79,27 @@ namespace Amsel.Models.Rundown.Models
         public Guid Id { get; set; }
 
         public virtual TenantEntity Tenant { get; set; }
+
+
+        [Table("RundownSets_Sequences")]
+        public class RundownSetSequences
+        {
+            [Column(nameof(RundownSequence))]
+            public Guid RundownSequenceId { get; protected set; }
+            [ForeignKey(nameof(RundownSequenceId))]
+            public RundownSequence RundownSequence { get; set; }
+
+            [Column(nameof(RundownSet))]
+            public Guid RundownSetId { get; protected set; }
+            [ForeignKey(nameof(RundownSetId))]
+            public RundownSet RundownSet { get; set; }
+
+            protected RundownSetSequences() { }
+            internal RundownSetSequences(RundownSequence sequence)
+            {
+                RundownSequence = sequence;
+                RundownSequenceId = sequence.Id;
+            }
+        }
     }
 }
