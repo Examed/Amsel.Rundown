@@ -65,11 +65,11 @@ namespace Amsel.Models.Rundown.Models
         public  string Name { get; set; }
 
         [NotNull]
-        public  ICollection<RundownParameter> Parameters { get; protected set; } = new List<RundownParameter>();
+        public virtual ICollection<RundownParameter> Parameters { get; protected set; } = new List<RundownParameter>();
 
         public  RundownSequenceType.EType SequenceType { get; set; }
 
-        public  TenantEntity Tenant { get; set; }
+        public virtual TenantEntity Tenant { get; set; }
 
         [NotMapped]
         public  ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();

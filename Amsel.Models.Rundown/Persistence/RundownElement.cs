@@ -59,9 +59,9 @@ namespace Amsel.Models.Rundown.Models
         public RundownSequenceType.EType SequenceType { get; set; }
 
 
-        public ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
+        public virtual ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
 
-        public RundownFunction Function { get; protected set; }
+        public virtual RundownFunction Function { get; protected set; }
 
         [Owned,ComplexType]
         public class RundownElementValue : RundownValue
@@ -75,7 +75,7 @@ namespace Amsel.Models.Rundown.Models
             [Column(nameof(Element))]
             public Guid ElementId { get; set; }
             [Required, ForeignKey(nameof(ElementId))]
-            public RundownElement Element { get; set; }
+            public virtual RundownElement Element { get; set; }
         }
     }
 }

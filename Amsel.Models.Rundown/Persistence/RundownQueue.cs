@@ -31,9 +31,9 @@ namespace Amsel.Models.Rundown.Models
 
         public bool StopOnNew { get; set; }
 
-        public TenantEntity Tenant { get; set; }
+        public virtual TenantEntity Tenant { get; set; }
 
         [NotMapped]
-        public ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
+        public virtual ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
     }
 }

@@ -47,10 +47,10 @@ namespace Amsel.Models.Rundown.Models
 
         public bool Editable { get; protected set; }
 
-        [Column(nameof(Function))]
+
         public Guid FunctionId { get; protected set; }
         [ForeignKey(nameof(FunctionId))]
-        public RundownFunction Function { get; protected set; }
+        public virtual RundownFunction Function { get; protected set; }
 
         public string Name { get; set; }
 

@@ -63,12 +63,12 @@ namespace Amsel.Models.Rundown.Models
 
         [NotNull]
         [ItemNotNull]
-        public virtual ICollection<RundownSetSequence> CurrentSequences { get; set; } = new List<RundownSetSequence>();
+        public virtual ICollection<RundownSetSequence> Sequences { get; set; } = new List<RundownSetSequence>();
 
         public void AddSequence(RundownSequence sequence)
         {
-            if (CurrentSequences.All(x => x.RundownSequenceId != sequence.Id))
-                CurrentSequences.Add(new RundownSetSequence(sequence));
+            if (Sequences.All(x => x.RundownSequenceId != sequence.Id))
+                Sequences.Add(new RundownSetSequence(sequence));
         }
                
 
@@ -78,17 +78,15 @@ namespace Amsel.Models.Rundown.Models
         [Table("RundownSets_Sequences")]
         public class RundownSetSequence
         {
-            [Column(nameof(RundownSequence))]
             public Guid RundownSequenceId { get; set; }
             [Required, ForeignKey(nameof(RundownSequenceId))]
-            public RundownSequence RundownSequence { get; set; }
+            public virtual RundownSequence RundownSequence { get; set; }
 
-            [Column(nameof(RundownSet))]
             public Guid RundownSetId { get; set; }
             [Required, ForeignKey(nameof(RundownSetId))]
-            public RundownSet RundownSet { get; set; }
+            public virtual RundownSet RundownSet { get; set; }
 
-            public ICollection<RundownSequenceValue> SequenceValues { get; protected set; } = new List<RundownSequenceValue>();
+            public virtual ICollection<RundownSequenceValue> SequenceValues { get; protected set; } = new List<RundownSequenceValue>();
             protected RundownSetSequence() { }
             internal RundownSetSequence(RundownSequence sequence, params RundownSequenceValue[] values)
             {
@@ -110,12 +108,12 @@ namespace Amsel.Models.Rundown.Models
                 [Column(nameof(RundownSequence))]
                 public Guid RundownSequenceId { get; set; }
                 [Required, ForeignKey(nameof(RundownSequenceId))]
-                public RundownSequence RundownSequence { get; set; }
+                public virtual RundownSequence RundownSequence { get; set; }
 
                 [Column(nameof(RundownSet))]
                 public Guid RundownSetId { get; set; }
                 [Required, ForeignKey(nameof(RundownSetId))]
-                public RundownSet RundownSet { get; set; }
+                public virtual RundownSet RundownSet { get; set; }
             }
         }
     }

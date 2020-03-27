@@ -41,7 +41,7 @@ namespace Amsel.Models.Rundown.Models
         public string Description { get; set; }
 
         [NotNull]
-        public ICollection<RundownElement> Elements { get; set; } = new List<RundownElement>();
+        public virtual ICollection<RundownElement> Elements { get; set; } = new List<RundownElement>();
 
 
         public bool CanEdit(TenantName tenantName)
@@ -71,10 +71,10 @@ namespace Amsel.Models.Rundown.Models
 
         [NotNull] public string Name { get; set; }
 
-        public TenantEntity Tenant { get; set; }
+        public virtual TenantEntity Tenant { get; set; }
 
         [NotMapped]
-        public ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
+        public virtual ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
 
       
     }
