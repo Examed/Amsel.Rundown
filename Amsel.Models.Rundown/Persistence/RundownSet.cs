@@ -3,6 +3,7 @@ using Amsel.Framework.Base.Interfaces;
 using Amsel.Model.Tenant.Interfaces;
 using Amsel.Model.Tenant.TenantModels;
 using JetBrains.Annotations;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,8 +30,6 @@ namespace Amsel.Models.Rundown.Models
             if (elementList != null)
                 Elements = elementList.ToList();
         }
-
-        public void AddData(DonationData donationData1, DonationData donationData2) => throw new NotImplementedException();
 
         public virtual void AddSequences(params RundownSequence[] rundownSequences)
         {
@@ -62,14 +61,12 @@ namespace Amsel.Models.Rundown.Models
 
         [NotNull]
         [ItemNotNull]
-        public virtual ICollection<RundownSetSequences> SequenceUsage { get; set; } = new List<RundownSetSequences>();
-
-        public IEnumerable<Guid> Sequences => SequenceUsage.Select(x => x.RundownSequenceId);
+        public virtual ICollection<RundownSetSequence> CurrentSequences { get; set; } = new List<RundownSetSequence>();
 
         public void AddSequence(RundownSequence sequence)
         {
-            if (!Sequences.Contains(sequence.Id))
-                SequenceUsage.Add(new RundownSetSequences(sequence));
+            if (CurrentSequences.All(x => x.RundownSequenceId != sequence.Id))
+                CurrentSequences.Add(new RundownSetSequence(sequence));
         }
 
         [NotMapped]
@@ -82,23 +79,46 @@ namespace Amsel.Models.Rundown.Models
 
 
         [Table("RundownSets_Sequences")]
-        public class RundownSetSequences
+        public class RundownSetSequence
         {
             [Column(nameof(RundownSequence))]
-            public Guid RundownSequenceId { get; protected set; }
-            [ForeignKey(nameof(RundownSequenceId))]
+            public Guid RundownSequenceId { get; set; }
+            [Required, ForeignKey(nameof(RundownSequenceId))]
             public RundownSequence RundownSequence { get; set; }
 
             [Column(nameof(RundownSet))]
-            public Guid RundownSetId { get; protected set; }
-            [ForeignKey(nameof(RundownSetId))]
+            public Guid RundownSetId { get; set; }
+            [Required, ForeignKey(nameof(RundownSetId))]
             public RundownSet RundownSet { get; set; }
 
-            protected RundownSetSequences() { }
-            internal RundownSetSequences(RundownSequence sequence)
+            public ICollection<RundownSequenceValue> SequenceValues { get; protected set; } = new List<RundownSequenceValue>();
+            protected RundownSetSequence() { }
+            internal RundownSetSequence(RundownSequence sequence, params RundownSequenceValue[] values)
             {
                 RundownSequence = sequence;
-                RundownSequenceId = sequence.Id;
+                if (values != null)
+                    SequenceValues = values;
+            }
+
+            [Owned, ComplexType]
+            [Table("RundownSets_Sequences_Value")]
+            public class RundownSequenceValue : RundownValue
+            {
+                protected RundownSequenceValue() { }
+
+                public RundownSequenceValue([NotNull] RundownParameter parameter, string value) : base(parameter, value)
+                {
+                }
+
+                [Column(nameof(RundownSequence))]
+                public Guid RundownSequenceId { get; set; }
+                [Required, ForeignKey(nameof(RundownSequenceId))]
+                public RundownSequence RundownSequence { get; set; }
+
+                [Column(nameof(RundownSet))]
+                public Guid RundownSetId { get; set; }
+                [Required, ForeignKey(nameof(RundownSetId))]
+                public RundownSet RundownSet { get; set; }
             }
         }
     }

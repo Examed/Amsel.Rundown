@@ -76,6 +76,6 @@ namespace Amsel.Models.Rundown.Models
         [NotMapped]
         public ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
 
-     
+      
     }
 }

@@ -30,10 +30,10 @@
 //            #endregion
 
 //            #region RundownElement
-//            CreateMap<RundownElement, RundownElement>()?.ForMember(x => x.Values, y => y.ConvertUsing<RundownElementValues, RundownElement>(z => z));
-//            CreateMap<RundownElement, RundownElement>()?.ForMember(x => x.Values, y => y.ConvertUsing<RundownElementValues, RundownElement>(z => z))
+//            CreateMap<RundownElement, RundownElement>()?.ForMember(x => x.Values, y => y.ConvertUsing<RundownElement.RundownValues, RundownElement>(z => z));
+//            CreateMap<RundownElement, RundownElement>()?.ForMember(x => x.Values, y => y.ConvertUsing<RundownElement.RundownValues, RundownElement>(z => z))
 //                                                          ?.ForMember(x => x.Function, y => y.ConvertUsing<RundownElementFunction, RundownElement>(z => z));
-//            CreateMap<RundownElement.RundownElementValue, RundownElement.ValueDTO>()?.ReverseMap();
+//            CreateMap<RundownElement.RundownElement.RundownValue, RundownElement.ValueDTO>()?.ReverseMap();
 //            #endregion
 
 //            #region RundownSequence
@@ -46,21 +46,21 @@
 //            #endregion
 //        }
 
-//        public class RundownElementValues : IValueConverter<RundownElement, IList<RundownElement.ValueDTO>>, IValueConverter<RundownElement, IList<RundownElement.RundownElementValue>>
+//        public class RundownElement.RundownValues : IValueConverter<RundownElement, IList<RundownElement.ValueDTO>>, IValueConverter<RundownElement, IList<RundownElement.RundownElement.RundownValue>>
 //        {
 //            #region PUBLIC METHODES
 //            public IList<RundownElement.ValueDTO> Convert(RundownElement sourceMember, ResolutionContext context)
 //            {
 //                // Add a Value for all Edible Parameters
-//                List<RundownElement.RundownElementValue> result = sourceMember.Function.Parameters
+//                List<RundownElement.RundownElement.RundownValue> result = sourceMember.Function.Parameters
 //                                                                      .Where(x => x.Editable)
-//                                                                      .Select(item => new RundownElement.RundownElementValue(item, item.Value))
+//                                                                      .Select(item => new RundownElement.RundownElement.RundownValue(item, item.Value))
 //                                                                      .ToList();
 
 //                // Add existing Values
-//                foreach(RundownElement.RundownElementValue item in sourceMember.Values)
+//                foreach(RundownElement.RundownElement.RundownValue item in sourceMember.Values)
 //                {
-//                    RundownElement.RundownElementValue value = result.FirstOrDefault(x => (x.Parameter == item.Parameter) &&
+//                    RundownElement.RundownElement.RundownValue value = result.FirstOrDefault(x => (x.Parameter == item.Parameter) &&
 //                        (x.Parameter.Name == item.Parameter.Name));
 //                    if(value != null)
 //                        value.SetValue(item.Value);
@@ -69,10 +69,10 @@
 //            }
 
 //            /// <inheritdoc/>
-//            public IList<RundownElement.RundownElementValue> Convert(RundownElement sourceMember, ResolutionContext context)
+//            public IList<RundownElement.RundownElement.RundownValue> Convert(RundownElement sourceMember, ResolutionContext context)
 //            {
-//                List<RundownElement.RundownElementValue> values = context.Mapper
-//                                                                      .Map<List<RundownElement.RundownElementValue>>(sourceMember.Values);
+//                List<RundownElement.RundownElement.RundownValue> values = context.Mapper
+//                                                                      .Map<List<RundownElement.RundownElement.RundownValue>>(sourceMember.Values);
 //                values.RemoveAll(x => x.Value == null);
 //                return values;
 //            }
