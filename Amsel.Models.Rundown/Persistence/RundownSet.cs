@@ -1,5 +1,6 @@
 ﻿using Amsel.Enums.Rundown.Enums;
 using Amsel.Framework.Base.Interfaces;
+using Amsel.Framework.Base.Models;
 using Amsel.Model.Tenant.Interfaces;
 using Amsel.Model.Tenant.TenantModels;
 using JetBrains.Annotations;
@@ -12,7 +13,6 @@ using System.Linq;
 
 namespace Amsel.Models.Rundown.Models
 {
-
     [ComplexType]
     /// <summary>
     /// RundownCollection contains a set of RundownElements that get played when the Collection is active
@@ -31,14 +31,8 @@ namespace Amsel.Models.Rundown.Models
                 Elements = elementList.ToList();
         }
 
-        public virtual void AddSequences(params RundownSequence[] rundownSequences)
-        {
-            foreach (RundownSequence sequence in rundownSequences)
-            {
-                AddSequence(sequence);
-            }
-        }
-
+        [Key]
+        public Guid Id { get; set; }
         [Display(Name = nameof(Description))]
         public virtual string Description { get; set; }
 
@@ -47,7 +41,6 @@ namespace Amsel.Models.Rundown.Models
         [NotNull]
         [ItemNotNull]
         public virtual ICollection<RundownElement> Elements { get; set; } = new List<RundownElement>();
-
         [Display(Name = nameof(Name))]
         [Required(ErrorMessage = "Field should not be empty")]
         [NotNull] public virtual string Name { get; set; }
@@ -59,6 +52,15 @@ namespace Amsel.Models.Rundown.Models
         [Required]
         public virtual RundownQueue Queue { get; set; }
 
+
+        public virtual void AddSequences(params RundownSequence[] rundownSequences)
+        {
+            foreach (RundownSequence sequence in rundownSequences)
+            {
+                AddSequence(sequence);
+            }
+        }
+
         [NotNull]
         [ItemNotNull]
         public virtual ICollection<RundownSetSequence> CurrentSequences { get; set; } = new List<RundownSetSequence>();
@@ -68,12 +70,7 @@ namespace Amsel.Models.Rundown.Models
             if (CurrentSequences.All(x => x.RundownSequenceId != sequence.Id))
                 CurrentSequences.Add(new RundownSetSequence(sequence));
         }
-
-        [NotMapped]
-        public ERundownStatus Status { get; set; }
-
-        [Key]
-        public Guid Id { get; set; }
+               
 
         public virtual TenantEntity Tenant { get; set; }
 
