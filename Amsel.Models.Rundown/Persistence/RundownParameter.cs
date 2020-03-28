@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 namespace Amsel.Models.Rundown.Models
 {
     [ComplexType, Owned]
-    public class RundownParameter : INamedEntity, ILinqEqual<RundownParameter>
+    public class RundownParameter : INamedEntity
     {
         protected RundownParameter() { }
 
@@ -54,7 +54,5 @@ namespace Amsel.Models.Rundown.Models
 
         public string Value { get; protected set; }
 
-        public Expression<Func<RundownParameter, bool>> LinqEquals => x => x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase);
-       
     }
 }
