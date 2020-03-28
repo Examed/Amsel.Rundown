@@ -1,15 +1,15 @@
-﻿using Amsel.Framework.Base.Attributs;
-using Amsel.Framework.Base.Interfaces;
+﻿using Amsel.Framework.Base.Interfaces;
 using Amsel.Model.Tenant.Interfaces;
 using Amsel.Model.Tenant.TenantModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq.Expressions;
 
 namespace Amsel.Models.Rundown.Models
 {
     [ComplexType]
-    public class RundownQueue : IGuidEntity, ISharedTenant, INamedEntity
+    public class RundownQueue : IGuidEntity, ISharedTenant, INamedEntity, ILinqEqual<RundownQueue>
     {
         protected RundownQueue() { }
 
@@ -26,7 +26,6 @@ namespace Amsel.Models.Rundown.Models
 
         public bool IsSystem { get; set; }
 
-        [Distinct]
         public string Name { get; set; }
 
         public bool StopOnNew { get; set; }
@@ -35,5 +34,7 @@ namespace Amsel.Models.Rundown.Models
 
         [NotMapped]
         public virtual ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
+                
+        public Expression<Func<RundownQueue, bool>> LinqEquals => x => x.Id == Id || x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase);
     }
 }

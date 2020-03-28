@@ -5,11 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq.Expressions;
 
 namespace Amsel.Models.Rundown.Models
 {
     [ComplexType, Owned]
-    public class RundownParameter : INamedEntity
+    public class RundownParameter : INamedEntity, ILinqEqual<RundownParameter>
     {
         protected RundownParameter() { }
 
@@ -46,11 +47,14 @@ namespace Amsel.Models.Rundown.Models
         public string DisplayName { get; set; }
 
         public bool Editable { get; protected set; }
-        
+
         public string Name { get; set; }
 
         public EParameterType Type { get; set; }
 
         public string Value { get; protected set; }
+
+        public Expression<Func<RundownParameter, bool>> LinqEquals => x => x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase);
+       
     }
 }
