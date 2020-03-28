@@ -12,7 +12,7 @@ using System.Linq;
 namespace Amsel.Models.Rundown.Models
 {
 
-    public partial class RundownElement : IGuidEntity, INamedEntity
+    public partial class RundownElement : LogicEntity, IGuidEntity, INamedEntity
     {
         public RundownElement() { }
         public RundownElement(RundownFunction function, RundownSequenceType.EType? sequenceType = null, int delay = 0)
@@ -63,7 +63,7 @@ namespace Amsel.Models.Rundown.Models
 
         public virtual RundownFunction Function { get; protected set; }
 
-        [Owned,ComplexType]
+        [Owned, ComplexType]
         public class RundownElementValue : RundownValue
         {
             protected RundownElementValue() { }
