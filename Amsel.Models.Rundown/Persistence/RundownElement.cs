@@ -71,11 +71,6 @@ namespace Amsel.Models.Rundown.Models
             public RundownElementValue([NotNull] RundownParameter parameter, string value) : base(parameter, value)
             {
             }
-
-            [Column(nameof(Element))]
-            public Guid ElementId { get; set; }
-            [Required, ForeignKey(nameof(ElementId))]
-            public virtual RundownElement Element { get; set; }
         }
     }
 }

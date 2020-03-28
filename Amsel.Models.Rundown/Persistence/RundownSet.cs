@@ -70,7 +70,7 @@ namespace Amsel.Models.Rundown.Models
             if (Sequences.All(x => x.RundownSequenceId != sequence.Id))
                 Sequences.Add(new RundownSetSequence(sequence));
         }
-               
+
 
         public virtual TenantEntity Tenant { get; set; }
 
@@ -81,10 +81,6 @@ namespace Amsel.Models.Rundown.Models
             public Guid RundownSequenceId { get; set; }
             [Required, ForeignKey(nameof(RundownSequenceId))]
             public virtual RundownSequence RundownSequence { get; set; }
-
-            public Guid RundownSetId { get; set; }
-            [Required, ForeignKey(nameof(RundownSetId))]
-            public virtual RundownSet RundownSet { get; set; }
 
             public virtual ICollection<RundownSequenceValue> SequenceValues { get; protected set; } = new List<RundownSequenceValue>();
             protected RundownSetSequence() { }
@@ -103,17 +99,7 @@ namespace Amsel.Models.Rundown.Models
 
                 public RundownSequenceValue([NotNull] RundownParameter parameter, string value) : base(parameter, value)
                 {
-                }
-
-                [Column(nameof(RundownSequence))]
-                public Guid RundownSequenceId { get; set; }
-                [Required, ForeignKey(nameof(RundownSequenceId))]
-                public virtual RundownSequence RundownSequence { get; set; }
-
-                [Column(nameof(RundownSet))]
-                public Guid RundownSetId { get; set; }
-                [Required, ForeignKey(nameof(RundownSetId))]
-                public virtual RundownSet RundownSet { get; set; }
+                }     
             }
         }
     }

@@ -46,12 +46,7 @@ namespace Amsel.Models.Rundown.Models
         public string DisplayName { get; set; }
 
         public bool Editable { get; protected set; }
-
-
-        public Guid FunctionId { get; protected set; }
-        [ForeignKey(nameof(FunctionId))]
-        public virtual RundownFunction Function { get; protected set; }
-
+        
         public string Name { get; set; }
 
         public EParameterType Type { get; set; }
