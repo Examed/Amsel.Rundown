@@ -17,7 +17,7 @@ namespace Amsel.Models.Rundown.Models
     /// A representation of a Action
     /// </summary>
     [ComplexType]
-    public class RundownFunction : LogicEntity, ISharedTenant, INamedEntity, ILinqEqual<RundownFunction>
+    public class RundownFunction : LogicEntity, ISharedTenant, INamedEntity, IEqualExpression<RundownFunction>
     {
         protected RundownFunction() { }
 
@@ -74,7 +74,7 @@ namespace Amsel.Models.Rundown.Models
         [NotMapped]
         public ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
 
-        public Expression<Func<RundownFunction, bool>> LinqEquals => x=> x.Id == Id || (x.HandlerName == HandlerName && x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
+        public Expression<Func<RundownFunction, bool>> IsEquals() => x=> x.Id == Id || (x.HandlerName == HandlerName && x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
 
 
     }

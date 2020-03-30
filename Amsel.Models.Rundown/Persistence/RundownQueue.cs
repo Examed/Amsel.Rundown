@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace Amsel.Models.Rundown.Models
 {
     [ComplexType]
-    public class RundownQueue : IGuidEntity, ISharedTenant, INamedEntity, ILinqEqual<RundownQueue>
+    public class RundownQueue : IGuidEntity, ISharedTenant, INamedEntity, IEqualExpression<RundownQueue>
     {
         protected RundownQueue() { }
 
@@ -35,6 +35,7 @@ namespace Amsel.Models.Rundown.Models
         [NotMapped]
         public virtual ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
                 
-        public Expression<Func<RundownQueue, bool>> LinqEquals => x => x.Id == Id || x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase);
+        public Expression<Func<RundownQueue, bool>> IsEquals() => x => x.Id == Id || x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase);
+        
     }
 }
