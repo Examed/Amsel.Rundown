@@ -48,11 +48,12 @@ namespace Amsel.Models.Rundown.Models
 
         public bool Editable { get; protected set; }
 
+        [Key]
         public string Name { get; set; }
 
         public EParameterType Type { get; set; }
 
-        public string Value { get; protected set; }
+        public string Value { get; set; }
 
     }
 }

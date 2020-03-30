@@ -12,7 +12,7 @@ using static Amsel.Models.Rundown.Models.RundownSet;
 namespace Amsel.Models.Rundown.Models
 {
     [ComplexType]
-    public class RundownSequence : LogicEntity, ISharedTenant, INamedEntity
+    public class RundownSequence : LogicEntity, ISharedTenant, INamedEntity, IGuidEntity
     {
         protected RundownSequence() { }
 

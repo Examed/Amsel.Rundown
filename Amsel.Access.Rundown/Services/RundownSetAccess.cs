@@ -34,23 +34,29 @@ namespace Amsel.Access.Rundown.Services
         protected override string Resource => RundownEndpointResources.SET;
 
 
-        public virtual async Task<(IEnumerable<RundownSet> value, int count)> GetByQueueAsync(string queueName, int? skip = null, int? take = null)
+
+        public virtual IEnumerable<RundownSet> GetByQueue(string queueName, int? skip = null, int? take = null)
+        {
+            return GetByQueueAsync(queueName, skip, take).Result;
+        }
+
+        public virtual async Task<IEnumerable<RundownSet>> GetByQueueAsync(string queueName, int? skip = null, int? take = null)
         {
             HttpResponseMessage response = await GetAsync(GetByQueueAddress, (nameof(queueName), queueName), (nameof(skip), skip), (nameof(take), take))
                 .ConfigureAwait(false);
-            return await response.DeserializeOrDefaultAsync<(IEnumerable<RundownSet> value, int count)>().ConfigureAwait(false);
+            return await response.DeserializeOrDefaultAsync<IEnumerable<RundownSet>>().ConfigureAwait(false);
         }
-
+                
 
         public Task<HttpResponseMessage> QueueConnectionAsync(EHandlerType handlerType,
                                                               [NotNull] string functionName,
                                                               [NotNull] Dictionary<string, string> values)
         {
-            if(functionName == null)
+            if (functionName == null)
                 throw new ArgumentNullException(nameof(functionName));
-            if(values == null)
+            if (values == null)
                 throw new ArgumentNullException(nameof(values));
-            if(!Enum.IsDefined(typeof(EHandlerType), handlerType))
+            if (!Enum.IsDefined(typeof(EHandlerType), handlerType))
                 throw new InvalidEnumArgumentException(nameof(handlerType), (int)handlerType, typeof(EHandlerType));
 
             RundownTrigger data = new RundownTrigger(handlerType, values);

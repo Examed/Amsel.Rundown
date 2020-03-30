@@ -13,11 +13,33 @@ using System.Linq;
 
 namespace Amsel.Models.Rundown.Models
 {
+    public class RundownSetBase : LogicEntity, INamedEntity, IGuidEntity
+    {
+        [Key]
+        public Guid Id { get; set; }
+        [Display(Name = nameof(Description))]
+        public virtual string Description { get; set; }
+
+        public virtual string Directory { get; set; }
+        [Display(Name = nameof(Name))]
+        [Required(ErrorMessage = "Field should not be empty")]
+        [NotNull] public virtual string Name { get; set; }
+
+
+        [Range(0, 100)]
+        [Display(Name = nameof(Priority))]
+        public virtual int Priority { get; set; }
+
+        [Required]
+        public virtual RundownQueue Queue { get; set; }
+    }
+
+
     [ComplexType]
     /// <summary>
     /// RundownCollection contains a set of RundownElements that get played when the Collection is active
     /// </summary>
-    public class RundownSet : LogicEntity, ITenantEntity, INamedEntity
+    public class RundownSet : RundownSetBase, ITenantEntity
     {
         protected RundownSet() { }
 
@@ -31,28 +53,17 @@ namespace Amsel.Models.Rundown.Models
                 Elements = elementList.ToList();
         }
 
-        [Key]
-        public Guid Id { get; set; }
-        [Display(Name = nameof(Description))]
-        public virtual string Description { get; set; }
 
-        public virtual string Directory { get; set; }
 
         [NotNull]
         [ItemNotNull]
         public virtual ICollection<RundownElement> Elements { get; set; } = new List<RundownElement>();
-        [Display(Name = nameof(Name))]
-        [Required(ErrorMessage = "Field should not be empty")]
-        [NotNull] public virtual string Name { get; set; }
 
-        [Range(0, 100)]
-        [Display(Name = nameof(Priority))]
-        public virtual int Priority { get; set; }
-
-        [Required]
-        public virtual RundownQueue Queue { get; set; }
-
-
+        public void AddSequence(RundownSequence sequence)
+        {
+            if (Sequences.All(x => x.RundownSequenceId != sequence.Id))
+                Sequences.Add(new RundownSetSequence(sequence));
+        }
         public virtual void AddSequences(params RundownSequence[] rundownSequences)
         {
             foreach (RundownSequence sequence in rundownSequences)
@@ -65,15 +76,7 @@ namespace Amsel.Models.Rundown.Models
         [ItemNotNull]
         public virtual ICollection<RundownSetSequence> Sequences { get; set; } = new List<RundownSetSequence>();
 
-        public void AddSequence(RundownSequence sequence)
-        {
-            if (Sequences.All(x => x.RundownSequenceId != sequence.Id))
-                Sequences.Add(new RundownSetSequence(sequence));
-        }
-
-
         public virtual TenantEntity Tenant { get; set; }
-
 
         [Table("RundownSets_Sequences")]
         public class RundownSetSequence
@@ -99,7 +102,7 @@ namespace Amsel.Models.Rundown.Models
 
                 public RundownSequenceValue([NotNull] RundownParameter parameter, string value) : base(parameter, value)
                 {
-                }     
+                }
             }
         }
     }

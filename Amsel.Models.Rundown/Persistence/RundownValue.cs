@@ -19,7 +19,6 @@ namespace Amsel.Models.Rundown.Models
 
         public void SetValue(string value) => Value = value;
 
-        [Required]
         public string ParameterName { get; protected set; }
 
         public string Value { get; set; }

@@ -49,9 +49,9 @@ namespace Amsel.Models.Rundown.Models
         [Key]
         public Guid Id { get; set; }
 
-        public EHandlerType HandlerName { get; protected set; }
+        public EHandlerType HandlerName { get; set; }
 
-        public string Icon { get; protected set; }
+        public string Icon { get; set; }
 
         /// <inheritdoc/>
         public bool IsPublic { get; set; }
@@ -65,7 +65,7 @@ namespace Amsel.Models.Rundown.Models
         public string Name { get; set; }
 
         [NotNull]
-        public virtual ICollection<RundownParameter> Parameters { get; protected set; } = new List<RundownParameter>();
+        public virtual ICollection<RundownParameter> Parameters { get; set; } = new List<RundownParameter>();
 
         public RundownSequenceType.EType SequenceType { get; set; }
 
