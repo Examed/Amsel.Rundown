@@ -22,9 +22,8 @@ namespace Amsel.Models.Rundown.Models
 
         public Guid Id { get; set; }
 
-        public bool IsPublic { get; set; }
+        public bool IsPublic { get; set; } = false;
 
-        public bool IsSystem { get; set; }
 
         public string Name { get; set; }
 
@@ -32,9 +31,7 @@ namespace Amsel.Models.Rundown.Models
 
         public virtual TenantEntity Tenant { get; set; }
 
-        [NotMapped]
-        public virtual ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
-                
+
         public Expression<Func<RundownQueue, bool>> IsEquals() => x => x.Id == Id || x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase);
         
     }

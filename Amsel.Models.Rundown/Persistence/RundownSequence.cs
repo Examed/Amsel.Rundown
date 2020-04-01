@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using static Amsel.Models.Rundown.Models.RundownSet;
 
 namespace Amsel.Models.Rundown.Models
 {
@@ -44,38 +43,21 @@ namespace Amsel.Models.Rundown.Models
         public virtual ICollection<RundownElement> Elements { get; set; } = new List<RundownElement>();
 
 
-        public bool CanEdit(TenantName tenantName)
-        {
-            return CanEdit(tenantName.ToString());
-        }
-        public bool CanEdit(string tenantName)
-        {
-            if (Tenant.TenantName == tenantName)
-                return true;
-            if (IsSystem)
-                return true;
-            if (IsPublic && UsedBy.Any(x => x.TenantName == tenantName))
-                return true;
 
-            return false;
-        }
 
         [Key]
         public Guid Id { get; set; }
 
         public bool IsBaseSequence { get; set; }
 
-        public bool IsPublic { get; set; }
+        public bool IsPublic { get; set; } = false;
 
-        public bool IsSystem { get; set; }
 
         [NotNull] public string Name { get; set; }
 
         public virtual TenantEntity Tenant { get; set; }
 
-        [NotMapped]
-        public virtual ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
+     
 
-      
     }
 }

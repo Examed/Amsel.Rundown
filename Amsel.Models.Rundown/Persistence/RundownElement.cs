@@ -30,7 +30,7 @@ namespace Amsel.Models.Rundown.Models
             {
                 RundownElementValue parameterValue = Values.FirstOrDefault(x => (x.ParameterName == current.Name));
                 if (parameterValue == null)
-                    parameterValue = new RundownElementValue(current, value);
+                    parameterValue = new RundownElementValue(current.Name, value);
                 else
                     parameterValue.SetValue(value);
 
@@ -68,7 +68,7 @@ namespace Amsel.Models.Rundown.Models
         {
             protected RundownElementValue() { }
 
-            public RundownElementValue([NotNull] RundownParameter parameter, string value) : base(parameter, value)
+            public RundownElementValue([NotNull] string parameterName, string value) : base(parameterName, value)
             {
             }
         }

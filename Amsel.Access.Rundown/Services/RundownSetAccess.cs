@@ -35,14 +35,14 @@ namespace Amsel.Access.Rundown.Services
 
 
 
-        public virtual IEnumerable<RundownSet> GetByQueue(string queueName, int? skip = null, int? take = null)
+        public virtual IEnumerable<RundownSet> GetByQueue(string queueName)
         {
-            return GetByQueueAsync(queueName, skip, take).Result;
+            return GetByQueueAsync(queueName).Result;
         }
 
-        public virtual async Task<IEnumerable<RundownSet>> GetByQueueAsync(string queueName, int? skip = null, int? take = null)
+        public virtual async Task<IEnumerable<RundownSet>> GetByQueueAsync(string queueName)
         {
-            HttpResponseMessage response = await GetAsync(GetByQueueAddress, (nameof(queueName), queueName), (nameof(skip), skip), (nameof(take), take))
+            HttpResponseMessage response = await GetAsync(GetByQueueAddress, (nameof(queueName), queueName))
                 .ConfigureAwait(false);
             return await response.DeserializeOrDefaultAsync<IEnumerable<RundownSet>>().ConfigureAwait(false);
         }

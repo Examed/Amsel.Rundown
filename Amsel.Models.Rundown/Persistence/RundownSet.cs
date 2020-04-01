@@ -1,10 +1,9 @@
-﻿using Amsel.Enums.Rundown.Enums;
-using Amsel.Framework.Base.Interfaces;
-using Amsel.Framework.Base.Models;
+﻿using Amsel.Framework.Base.Interfaces;
 using Amsel.Model.Tenant.Interfaces;
 using Amsel.Model.Tenant.TenantModels;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,12 +23,6 @@ namespace Amsel.Models.Rundown.Models
         [Display(Name = nameof(Name))]
         [Required(ErrorMessage = "Field should not be empty")]
         [NotNull] public virtual string Name { get; set; }
-
-
-        [Range(0, 100)]
-        [Display(Name = nameof(Priority))]
-        public virtual int Priority { get; set; }
-
         [Required]
         public virtual RundownQueue Queue { get; set; }
     }
@@ -53,7 +46,9 @@ namespace Amsel.Models.Rundown.Models
                 Elements = elementList.ToList();
         }
 
-
+        [Range(0, 100)]
+        [Display(Name = nameof(Priority))]
+        public virtual int Priority { get; set; }
 
         [NotNull]
         [ItemNotNull]
@@ -81,17 +76,18 @@ namespace Amsel.Models.Rundown.Models
         [Table("RundownSets_Sequences")]
         public class RundownSetSequence
         {
-            public Guid RundownSequenceId { get; set; }
-            [Required, ForeignKey(nameof(RundownSequenceId))]
+            [JsonProperty(nameof(RundownSequenceId))]
+            public Guid RundownSequenceId { get; protected set; }
+            [Required, ForeignKey(nameof(RundownSequenceId)), JsonProperty(nameof(RundownSequence))]
             public virtual RundownSequence RundownSequence { get; set; }
-
+            [JsonProperty(nameof(SequenceValues))]
             public virtual ICollection<RundownSequenceValue> SequenceValues { get; protected set; } = new List<RundownSequenceValue>();
             protected RundownSetSequence() { }
-            internal RundownSetSequence(RundownSequence sequence, params RundownSequenceValue[] values)
+            internal RundownSetSequence(RundownSequence rundownSequence, params RundownSequenceValue[] sequenceValues)
             {
-                RundownSequence = sequence;
-                if (values != null)
-                    SequenceValues = values;
+                RundownSequence = rundownSequence;
+                if (sequenceValues != null)
+                    SequenceValues = sequenceValues;
             }
 
             [Owned, ComplexType]
@@ -100,7 +96,7 @@ namespace Amsel.Models.Rundown.Models
             {
                 protected RundownSequenceValue() { }
 
-                public RundownSequenceValue([NotNull] RundownParameter parameter, string value) : base(parameter, value)
+                public RundownSequenceValue([NotNull] string parameterName, string value) : base(parameterName, value)
                 {
                 }
             }

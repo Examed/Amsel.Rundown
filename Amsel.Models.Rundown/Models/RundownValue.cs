@@ -11,9 +11,9 @@ namespace Amsel.Models.Rundown.Models
     {
         protected RundownValue() { }
 
-        public RundownValue([NotNull] RundownParameter parameter, string value)
+        public RundownValue([NotNull] string parameterName, string value)
         {
-            ParameterName = parameter.Name;
+            ParameterName = parameterName;
             Value = value;
         }
 

@@ -53,11 +53,7 @@ namespace Amsel.Models.Rundown.Models
 
         public string Icon { get; set; }
 
-        /// <inheritdoc/>
-        public bool IsPublic { get; set; }
 
-        /// <inheritdoc/>
-        public bool IsSystem { get; set; }
 
         public bool IsTrigger { get; set; }
 
@@ -70,9 +66,7 @@ namespace Amsel.Models.Rundown.Models
         public RundownSequenceType.EType SequenceType { get; set; }
 
         public virtual TenantEntity Tenant { get; set; }
-
-        [NotMapped]
-        public ICollection<TenantEntity> UsedBy { get; set; } = new List<TenantEntity>();
+        public bool IsPublic { get ; set ; } = false;
 
         public Expression<Func<RundownFunction, bool>> IsEquals() => x=> x.Id == Id || (x.HandlerName == HandlerName && x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
 
