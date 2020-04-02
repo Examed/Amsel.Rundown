@@ -11,16 +11,17 @@ namespace Amsel.Models.Rundown.Models
     {
         protected RundownValue() { }
 
-        public RundownValue([NotNull] string parameterName, string value)
+        public RundownValue([NotNull] RundownParameter parameter, string value)
         {
-            ParameterName = parameterName;
+            Parameter = parameter;
             Value = value;
         }
 
         public void SetValue(string value) => Value = value;
 
-        public string ParameterName { get; protected set; }
-
+        [NotMapped]
+        public string ParameterName => Parameter?.Name;
+        public RundownParameter Parameter { get; protected set; }
         public string Value { get; set; }
     }
 }

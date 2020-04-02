@@ -96,7 +96,7 @@ namespace Amsel.Models.Rundown.Models
             {
                 protected RundownSequenceValue() { }
 
-                public RundownSequenceValue([NotNull] string parameterName, string value) : base(parameterName, value)
+                public RundownSequenceValue([NotNull] RundownParameter parameter, string value) : base(parameter, value)
                 {
                 }
             }
