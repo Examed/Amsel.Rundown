@@ -6,22 +6,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Amsel.Models.Rundown.Models
 {
-
     public class RundownValue
     {
-        protected RundownValue() { }
-
-        public RundownValue([NotNull] RundownParameter parameter, string value)
+        public RundownValue([NotNull] string parameterName, string value)
         {
-            Parameter = parameter;
+            ParameterName = parameterName;
             Value = value;
         }
+        public string ParameterName { get; set; }
 
-        public void SetValue(string value) => Value = value;
-
-        [NotMapped]
-        public string ParameterName => Parameter?.Name;
-        public RundownParameter Parameter { get; protected set; }
         public string Value { get; set; }
+
+        protected RundownValue() { }
+  
+
+        #region PUBLIC METHODES
+        public void SetValue(string value) => Value = value;
+        #endregion
     }
 }

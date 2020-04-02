@@ -94,9 +94,17 @@ namespace Amsel.Models.Rundown.Models
             [Table("RundownSets_Sequences_Value")]
             public class RundownSequenceValue : RundownValue
             {
+
+                public virtual Guid? ElementId { get; set; }
+
                 protected RundownSequenceValue() { }
 
-                public RundownSequenceValue([NotNull] RundownParameter parameter, string value) : base(parameter, value)
+                public RundownSequenceValue(Guid elementId, string parameterName, string value) : base(parameterName, value)
+                {
+                    ElementId = elementId;
+                }
+
+                public RundownSequenceValue([NotNull] string parameterName, string value) : base(parameterName, value)
                 {
                 }
             }
