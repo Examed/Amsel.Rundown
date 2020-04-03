@@ -1,4 +1,5 @@
 ﻿using Amsel.Enums.Rundown.Enums;
+using Amsel.Framework.Base.Attributes;
 using Amsel.Framework.Base.Interfaces;
 using Amsel.Model.Tenant.TenantModels;
 using JetBrains.Annotations;
@@ -11,7 +12,7 @@ using System.Linq;
 
 namespace Amsel.Models.Rundown.Models
 {
-
+    [Owned, ComplexType]
     public partial class RundownElement : LogicEntity, IGuidEntity, INamedEntity
     {
         public RundownElement() { }
@@ -58,7 +59,7 @@ namespace Amsel.Models.Rundown.Models
 
         public RundownSequenceType.EType SequenceType { get; set; }
 
-
+        [CascadeUpdates]
         public virtual ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
 
         public virtual RundownFunction Function { get; protected set; }

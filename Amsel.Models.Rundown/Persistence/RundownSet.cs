@@ -1,4 +1,5 @@
-﻿using Amsel.Framework.Base.Interfaces;
+﻿using Amsel.Framework.Base.Attributes;
+using Amsel.Framework.Base.Interfaces;
 using Amsel.Model.Tenant.Interfaces;
 using Amsel.Model.Tenant.TenantModels;
 using JetBrains.Annotations;
@@ -50,8 +51,7 @@ namespace Amsel.Models.Rundown.Models
         [Display(Name = nameof(Priority))]
         public virtual int Priority { get; set; }
 
-        [NotNull]
-        [ItemNotNull]
+        [CascadeUpdates]
         public virtual ICollection<RundownElement> Elements { get; set; } = new List<RundownElement>();
 
         public void AddSequence(RundownSequence sequence)
