@@ -27,7 +27,7 @@ namespace Amsel.Access.Rundown.Services
                                                                                              Resource,
                                                                                              RundownQueueControllerResources.GET_NAMES,
                                                                                              RequestLocal);
-
+        [NotNull] UriBuilder GetRundownSetsAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownQueueControllerResources.GET_RUNDOWNS, RequestLocal);
         protected override bool RequestLocal => false;
 
         /// <inheritdoc/>
@@ -37,6 +37,19 @@ namespace Amsel.Access.Rundown.Services
         {
             HttpResponseMessage response = await GetAsync(GetQueueNamesAddress).ConfigureAwait(false);
             return await response.DeserializeElseThrowAsync<IEnumerable<GuidNameEntity>>().ConfigureAwait(false);
+        }
+
+
+        public virtual IEnumerable<RundownSet> GetRundownSets(Guid Id)
+        {
+            return GetRundownSetsAsync(Id).Result;
+        }
+
+        public virtual async Task<IEnumerable<RundownSet>> GetRundownSetsAsync(Guid Id)
+        {
+            HttpResponseMessage response = await GetAsync(GetRundownSetsAddress, (nameof(Id), Id))
+                .ConfigureAwait(false);
+            return await response.DeserializeOrDefaultAsync<IEnumerable<RundownSet>>().ConfigureAwait(false);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Amsel.Access.Rundown.Services
 
         [NotNull] UriBuilder GetByConnectionAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.ENQUEUE, RequestLocal);
 
-        [NotNull] UriBuilder GetByQueueAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_BY_QUEUE, RequestLocal);
+
 
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
@@ -35,18 +35,14 @@ namespace Amsel.Access.Rundown.Services
 
 
 
-        public virtual IEnumerable<RundownSet> GetByQueue(string queueName)
+        UriBuilder GetSequencesAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_SEQUENCES, RequestLocal);
+
+        public virtual async Task<IEnumerable<RundownSequence>> GetSequences(Guid id)
         {
-            return GetByQueueAsync(queueName).Result;
+            HttpResponseMessage response = await GetAsync(GetSequencesAddress, (nameof(id), id)).ConfigureAwait(false);
+            return await response.DeserializeOrDefaultAsync<IEnumerable<RundownSequence>>().ConfigureAwait(false);
         }
 
-        public virtual async Task<IEnumerable<RundownSet>> GetByQueueAsync(string queueName)
-        {
-            HttpResponseMessage response = await GetAsync(GetByQueueAddress, (nameof(queueName), queueName))
-                .ConfigureAwait(false);
-            return await response.DeserializeOrDefaultAsync<IEnumerable<RundownSet>>().ConfigureAwait(false);
-        }
-                
 
         public Task<HttpResponseMessage> QueueConnectionAsync(EHandlerType handlerType,
                                                               [NotNull] string functionName,

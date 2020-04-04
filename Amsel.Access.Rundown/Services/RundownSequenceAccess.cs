@@ -19,9 +19,7 @@ namespace Amsel.Access.Rundown.Services
         public RundownSequenceAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService) { }
 
 
-        [NotNull]
-        UriBuilder GetByRundownAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSequenceControllerResources.GET_BY_RUNDOWN, RequestLocal);
-
+ 
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
 
@@ -30,10 +28,6 @@ namespace Amsel.Access.Rundown.Services
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.SEQUENCE;
 
-        public virtual async Task<IEnumerable<RundownSequence>> GetSequencesByRundown(Guid id)
-        {
-            HttpResponseMessage response = await GetAsync(GetByRundownAddress, (nameof(id), id)).ConfigureAwait(false);
-            return await response.DeserializeOrDefaultAsync<IEnumerable<RundownSequence>>().ConfigureAwait(false);
-        }
+
     }
 }
