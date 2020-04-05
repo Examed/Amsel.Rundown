@@ -34,6 +34,16 @@ namespace Amsel.Models.Rundown.Persistence
         public string Tooltip { get; set; }
         [NotMapped]
         public bool Expanded { get; set; }
+
+        public string Icon
+        {
+            get
+            {
+                if (IsEntiy)
+                    return "zip";
+                return "folder";
+            }
+        }
         public virtual bool IsEntiy { get; set; } = true;
         public Guid? ParentId { get; set; }
         [NotMapped]
@@ -112,7 +122,7 @@ namespace Amsel.Models.Rundown.Persistence
         public Guid? ParentId { get; set; }
         [ForeignKey(nameof(ParentId))]
         public virtual CompositeNode Parent { get; set; }
-        [NotMapped]
+        [JsonIgnore, NotMapped]
         public ICollection<CompositeComponent> Childs { get; } = null;
 
     }
