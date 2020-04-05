@@ -10,22 +10,111 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Linq.Expressions;
+using Amsel.Models.Rundown.Models;
+using AutoMapper;
 
-namespace Amsel.Models.Rundown.Models
+namespace Amsel.Models.Rundown.Persistence
 {
-    public class RundownSetBase : LogicEntity, INamedEntity, IGuidEntity
+    public interface ICompositeEntity
+    {
+        Guid Id { get; }
+        string Name { get; set; }
+        string Tooltip { get; set; }
+        public Guid? ParentId { get; set; }
+        public ICollection<CompositeComponent> Childs { get; }
+    }
+
+
+    public class CompositeComponent : ICompositeEntity
     {
         [Key]
         public Guid Id { get; set; }
-        [Display(Name = nameof(Description))]
-        public virtual string Description { get; set; }
+        public string Name { get; set; }
+        public string Tooltip { get; set; }
+        [NotMapped]
+        public bool Expanded { get; set; }
+        public virtual bool IsEntiy { get; set; } = true;
+        public Guid? ParentId { get; set; }
+        [NotMapped]
+        public virtual ICollection<CompositeComponent> Childs { get; set; }
 
-        public virtual string Directory { get; set; }
+        protected CompositeComponent()
+        {
+            Childs = null;
+        }
+    }
+
+    [ComplexType]
+    public class CompositeNode : CompositeComponent, IEqualExpression<CompositeNode>
+    {
+        [NotMapped]
+        public override ICollection<CompositeComponent> Childs
+        {
+            get
+            {
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<ICompositeEntity, CompositeComponent>());
+                var mapper = config.CreateMapper();
+                List<CompositeComponent> result = new List<CompositeComponent>();
+                foreach (var node in ChildNodes)
+                    result.Add(node);
+                foreach (var rundownSet in ChildRundownSets)
+                    result.Add(mapper.Map<CompositeComponent>(rundownSet));
+
+                if (!result.Any())
+                    return null;
+                return result;
+            }
+        }
+        [InverseProperty(nameof(Parent))]
+        public virtual ICollection<CompositeNode> ChildNodes { get; set; } = new List<CompositeNode>();
+        public virtual ICollection<RundownSet> ChildRundownSets { get; set; } = new List<RundownSet>();
+        [NotMapped]
+        public override bool IsEntiy { get; set; } = false;
+        [ForeignKey(nameof(ParentId))]
+        public virtual CompositeNode Parent { get; set; }
+        protected CompositeNode() { }
+
+        public CompositeNode(string name, params ICompositeEntity[] childs)
+        {
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+            foreach (var item in childs)
+            {
+                if (item is CompositeNode node)
+                    ChildNodes.Add(node);
+                else if (item is RundownSet rundownSet)
+                    ChildRundownSets.Add(rundownSet);
+            }
+        }
+
+        public Expression<Func<CompositeNode, bool>> IsEquals()
+        {
+            return x => x.Id == Id || (x.Name == Name && x.ParentId == ParentId);
+        }
+    }
+
+
+
+
+
+
+    public class RundownSetBase : LogicEntity, INamedEntity, IGuidEntity, ICompositeEntity
+    {
+        [Key]
+        public Guid Id { get; set; }
+
         [Display(Name = nameof(Name))]
         [Required(ErrorMessage = "Field should not be empty")]
         [NotNull] public virtual string Name { get; set; }
-        [Required]
-        public virtual RundownQueue Queue { get; set; }
+        [Display(Name = nameof(Tooltip))]
+        public string Tooltip { get; set; }
+        public virtual string Directory { get; set; }
+        public Guid? ParentId { get; set; }
+        [ForeignKey(nameof(ParentId))]
+        public virtual CompositeNode Parent { get; set; }
+        [NotMapped]
+        public ICollection<CompositeComponent> Childs { get; } = null;
+
     }
 
 
@@ -37,11 +126,10 @@ namespace Amsel.Models.Rundown.Models
     {
         protected RundownSet() { }
 
-
         public RundownSet([NotNull] string name, RundownQueue queue, params RundownElement[] elementList)
         {
-            Name = name ?? throw new ArgumentNullException(nameof(name));
-            Queue = queue;
+            Name = name ?? throw new ArgumentNullException(nameof(queue));
+            Queue = queue ?? throw new ArgumentNullException(nameof(queue));
 
             if (elementList != null)
                 Elements = elementList.ToList();
@@ -53,7 +141,8 @@ namespace Amsel.Models.Rundown.Models
 
         [CascadeUpdates]
         public virtual ICollection<RundownElement> Elements { get; set; } = new List<RundownElement>();
-
+        [Required]
+        public virtual RundownQueue Queue { get; set; }
         public void AddSequence(RundownSequence sequence)
         {
             if (Sequences.All(x => x.RundownSequenceId != sequence.Id))
@@ -71,6 +160,8 @@ namespace Amsel.Models.Rundown.Models
         [ItemNotNull]
         public virtual ICollection<RundownSetSequence> Sequences { get; set; } = new List<RundownSetSequence>();
 
+        public Guid TenantId { get; set; }
+        [ForeignKey(nameof(TenantId))]
         public virtual TenantEntity Tenant { get; set; }
 
         [Table("RundownSets_Sequences")]

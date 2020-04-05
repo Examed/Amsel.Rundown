@@ -4,8 +4,9 @@ using Amsel.Model.Tenant.TenantModels;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq.Expressions;
+using Amsel.Models.Rundown.Models;
 
-namespace Amsel.Models.Rundown.Models
+namespace Amsel.Models.Rundown.Persistence
 {
     [ComplexType]
     public class RundownQueue : IGuidEntity, ISharedTenant, INamedEntity, IEqualExpression<RundownQueue>
@@ -28,6 +29,8 @@ namespace Amsel.Models.Rundown.Models
 
         public bool StopOnNew { get; set; }
 
+        public Guid TenantId { get; set; }
+        [ForeignKey(nameof(TenantId))]
         public virtual TenantEntity Tenant { get; set; }
 
 

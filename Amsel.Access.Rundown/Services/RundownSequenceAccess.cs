@@ -3,7 +3,7 @@ using Amsel.Framework.Structure.Interfaces;
 using Amsel.Framework.Structure.Services;
 using Amsel.Framework.Utilities.Extensions.Http;
 using Amsel.Model.Tenant.TenantModels;
-using Amsel.Models.Rundown.Models;
+using Amsel.Models.Rundown.Persistence;
 using Amsel.Resources.Rundown.Controller;
 using Amsel.Resources.Rundown.Endpoints;
 using JetBrains.Annotations;

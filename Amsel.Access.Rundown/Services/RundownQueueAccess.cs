@@ -1,10 +1,11 @@
 ﻿using Amsel.Framework.Base.Models;
 using Amsel.Framework.Structure.Factory;
 using Amsel.Framework.Structure.Interfaces;
+using Amsel.Framework.Structure.Resources;
 using Amsel.Framework.Structure.Services;
 using Amsel.Framework.Utilities.Extensions.Http;
 using Amsel.Model.Tenant.TenantModels;
-using Amsel.Models.Rundown.Models;
+using Amsel.Models.Rundown.Persistence;
 using Amsel.Resources.Rundown.Controller;
 using Amsel.Resources.Rundown.Endpoints;
 using JetBrains.Annotations;
@@ -28,6 +29,7 @@ namespace Amsel.Access.Rundown.Services
                                                                                              RundownQueueControllerResources.GET_NAMES,
                                                                                              RequestLocal);
         [NotNull] UriBuilder GetRundownSetsAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownQueueControllerResources.GET_RUNDOWNS, RequestLocal);
+        [NotNull] UriBuilder GetAllAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownQueueControllerResources.GET_ALL, RequestLocal);
         protected override bool RequestLocal => false;
 
         /// <inheritdoc/>
@@ -38,7 +40,11 @@ namespace Amsel.Access.Rundown.Services
             HttpResponseMessage response = await GetAsync(GetQueueNamesAddress).ConfigureAwait(false);
             return await response.DeserializeElseThrowAsync<IEnumerable<GuidNameEntity>>().ConfigureAwait(false);
         }
-
+        public async Task<IEnumerable<RundownQueue>> GetAllAsync()
+        {
+            HttpResponseMessage response = await GetAsync(GetAllAddress).ConfigureAwait(false);
+            return await response.DeserializeElseThrowAsync<IEnumerable<RundownQueue>>().ConfigureAwait(false);
+        }
 
         public virtual IEnumerable<RundownSet> GetRundownSets(Guid Id)
         {

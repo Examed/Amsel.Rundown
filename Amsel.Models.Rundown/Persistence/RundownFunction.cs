@@ -9,8 +9,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Linq.Expressions;
+using Amsel.Models.Rundown.Models;
 
-namespace Amsel.Models.Rundown.Models
+namespace Amsel.Models.Rundown.Persistence
 {
     /// <inheritdoc cref="GuidEntity"/>
     /// <summary>
@@ -65,6 +66,8 @@ namespace Amsel.Models.Rundown.Models
 
         public RundownSequenceType.EType SequenceType { get; set; }
 
+        public Guid TenantId { get; set; }
+        [ForeignKey(nameof(TenantId))]
         public virtual TenantEntity Tenant { get; set; }
         public bool IsPublic { get ; set ; } = false;
 

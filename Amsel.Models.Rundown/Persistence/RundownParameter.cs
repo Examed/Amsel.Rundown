@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Amsel.Models.Rundown.Models
+namespace Amsel.Models.Rundown.Persistence
 {
     [ComplexType, Owned]
     public class RundownParameter : INamedEntity

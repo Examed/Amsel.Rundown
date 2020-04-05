@@ -5,6 +5,7 @@ using Amsel.Framework.Structure.Services;
 using Amsel.Framework.Utilities.Extensions.Http;
 using Amsel.Model.Tenant.TenantModels;
 using Amsel.Models.Rundown.Models;
+using Amsel.Models.Rundown.Persistence;
 using Amsel.Resources.Rundown.Controller;
 using Amsel.Resources.Rundown.Endpoints;
 using JetBrains.Annotations;
@@ -32,6 +33,15 @@ namespace Amsel.Access.Rundown.Services
 
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.SET;
+
+
+        UriBuilder GetCompositesAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_COMPOSITES, RequestLocal);
+
+        public virtual async Task<IEnumerable<CompositeComponent>> GetComposites()
+        {
+            HttpResponseMessage response = await GetAsync(GetCompositesAddress).ConfigureAwait(false);
+            return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeComponent>>().ConfigureAwait(false);
+        }
 
 
 

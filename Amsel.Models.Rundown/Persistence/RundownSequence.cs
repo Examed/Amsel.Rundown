@@ -7,8 +7,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq.Expressions;
+using Amsel.Models.Rundown.Models;
 
-namespace Amsel.Models.Rundown.Models
+namespace Amsel.Models.Rundown.Persistence
 {
     [ComplexType]
     public class RundownSequence : LogicEntity, ISharedTenant, INamedEntity, IGuidEntity, IEqualExpression<RundownSequence>
@@ -52,9 +53,11 @@ namespace Amsel.Models.Rundown.Models
 
         [NotNull] public string Name { get; set; }
 
+
+        public Guid TenantId { get; set; }
+        [ForeignKey(nameof(TenantId))]
         public virtual TenantEntity Tenant { get; set; }
 
-     
 
     }
 }

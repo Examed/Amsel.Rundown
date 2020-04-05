@@ -9,8 +9,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Amsel.Models.Rundown.Models;
 
-namespace Amsel.Models.Rundown.Models
+namespace Amsel.Models.Rundown.Persistence
 {
     [Owned, ComplexType]
     public partial class RundownElement : LogicEntity, IGuidEntity, INamedEntity
