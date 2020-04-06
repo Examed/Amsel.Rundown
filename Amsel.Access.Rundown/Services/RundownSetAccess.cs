@@ -30,20 +30,13 @@ namespace Amsel.Access.Rundown.Services
 
         [NotNull] private UriBuilder GetByConnectionAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.ENQUEUE, RequestLocal);
 
-        private UriBuilder GetCompositesAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_COMPOSITES, RequestLocal);
-
+ 
         private UriBuilder GetSequencesAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_SEQUENCES, RequestLocal);
 
         public RundownSetAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService)
         { }
 
         #region PUBLIC METHODES
-        public virtual async Task<IEnumerable<CompositeComponent>> GetComposites()
-        {
-            HttpResponseMessage response = await GetAsync(GetCompositesAddress).ConfigureAwait(false);
-            return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeComponent>>().ConfigureAwait(false);
-        }
-
         public virtual async Task<IEnumerable<RundownSequence>> GetSequences(Guid id)
         {
             HttpResponseMessage response = await GetAsync(GetSequencesAddress, (nameof(id), id)).ConfigureAwait(false);

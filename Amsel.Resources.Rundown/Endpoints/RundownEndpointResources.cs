@@ -8,5 +8,6 @@
         public const string QUEUE = "queue";
         public const string SEQUENCE = "sequence";
         public const string SET = "set";
+        public const string COMPOSITES = "composites";
     }
 }
