@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Amsel.Framework.Composites.Models;
 
 namespace Amsel.Access.Rundown.Services
 {
