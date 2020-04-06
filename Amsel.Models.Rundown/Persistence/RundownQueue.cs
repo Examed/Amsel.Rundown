@@ -4,13 +4,25 @@ using Amsel.Model.Tenant.TenantModels;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq.Expressions;
-using Amsel.Models.Rundown.Models;
 
 namespace Amsel.Models.Rundown.Persistence
 {
     [ComplexType]
     public class RundownQueue : IGuidEntity, ISharedTenant, INamedEntity, IEqualExpression<RundownQueue>
     {
+        public Guid Id { get; set; }
+
+        public bool IsPublic { get; set; } = false;
+
+        public string Name { get; set; }
+
+        public bool StopOnNew { get; set; }
+
+        [ForeignKey(nameof(TenantId))]
+        public virtual TenantEntity Tenant { get; set; }
+
+        public Guid TenantId { get; set; }
+
         protected RundownQueue() { }
 
         public RundownQueue(string name, bool stopOnNew = false, bool isPublic = false)
@@ -20,21 +32,9 @@ namespace Amsel.Models.Rundown.Persistence
             IsPublic = isPublic;
         }
 
-        public Guid Id { get; set; }
-
-        public bool IsPublic { get; set; } = false;
-
-
-        public string Name { get; set; }
-
-        public bool StopOnNew { get; set; }
-
-        public Guid TenantId { get; set; }
-        [ForeignKey(nameof(TenantId))]
-        public virtual TenantEntity Tenant { get; set; }
-
-
-        public Expression<Func<RundownQueue, bool>> IsEquals() => x => x.Id == Id || x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase);
-        
+        #region PUBLIC METHODES
+        public Expression<Func<RundownQueue, bool>> IsEquals() => x => (x.Id == Id) ||
+            x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase);
+        #endregion
     }
 }

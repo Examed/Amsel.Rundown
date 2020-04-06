@@ -11,6 +11,21 @@ namespace Amsel.Models.Rundown.Persistence
     [ComplexType, Owned]
     public class RundownParameter : INamedEntity
     {
+        public string ArgumentName { get; set; }
+
+        public string Description { get; set; }
+
+        public string DisplayName { get; set; }
+
+        public bool Editable { get; protected set; }
+
+        [Key]
+        public string Name { get; set; }
+
+        public EParameterType Type { get; set; }
+
+        public string Value { get; set; }
+
         protected RundownParameter() { }
 
         public RundownParameter([NotNull] string name, EParameterType type = EParameterType.TEXTBOX, string description = null)
@@ -33,26 +48,12 @@ namespace Amsel.Models.Rundown.Persistence
             Editable = false;
         }
 
+        #region PUBLIC METHODES
         public void SetValue(string value)
         {
             Editable = string.IsNullOrEmpty(value);
             Value = value;
         }
-
-        public string ArgumentName { get; set; }
-
-        public string Description { get; set; }
-
-        public string DisplayName { get; set; }
-
-        public bool Editable { get; protected set; }
-
-        [Key]
-        public string Name { get; set; }
-
-        public EParameterType Type { get; set; }
-
-        public string Value { get; set; }
-
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Amsel.Enums.Rundown.Enums;
+using Amsel.Framework.Composites.Models;
 using Amsel.Framework.Structure.Factory;
 using Amsel.Framework.Structure.Interfaces;
 using Amsel.Framework.Structure.Services;
@@ -14,19 +15,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Amsel.Framework.Composites.Models;
 
 namespace Amsel.Access.Rundown.Services
 {
     public class RundownSetAccess : CRUDAccess<RundownSet>
     {
-        public RundownSetAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService) { }
-
-
-        [NotNull] UriBuilder GetByConnectionAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.ENQUEUE, RequestLocal);
-
-
-
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
 
@@ -35,18 +28,21 @@ namespace Amsel.Access.Rundown.Services
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.SET;
 
+        [NotNull] private UriBuilder GetByConnectionAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.ENQUEUE, RequestLocal);
 
-        UriBuilder GetCompositesAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_COMPOSITES, RequestLocal);
+        private UriBuilder GetCompositesAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_COMPOSITES, RequestLocal);
 
+        private UriBuilder GetSequencesAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_SEQUENCES, RequestLocal);
+
+        public RundownSetAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService)
+        { }
+
+        #region PUBLIC METHODES
         public virtual async Task<IEnumerable<CompositeComponent>> GetComposites()
         {
             HttpResponseMessage response = await GetAsync(GetCompositesAddress).ConfigureAwait(false);
             return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeComponent>>().ConfigureAwait(false);
         }
-
-
-
-        UriBuilder GetSequencesAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_SEQUENCES, RequestLocal);
 
         public virtual async Task<IEnumerable<RundownSequence>> GetSequences(Guid id)
         {
@@ -54,21 +50,19 @@ namespace Amsel.Access.Rundown.Services
             return await response.DeserializeOrDefaultAsync<IEnumerable<RundownSequence>>().ConfigureAwait(false);
         }
 
-
-        public Task<HttpResponseMessage> QueueConnectionAsync(EHandlerType handlerType,
-                                                              [NotNull] string functionName,
-                                                              [NotNull] Dictionary<string, string> values)
+        public Task<HttpResponseMessage> QueueConnectionAsync(EHandlerType handlerType, [NotNull] string functionName, [NotNull] Dictionary<string, string> values)
         {
-            if (functionName == null)
+            if(functionName == null)
                 throw new ArgumentNullException(nameof(functionName));
-            if (values == null)
+            if(values == null)
                 throw new ArgumentNullException(nameof(values));
-            if (!Enum.IsDefined(typeof(EHandlerType), handlerType))
+            if(!Enum.IsDefined(typeof(EHandlerType), handlerType))
                 throw new InvalidEnumArgumentException(nameof(handlerType), (int)handlerType, typeof(EHandlerType));
 
             RundownTrigger data = new RundownTrigger(handlerType, values);
 
             return PostAsync(GetByConnectionAddress, GetJsonContent(data));
         }
+        #endregion
     }
 }

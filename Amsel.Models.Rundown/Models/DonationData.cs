@@ -7,8 +7,11 @@ namespace Amsel.Models.Rundown.Models
     [ComplexType]
     public class DonationData : DataEntity
     {
-        protected DonationData() { }
+        public virtual double Amount { get; set; }
 
+        public virtual string User { get; set; }
+
+        protected DonationData() { }
 
         public DonationData(string user, double amount)
         {
@@ -17,11 +20,8 @@ namespace Amsel.Models.Rundown.Models
             User = user ?? throw new ArgumentNullException(nameof(user));
         }
 
-
+        #region PUBLIC METHODES
         public override object GetData() => new { Amount, User };
-
-        public virtual double Amount { get; set; }
-
-        public virtual string User { get; set; }
+        #endregion
     }
 }

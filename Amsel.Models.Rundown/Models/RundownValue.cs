@@ -4,17 +4,17 @@ namespace Amsel.Models.Rundown.Models
 {
     public class RundownValue
     {
-        public RundownValue([NotNull] string parameterName, string value)
-        {
-            ParameterName = parameterName;
-            Value = value;
-        }
         public string ParameterName { get; set; }
 
         public string Value { get; set; }
 
         protected RundownValue() { }
-  
+
+        public RundownValue([NotNull] string parameterName, string value)
+        {
+            ParameterName = parameterName;
+            Value = value;
+        }
 
         #region PUBLIC METHODES
         public void SetValue(string value) => Value = value;

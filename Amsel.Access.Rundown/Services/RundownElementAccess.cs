@@ -8,15 +8,15 @@ namespace Amsel.Access.Rundown.Services
 {
     public class RundownElementAccess : CRUDAccess<RundownElement>
     {
-        public RundownElementAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService) { }
-
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
-
 
         protected override bool RequestLocal => false;
 
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.ELEMENT;
+
+        public RundownElementAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService)
+        { }
     }
 }

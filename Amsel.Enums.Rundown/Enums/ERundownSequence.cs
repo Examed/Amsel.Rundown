@@ -4,10 +4,11 @@ using System.Linq;
 
 namespace Amsel.Enums.Rundown.Enums
 {
-    public static class RundownSequenceType
+    public static class RundownModeType
     {
         public static readonly IEnumerable<EType> EnumList = Enum.GetValues(typeof(EType)).OfType<EType>();
 
+        #region PUBLIC METHODES
         public static string GetDesription(this EType type)
         {
             switch(type)
@@ -57,6 +58,7 @@ namespace Amsel.Enums.Rundown.Enums
                     return string.Empty;
             }
         }
+        #endregion
 
         public enum EType
         {

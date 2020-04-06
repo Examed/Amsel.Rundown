@@ -5,40 +5,46 @@ namespace Amsel.Enums.Rundown.Helper
 {
     public static class RundownSequenceHelper
     {
-        public static bool DoNotPlaySequence(this RundownSequenceType.EType sequence, CancellationToken cancellationToken, bool rundownSetIsVisible = true)
+        #region PUBLIC METHODES
+        public static bool IsAfterTransitionHide(this RundownModeType.EType sequence) => sequence.CompareTo(RundownModeType.EType.TRANSITION_HIDE) >
+            0;
+
+        public static bool IsAfterTransitionShow(this RundownModeType.EType sequence) => sequence.CompareTo(RundownModeType.EType.TRANSITION_SHOW) >
+            0;
+
+        public static bool IsBeforeTransitionHide(this RundownModeType.EType sequence) => sequence.CompareTo(RundownModeType.EType.TRANSITION_HIDE) <
+            0;
+
+        public static bool IsBeforeTransitionShow(this RundownModeType.EType sequence) => sequence.CompareTo(RundownModeType.EType.TRANSITION_SHOW) <
+            0;
+
+        public static bool IsBetweenTransitions(this RundownModeType.EType sequence) => sequence.IsAfterTransitionShow() &&
+            sequence.IsBeforeTransitionHide();
+
+        public static bool IsModeExecutable(this RundownModeType.EType sequence, CancellationToken cancellationToken, bool rundownSetIsVisible = true)
         {
-            if (cancellationToken.IsCancellationRequested && !sequence.IsAfterTransitionOut())
+            if(cancellationToken.IsCancellationRequested && !sequence.IsAfterTransitionHide())
             {
-
-                if (sequence.IsBeforeTransitionIn())
-                    return true;
-
-                if (sequence.IsTransitionIn())
-                    return true;
-
-                if (sequence.IsBetweenTransitions())
+                if(sequence.IsBeforeTransitionShow())
                     return false;
 
-                if (sequence.IsTransitionOut() && !rundownSetIsVisible)
-                    return true;
+                if(sequence.IsTransitionShow())
+                    return false;
 
-                if (sequence.CompareTo(RundownSequenceType.EType.WAIT) == 0)
-                    return true;
+                if(sequence.IsBetweenTransitions())
+                    return false;
+
+                if(sequence.IsTransitionHide() && !rundownSetIsVisible)
+                    return false;
             }
-
-            return false;
+            return true;
         }
 
+        public static bool IsTransitionHide(this RundownModeType.EType sequence) => sequence ==
+            RundownModeType.EType.TRANSITION_HIDE;
 
-
-        public static bool IsAfterTransitionOut(this RundownSequenceType.EType sequence) => sequence.CompareTo(RundownSequenceType.EType.TRANSITION_HIDE) > 0;
-
-        public static bool IsBeforeTransitionIn(this RundownSequenceType.EType sequence) => sequence.CompareTo(RundownSequenceType.EType.TRANSITION_SHOW) < 0;
-
-             public static bool IsBetweenTransitions(this RundownSequenceType.EType sequence) => !sequence.IsBeforeTransitionIn() && !sequence.IsAfterTransitionOut();
-
-        public static bool IsTransitionIn(this RundownSequenceType.EType sequence) => sequence == RundownSequenceType.EType.TRANSITION_SHOW;
-
-        public static bool IsTransitionOut(this RundownSequenceType.EType sequence) => sequence == RundownSequenceType.EType.TRANSITION_HIDE;
+        public static bool IsTransitionShow(this RundownModeType.EType sequence) => sequence ==
+            RundownModeType.EType.TRANSITION_SHOW;
+        #endregion
     }
 }

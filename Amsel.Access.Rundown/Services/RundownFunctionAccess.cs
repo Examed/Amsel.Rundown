@@ -8,8 +8,6 @@ namespace Amsel.Access.Rundown.Services
 {
     public class RundownFunctionAccess : CRUDAccess<RundownFunction>
     {
-        public RundownFunctionAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService) { }
-
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
 
@@ -17,5 +15,8 @@ namespace Amsel.Access.Rundown.Services
 
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.FUNCTION;
+
+        public RundownFunctionAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService)
+        { }
     }
 }

@@ -9,7 +9,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Linq.Expressions;
-using Amsel.Models.Rundown.Models;
 
 namespace Amsel.Models.Rundown.Persistence
 {
@@ -20,13 +19,34 @@ namespace Amsel.Models.Rundown.Persistence
     [ComplexType]
     public class RundownFunction : LogicEntity, ISharedTenant, INamedEntity, IEqualExpression<RundownFunction>
     {
+        public string Description { get; set; } = string.Empty;
+
+        public EHandlerType HandlerName { get; set; }
+
+        public string Icon { get; set; }
+
+        [Key]
+        public Guid Id { get; set; }
+
+        public bool IsPublic { get; set; } = false;
+
+        public bool IsTrigger { get; set; }
+
+        public string Name { get; set; }
+
+        [NotNull]
+        public virtual ICollection<RundownParameter> Parameters { get; set; } = new List<RundownParameter>();
+
+        public RundownModeType.EType SequenceType { get; set; }
+
+        [ForeignKey(nameof(TenantId))]
+        public virtual TenantEntity Tenant { get; set; }
+
+        public Guid TenantId { get; set; }
+
         protected RundownFunction() { }
 
-
-        public RundownFunction(string name,
-                               EHandlerType handler,
-                               RundownSequenceType.EType sequenceType = RundownSequenceType.EType.LOAD,
-                               bool isTrigger = false)
+        public RundownFunction(string name, EHandlerType handler, RundownModeType.EType sequenceType = RundownModeType.EType.LOAD, bool isTrigger = false)
         {
             Name = name;
             IsTrigger = isTrigger;
@@ -34,10 +54,11 @@ namespace Amsel.Models.Rundown.Persistence
             SequenceType = sequenceType;
         }
 
+        #region PUBLIC METHODES
         public void AddParameter([NotNull] string name, string value = null, EParameterType type = EParameterType.TEXTBOX, string description = null)
         {
             RundownParameter current = Parameters.FirstOrDefault(x => x.Name == name);
-            if (current != null)
+            if(current != null)
                 throw new InvalidOperationException($"There is already a Parameter with the Name {name}");
 
             RundownParameter parameter = string.IsNullOrEmpty(value)
@@ -46,33 +67,8 @@ namespace Amsel.Models.Rundown.Persistence
             Parameters.Add(parameter);
         }
 
-        public string Description { get; set; } = string.Empty;
-        [Key]
-        public Guid Id { get; set; }
-
-        public EHandlerType HandlerName { get; set; }
-
-        public string Icon { get; set; }
-
-
-
-        public bool IsTrigger { get; set; }
-
-     
-        public string Name { get; set; }
-
-        [NotNull]
-        public virtual ICollection<RundownParameter> Parameters { get; set; } = new List<RundownParameter>();
-
-        public RundownSequenceType.EType SequenceType { get; set; }
-
-        public Guid TenantId { get; set; }
-        [ForeignKey(nameof(TenantId))]
-        public virtual TenantEntity Tenant { get; set; }
-        public bool IsPublic { get ; set ; } = false;
-
-        public Expression<Func<RundownFunction, bool>> IsEquals() => x=> x.Id == Id || (x.HandlerName == HandlerName && x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
-
-
+        public Expression<Func<RundownFunction, bool>> IsEquals() => x => (x.Id == Id) ||
+            ((x.HandlerName == HandlerName) && x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase));
+        #endregion
     }
 }
