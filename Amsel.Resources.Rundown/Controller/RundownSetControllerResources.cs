@@ -24,6 +24,5 @@
     {
         public const string GET_ALL = "get/all";
         public const string GET_COMPONENTS = "get/components";
-        public const string UPDATE_PARENT = "update/parent";
     }
 }

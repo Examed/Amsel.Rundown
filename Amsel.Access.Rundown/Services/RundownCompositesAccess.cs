@@ -4,7 +4,6 @@ using Amsel.Framework.Structure.Interfaces;
 using Amsel.Framework.Structure.Services;
 using Amsel.Framework.Utilities.Extensions.Http;
 using Amsel.Model.Tenant.TenantModels;
-using Amsel.Models.Rundown.DTOs;
 using Amsel.Resources.Rundown.Controller;
 using Amsel.Resources.Rundown.Endpoints;
 using System;
@@ -48,14 +47,6 @@ namespace Amsel.Access.Rundown.Services
             return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeComponent>>().ConfigureAwait(false);
         }
 
-        private UriBuilder UpdateComponentParentAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownCompositeControllerResources.UPDATE_PARENT, RequestLocal);
-
-        public virtual async Task<bool> UpdateComponentParent(CompositeComponent component, Guid? newParentId)
-        {
-            var updateDTO = new UpdateCompositeParentDTO(component, newParentId);
-            HttpResponseMessage response = await PostAsync(UpdateComponentParentAddress, GetJsonContent(updateDTO)).ConfigureAwait(false);
-            return response.IsSuccessStatusCode;
-        }
         #endregion
     }
 }
