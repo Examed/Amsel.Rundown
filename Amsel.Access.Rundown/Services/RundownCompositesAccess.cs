@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Amsel.Access.Rundown.Services
 {
-    public class RundownCompositesAccess : CRUDAccess<CompositeComponent>
+    public class RundownCompositesAccess : CRUDAccess<CompositeEntity>
     {
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
@@ -31,20 +31,20 @@ namespace Amsel.Access.Rundown.Services
         { }
 
         #region PUBLIC METHODES
-        public virtual async Task<IEnumerable<CompositeComponent>> GetCompositesAsync()
+        public virtual async Task<IEnumerable<CompositeEntity>> GetCompositesAsync()
         {
             HttpResponseMessage response = await GetAsync(GetCompositesAddress).ConfigureAwait(false);
-            return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeComponent>>().ConfigureAwait(false);
+            return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeEntity>>().ConfigureAwait(false);
         }
 
-        public virtual async Task<IEnumerable<CompositeComponent>> GetComponentsAsync(CompositeComponent composite)
+        public virtual async Task<IEnumerable<CompositeEntity>> GetComponentsAsync(CompositeEntity composite)
         {
             return await GetComponentsAsync(composite.Id);
         }
-        public virtual async Task<IEnumerable<CompositeComponent>> GetComponentsAsync(Guid? id)
+        public virtual async Task<IEnumerable<CompositeEntity>> GetComponentsAsync(Guid? id)
         {
             HttpResponseMessage response = await GetAsync(GetComponentsAddress, ("id", id)).ConfigureAwait(false);
-            return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeComponent>>().ConfigureAwait(false);
+            return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeEntity>>().ConfigureAwait(false);
         }
 
         #endregion

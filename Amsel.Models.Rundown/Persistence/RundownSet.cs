@@ -27,9 +27,6 @@ namespace Amsel.Models.Rundown.Persistence
         [Required(ErrorMessage = "Field should not be empty")]
         [NotNull] public virtual string Name { get; set; }
 
-        [ForeignKey(nameof(ParentId))]
-        public virtual CompositeComponent Parent { get; set; }
-
         public Guid? ParentId { get; set; }
 
         [Display(Name = nameof(Tooltip))]
@@ -38,8 +35,8 @@ namespace Amsel.Models.Rundown.Persistence
 
     [ComplexType]
     /// <summary>
-/// RundownCollection contains a set of RundownElements that get played when the Collection is active
-/// </summary>
+    /// RundownCollection contains a set of RundownElements that get played when the Collection is active
+    /// </summary>
     /// <summary>
     /// RundownCollection contains a set of RundownElements that get played when the Collection is active
     /// </summary>
@@ -50,10 +47,15 @@ namespace Amsel.Models.Rundown.Persistence
 
         [Range(0, 100)]
         [Display(Name = nameof(Priority))]
-        public virtual int Priority { get; set; }
+        public virtual int Priority { get; set; } = 30;
 
         [Required]
+        public virtual Guid QueueId { get; set; }
+        [ForeignKey(nameof(QueueId)), JsonIgnore]
         public virtual RundownQueue Queue { get; set; }
+
+        [ForeignKey(nameof(ParentId))]
+        public virtual CompositeComponent Parent { get; set; }
 
         [NotNull]
         [ItemNotNull]
@@ -64,6 +66,7 @@ namespace Amsel.Models.Rundown.Persistence
 
         public Guid TenantId { get; set; }
 
+        [JsonConstructor]
         protected RundownSet() { }
 
         public RundownSet([NotNull] string name, RundownQueue queue, params RundownElement[] elementList)
@@ -71,20 +74,21 @@ namespace Amsel.Models.Rundown.Persistence
             Name = name ?? throw new ArgumentNullException(nameof(queue));
             Queue = queue ?? throw new ArgumentNullException(nameof(queue));
 
-            if(elementList != null)
+            if (elementList != null)
                 Elements = elementList.ToList();
         }
+
 
         #region PUBLIC METHODES
         public void AddSequence(RundownSequence sequence)
         {
-            if(Sequences.All(x => x.RundownSequenceId != sequence.Id))
+            if (Sequences.All(x => x.RundownSequenceId != sequence.Id))
                 Sequences.Add(new RundownSetSequence(sequence));
         }
 
         public virtual void AddSequences(params RundownSequence[] rundownSequences)
         {
-            foreach(RundownSequence sequence in rundownSequences)
+            foreach (RundownSequence sequence in rundownSequences)
             {
                 AddSequence(sequence);
             }
@@ -112,7 +116,7 @@ namespace Amsel.Models.Rundown.Persistence
             internal RundownSetSequence(RundownSequence rundownSequence, params RundownSequenceValue[] sequenceValues)
             {
                 RundownSequence = rundownSequence;
-                if(sequenceValues != null)
+                if (sequenceValues != null)
                     SequenceValues = sequenceValues;
             }
 
