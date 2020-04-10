@@ -26,7 +26,7 @@ namespace Amsel.Models.Rundown.Persistence
 
         public string Name { get; set; }
 
-        public RundownModeType.EType SequenceType { get; set; }
+        public ERundownMode SequenceType { get; set; }
 
         [CascadeUpdates]
         public virtual ICollection<RundownElementValue> Values
@@ -37,7 +37,7 @@ namespace Amsel.Models.Rundown.Persistence
 
         public RundownElement() { }
 
-        public RundownElement(RundownFunction function, RundownModeType.EType? sequenceType = null, int delay = 0)
+        public RundownElement(RundownFunction function, ERundownMode? sequenceType = null, int delay = 0)
         {
             SequenceType = sequenceType ?? function.SequenceType;
             Function = function;

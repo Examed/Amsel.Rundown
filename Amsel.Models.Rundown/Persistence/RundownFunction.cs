@@ -37,7 +37,7 @@ namespace Amsel.Models.Rundown.Persistence
         [NotNull]
         public virtual ICollection<RundownParameter> Parameters { get; set; } = new List<RundownParameter>();
 
-        public RundownModeType.EType SequenceType { get; set; }
+        public ERundownMode SequenceType { get; set; }
 
         [ForeignKey(nameof(TenantId))]
         public virtual TenantEntity Tenant { get; set; }
@@ -46,7 +46,7 @@ namespace Amsel.Models.Rundown.Persistence
 
         protected RundownFunction() { }
 
-        public RundownFunction(string name, EHandlerType handler, RundownModeType.EType sequenceType = RundownModeType.EType.LOAD, bool isTrigger = false)
+        public RundownFunction(string name, EHandlerType handler, ERundownMode sequenceType = ERundownMode.LOAD, bool isTrigger = false)
         {
             Name = name;
             IsTrigger = isTrigger;

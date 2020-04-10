@@ -1,79 +1,41 @@
-﻿using System;
+﻿using Amsel.Framework.Utilities.Extensions.Types;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Amsel.Enums.Rundown.Enums
 {
-    public static class RundownModeType
+    public enum ERundownMode
     {
-        public static readonly IEnumerable<EType> EnumList = Enum.GetValues(typeof(EType)).OfType<EType>();
+        [EnumName("Trigger")]
+        [Description("Trigger that can start the RundownSet")]
+        TRIGGER = 0,
 
-        #region PUBLIC METHODES
-        public static string GetDesription(this EType type)
-        {
-            switch(type)
-            {
-                case EType.TRIGGER:
-                    return "Trigger that can start the RundownSet";
-                case EType.LOAD:
-                    return "Load Resources of the RundownSet";
-                case EType.TRANSITION_SHOW:
-                    return "Transition to make the RundownSet visible";
-                case EType.ACTIVE:
-                    return "Activities that should be happen during the RundownSet is visible";
-                case EType.WAIT:
-                    return string.Empty;
-                case EType.TRANSITION_HIDE:
-                    return "Transition to hide the RundownSet";
-                case EType.STOP:
-                    return string.Empty;
-                case EType.CLEANUP:
-                    return "Revert actions that should only be active while the RundownSet is active";
-                default:
-                    return string.Empty;
-            }
-        }
+        [EnumName("Load")]
+        [Description("Load Resources of the RundownSet")]
+        LOAD = 10,
 
-        public static string GetName(this EType type)
-        {
-            switch(type)
-            {
-                case EType.TRIGGER:
-                    return "Trigger";
-                case EType.LOAD:
-                    return "Load";
-                case EType.TRANSITION_SHOW:
-                    return "Show Transition";
-                case EType.ACTIVE:
-                    return "Active";
-                case EType.WAIT:
-                    return "Wait";
-                case EType.TRANSITION_HIDE:
-                    return "Hide Transition";
-                case EType.STOP:
-                    return "Stop";
-                case EType.CLEANUP:
-                    return "Cleanup";
-                default:
-                    return string.Empty;
-            }
-        }
-        #endregion
+        [EnumName("Show Transition")]
+        [Description("Transition to make the RundownSet visible")]
+        TRANSITION_SHOW = 25,
 
-        public enum EType
-        {
-            TRIGGER = 0,
-            LOAD = 10,
+        [EnumName("Active")]
+        [Description("Activities that should be happen during the RundownSet is visible")]
+        ACTIVE = 50,
 
-            TRANSITION_SHOW = 25,
+        [EnumName("Wait")]
+        WAIT = 65,
 
-            ACTIVE = 50,
+        [EnumName("Hide Transition")]
+        [Description("Transition to hide the RundownSet")]
+        TRANSITION_HIDE = 75,
 
-            WAIT = 65,
-            TRANSITION_HIDE = 75,
+        [EnumName("Stop")]
+        STOP = 90,
 
-            STOP = 90,
-            CLEANUP = 100
-        }
+        [EnumName("Cleanup")]
+        [Description("Revert actions that should only be active while the RundownSet is active")]
+        CLEANUP = 100
     }
 }
