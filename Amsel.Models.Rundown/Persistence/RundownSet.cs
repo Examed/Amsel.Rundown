@@ -31,6 +31,9 @@ namespace Amsel.Models.Rundown.Persistence
 
         [Display(Name = nameof(Tooltip))]
         public string Tooltip { get; set; }
+
+        [Required]
+        public virtual Guid QueueId { get; set; }
     }
 
     [ComplexType]
@@ -49,8 +52,6 @@ namespace Amsel.Models.Rundown.Persistence
         [Display(Name = nameof(Priority))]
         public virtual int Priority { get; set; } = 30;
 
-        [Required]
-        public virtual Guid QueueId { get; set; }
         [ForeignKey(nameof(QueueId)), JsonIgnore]
         public virtual RundownQueue Queue { get; set; }
 
