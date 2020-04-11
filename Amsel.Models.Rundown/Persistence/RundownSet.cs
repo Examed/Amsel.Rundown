@@ -33,13 +33,10 @@ namespace Amsel.Models.Rundown.Persistence
         public string Tooltip { get; set; }
 
         [Required]
-        public virtual Guid QueueId { get; set; }
+        public virtual Guid? QueueId { get; set; }
     }
 
     [ComplexType]
-    /// <summary>
-    /// RundownCollection contains a set of RundownElements that get played when the Collection is active
-    /// </summary>
     /// <summary>
     /// RundownCollection contains a set of RundownElements that get played when the Collection is active
     /// </summary>
@@ -55,24 +52,28 @@ namespace Amsel.Models.Rundown.Persistence
         [ForeignKey(nameof(QueueId)), JsonIgnore]
         public virtual RundownQueue Queue { get; set; }
 
-        [ForeignKey(nameof(ParentId))]
+        [ForeignKey(nameof(ParentId)), JsonIgnore]
         public virtual CompositeComponent Parent { get; set; }
 
         [NotNull]
         [ItemNotNull]
         public virtual ICollection<RundownSetSequence> Sequences { get; set; } = new List<RundownSetSequence>();
 
-        [ForeignKey(nameof(TenantId))]
+        [ForeignKey(nameof(TenantId)), JsonIgnore]
         public virtual TenantEntity Tenant { get; set; }
 
         public Guid TenantId { get; set; }
 
         [JsonConstructor]
         protected RundownSet() { }
+        public RundownSet([NotNull] string name)
+        {
+            Name = name ?? throw new ArgumentNullException(nameof(name));
+        }
 
         public RundownSet([NotNull] string name, RundownQueue queue, params RundownElement[] elementList)
         {
-            Name = name ?? throw new ArgumentNullException(nameof(queue));
+            Name = name ?? throw new ArgumentNullException(nameof(name));
             Queue = queue ?? throw new ArgumentNullException(nameof(queue));
 
             if (elementList != null)
@@ -108,8 +109,7 @@ namespace Amsel.Models.Rundown.Persistence
             [JsonProperty(nameof(SequenceValues))]
             public virtual ICollection<RundownSequenceValue> SequenceValues
             {
-                get;
-                protected set;
+                get; protected set;
             } = new List<RundownSequenceValue>();
 
             protected RundownSetSequence() { }

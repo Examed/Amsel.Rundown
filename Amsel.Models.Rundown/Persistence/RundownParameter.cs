@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq.Expressions;
 
 namespace Amsel.Models.Rundown.Persistence
 {
@@ -54,6 +55,7 @@ namespace Amsel.Models.Rundown.Persistence
             Editable = string.IsNullOrEmpty(value);
             Value = value;
         }
+
         #endregion
     }
 }
