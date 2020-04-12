@@ -21,7 +21,7 @@ namespace Amsel.Models.Rundown.Persistence
         [ForeignKey(nameof(TenantId))]
         public virtual TenantEntity Tenant { get; set; }
 
-        public Guid TenantId { get; set; }
+        public Guid? TenantId { get; set; }
 
         protected RundownQueue() { }
 

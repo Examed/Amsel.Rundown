@@ -62,7 +62,7 @@ namespace Amsel.Models.Rundown.Persistence
         [ForeignKey(nameof(TenantId)), JsonIgnore]
         public virtual TenantEntity Tenant { get; set; }
 
-        public Guid TenantId { get; set; }
+        public Guid? TenantId { get; set; }
 
         [JsonConstructor]
         protected RundownSet() { }
