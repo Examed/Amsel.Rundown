@@ -14,7 +14,7 @@ namespace Amsel.Access.Rundown.Bootstrap
             builder.RegisterType<RundownElementAccess>();
             builder.RegisterType<RundownFunctionAccess>();
             builder.RegisterType<RundownCompositesAccess>();
-            
+
 
             base.Load(builder);
         }

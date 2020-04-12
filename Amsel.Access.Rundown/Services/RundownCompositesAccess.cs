@@ -23,30 +23,27 @@ namespace Amsel.Access.Rundown.Services
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.COMPOSITES;
 
+        private UriBuilder GetComponentsAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownCompositeControllerResources.GET_COMPONENTS, RequestLocal);
 
         private UriBuilder GetCompositesAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownCompositeControllerResources.GET_ALL, RequestLocal);
-        private UriBuilder GetComponentsAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownCompositeControllerResources.GET_COMPONENTS, RequestLocal);
 
         public RundownCompositesAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService)
         { }
 
         #region PUBLIC METHODES
+        public virtual async Task<IEnumerable<CompositeEntity>> GetComponentsAsync(CompositeEntity composite) => await GetComponentsAsync(composite.Id);
+
+        public virtual async Task<IEnumerable<CompositeEntity>> GetComponentsAsync(Guid? id)
+        {
+            HttpResponseMessage response = await GetAsync(GetComponentsAddress, (nameof(id), id)).ConfigureAwait(false);
+            return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeEntity>>().ConfigureAwait(false);
+        }
+
         public virtual async Task<IEnumerable<CompositeEntity>> GetCompositesAsync()
         {
             HttpResponseMessage response = await GetAsync(GetCompositesAddress).ConfigureAwait(false);
             return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeEntity>>().ConfigureAwait(false);
         }
-
-        public virtual async Task<IEnumerable<CompositeEntity>> GetComponentsAsync(CompositeEntity composite)
-        {
-            return await GetComponentsAsync(composite.Id);
-        }
-        public virtual async Task<IEnumerable<CompositeEntity>> GetComponentsAsync(Guid? id)
-        {
-            HttpResponseMessage response = await GetAsync(GetComponentsAddress, ("id", id)).ConfigureAwait(false);
-            return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeEntity>>().ConfigureAwait(false);
-        }
-
         #endregion
     }
 }

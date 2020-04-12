@@ -40,11 +40,9 @@ namespace Amsel.Enums.Rundown.Helper
             return true;
         }
 
-        public static bool IsTransitionHide(this ERundownMode sequence) => sequence ==
-            ERundownMode.TRANSITION_HIDE;
+        public static bool IsTransitionHide(this ERundownMode sequence) => sequence == ERundownMode.TRANSITION_HIDE;
 
-        public static bool IsTransitionShow(this ERundownMode sequence) => sequence ==
-            ERundownMode.TRANSITION_SHOW;
+        public static bool IsTransitionShow(this ERundownMode sequence) => sequence == ERundownMode.TRANSITION_SHOW;
         #endregion
     }
 }

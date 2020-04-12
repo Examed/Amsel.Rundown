@@ -1,5 +1,4 @@
 ﻿using Amsel.Enums.Rundown.Enums;
-using Amsel.Framework.Composites.Models;
 using Amsel.Framework.Structure.Factory;
 using Amsel.Framework.Structure.Interfaces;
 using Amsel.Framework.Structure.Services;
@@ -30,7 +29,6 @@ namespace Amsel.Access.Rundown.Services
 
         [NotNull] private UriBuilder GetByConnectionAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.ENQUEUE, RequestLocal);
 
- 
         private UriBuilder GetSequencesAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_SEQUENCES, RequestLocal);
 
         public RundownSetAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService)
