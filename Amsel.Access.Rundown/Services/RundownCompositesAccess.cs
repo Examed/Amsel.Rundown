@@ -23,9 +23,9 @@ namespace Amsel.Access.Rundown.Services
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.COMPOSITES;
 
-        private UriBuilder GetComponentsAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownCompositeControllerResources.GET_COMPONENTS, RequestLocal);
+        public UriBuilder GetComponentsAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownCompositeControllerResources.GET_COMPONENTS, RequestLocal);
 
-        private UriBuilder GetCompositesAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownCompositeControllerResources.GET_ALL, RequestLocal);
+        public UriBuilder GetCompositesAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownCompositeControllerResources.GET_ALL, RequestLocal);
 
         public RundownCompositesAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService)
         { }

@@ -8,7 +8,10 @@
         public const string GET_BY_ID = "get";
         public const string GET_SEQUENCES = "get/sequences";
     }
-
+    public static class RundownFunctionControllerResources
+    {
+        public const string GET_BY_HANDLER = "get/handler/{handler}";
+    }
     public static class RundownQueueControllerResources
     {
         public const string GET_ALL = "get/all";

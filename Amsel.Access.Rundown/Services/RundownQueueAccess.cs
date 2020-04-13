@@ -28,9 +28,9 @@ namespace Amsel.Access.Rundown.Services
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.QUEUE;
 
-        [NotNull] private UriBuilder GetAllAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownQueueControllerResources.GET_ALL, RequestLocal);
+        [NotNull] public UriBuilder GetAllAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownQueueControllerResources.GET_ALL, RequestLocal);
 
-        [NotNull] private UriBuilder GetRundownSetsAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownQueueControllerResources.GET_RUNDOWNS, RequestLocal);
+        [NotNull] public UriBuilder GetRundownSetsAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownQueueControllerResources.GET_RUNDOWNS, RequestLocal);
 
         public RundownQueueAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService)
         { }
