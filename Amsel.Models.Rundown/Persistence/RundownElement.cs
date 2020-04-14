@@ -29,11 +29,7 @@ namespace Amsel.Models.Rundown.Persistence
         public ERundownMode SequenceType { get; set; }
 
         [CascadeUpdates]
-        public virtual ICollection<RundownElementValue> Values
-        {
-            get;
-            protected set;
-        } = new List<RundownElementValue>();
+        public virtual ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
 
         public RundownElement() { }
 
@@ -49,10 +45,10 @@ namespace Amsel.Models.Rundown.Persistence
         public void AddValue([NotNull] string name, string value)
         {
             List<RundownParameter> parameter = Function.Parameters.Where(x => x.Name == name).ToList();
-            foreach(RundownParameter current in parameter)
+            foreach (RundownParameter current in parameter)
             {
                 RundownElementValue parameterValue = Values.FirstOrDefault(x => x.ParameterName == current.Name);
-                if(parameterValue == null)
+                if (parameterValue == null)
                     parameterValue = new RundownElementValue(current.Name, value);
                 else
                     parameterValue.SetValue(value);
@@ -65,7 +61,7 @@ namespace Amsel.Models.Rundown.Persistence
         public Dictionary<string, string> GetValues()
         {
             Dictionary<string, string> values = Function.Parameters.ToDictionary(item => item.Name, item => item.Value);
-            foreach(RundownValue item in Values)
+            foreach (RundownValue item in Values)
                 values[item.ParameterName] = item.Value;
 
             return values;
