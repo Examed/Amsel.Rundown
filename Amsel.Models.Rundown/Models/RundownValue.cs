@@ -15,9 +15,5 @@ namespace Amsel.Models.Rundown.Models
             ParameterName = parameterName;
             Value = value;
         }
-
-        #region PUBLIC METHODES
-        public void SetValue(string value) => Value = value;
-        #endregion
     }
 }

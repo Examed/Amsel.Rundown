@@ -5,6 +5,7 @@ using Amsel.Model.Tenant.TenantModels;
 using Amsel.Models.Rundown.Models;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +21,7 @@ namespace Amsel.Models.Rundown.Persistence
 
         public int Duration { get; set; }
 
+        [Required, JsonProperty]
         public virtual RundownFunction Function { get; protected set; }
 
         [Key] public Guid Id { get; set; }
@@ -42,25 +44,23 @@ namespace Amsel.Models.Rundown.Persistence
         }
 
         #region PUBLIC METHODES
-        public void AddValue([NotNull] string name, string value)
+        public void SetValue(string name, string value)
         {
-            List<RundownParameter> parameter = Function.Parameters.Where(x => x.Name == name).ToList();
-            foreach (RundownParameter current in parameter)
+            List<RundownParameter> parameters = Function.Parameters.Where(x => x.Name == name).ToList();
+            foreach (RundownParameter current in parameters)
             {
                 RundownElementValue parameterValue = Values.FirstOrDefault(x => x.ParameterName == current.Name);
-                if (parameterValue == null)
-                    parameterValue = new RundownElementValue(current.Name, value);
-                else
-                    parameterValue.SetValue(value);
-
-                Values.Add(parameterValue);
+                if (parameterValue == null)               
+                    Values.Add(new RundownElementValue(current.Name, value));                
+                else                
+                    parameterValue.Value = value;                
             }
         }
 
         [NotNull]
-        public Dictionary<string, string> GetValues()
+        public Dictionary<string, string> GetValues(bool onlyEditable = false)
         {
-            Dictionary<string, string> values = Function.Parameters.ToDictionary(item => item.Name, item => item.Value);
+            Dictionary<string, string> values = Function.Parameters.Where(x => x.HasValue || !onlyEditable).ToDictionary(item => item.Name, item => item.Value);
             foreach (RundownValue item in Values)
                 values[item.ParameterName] = item.Value;
 

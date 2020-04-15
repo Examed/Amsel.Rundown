@@ -17,7 +17,7 @@ namespace Amsel.Models.Rundown.Persistence
 
         public string DisplayName { get; set; }
 
-        public bool Editable { get; protected set; }
+        public bool HasValue => string.IsNullOrEmpty(Value);
 
         [Key]
         public string Name { get; set; }
@@ -34,7 +34,6 @@ namespace Amsel.Models.Rundown.Persistence
             DisplayName = name.Replace('.', ' ');
             Type = type;
             Description = description;
-            Editable = true;
         }
 
         /// <inheritdoc/>
@@ -45,15 +44,6 @@ namespace Amsel.Models.Rundown.Persistence
             Type = type;
             Value = value;
             Description = description;
-            Editable = false;
         }
-
-        #region PUBLIC METHODES
-        public void SetValue(string value)
-        {
-            Editable = string.IsNullOrEmpty(value);
-            Value = value;
-        }
-        #endregion
     }
 }

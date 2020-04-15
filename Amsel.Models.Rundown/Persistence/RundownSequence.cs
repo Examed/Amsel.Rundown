@@ -2,6 +2,7 @@
 using Amsel.Model.Tenant.Interfaces;
 using Amsel.Model.Tenant.TenantModels;
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,7 +26,7 @@ namespace Amsel.Models.Rundown.Persistence
 
         [NotNull] public string Name { get; set; }
 
-        [ForeignKey(nameof(TenantId))]
+        [ForeignKey(nameof(TenantId)), JsonIgnore]
         public virtual TenantEntity Tenant { get; set; }
 
         public Guid? TenantId { get; set; }
