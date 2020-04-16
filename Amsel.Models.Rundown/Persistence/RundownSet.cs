@@ -94,6 +94,16 @@ namespace Amsel.Models.Rundown.Persistence
                 AddSequence(sequence);
             }
         }
+
+        public void RemoveSequence(RundownSequence sequence)
+        {
+            RemoveSequence(sequence.Id);
+        }
+        public void RemoveSequence(Guid Id)
+        {
+           foreach(var item in Sequences.Where(x => x.RundownSequenceId == Id).ToList())
+                Sequences.Remove(item);
+        }
         #endregion
 
         [Table("RundownSets_Sequences")]
