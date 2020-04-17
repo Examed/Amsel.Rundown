@@ -30,7 +30,7 @@ namespace Amsel.Models.Rundown.Persistence
 
         public ERundownMode SequenceType { get; set; }
 
-        [CascadeUpdates]
+        [CascadeUpdates, CascadeDelete]
         public virtual ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
 
         public RundownElement() { }

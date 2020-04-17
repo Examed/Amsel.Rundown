@@ -38,14 +38,14 @@ namespace Amsel.Models.Rundown.Persistence
 
     [ComplexType]
     /// <summary>
-/// RundownCollection contains a set of RundownElements that get played when the Collection is active
-/// </summary>
+    /// RundownCollection contains a set of RundownElements that get played when the Collection is active
+    /// </summary>
     /// <summary>
     /// RundownCollection contains a set of RundownElements that get played when the Collection is active
     /// </summary>
     public class RundownSet : RundownSetBase, ITenantEntity
     {
-        [CascadeUpdates]
+        [CascadeUpdates, CascadeDelete]
         public virtual ICollection<RundownElement> Elements { get; set; } = new List<RundownElement>();
 
         [ForeignKey(nameof(ParentId)), JsonIgnore]
@@ -58,8 +58,7 @@ namespace Amsel.Models.Rundown.Persistence
         [ForeignKey(nameof(QueueId)), JsonIgnore]
         public virtual RundownQueue Queue { get; set; }
 
-        [NotNull]
-        [ItemNotNull]
+        [NotNull, CascadeUpdates, CascadeDelete]
         public virtual ICollection<RundownSetSequence> Sequences { get; set; } = new List<RundownSetSequence>();
 
         [ForeignKey(nameof(TenantId)), JsonIgnore]
@@ -76,20 +75,20 @@ namespace Amsel.Models.Rundown.Persistence
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Queue = queue ?? throw new ArgumentNullException(nameof(queue));
 
-            if(elementList != null)
+            if (elementList != null)
                 Elements = elementList.ToList();
         }
 
         #region PUBLIC METHODES
         public void AddSequence(RundownSequence sequence)
         {
-            if(Sequences.All(x => x.RundownSequenceId != sequence.Id))
+            if (Sequences.All(x => x.RundownSequenceId != sequence.Id))
                 Sequences.Add(new RundownSetSequence(sequence));
         }
 
         public virtual void AddSequences(params RundownSequence[] rundownSequences)
         {
-            foreach(RundownSequence sequence in rundownSequences)
+            foreach (RundownSequence sequence in rundownSequences)
             {
                 AddSequence(sequence);
             }
@@ -101,7 +100,7 @@ namespace Amsel.Models.Rundown.Persistence
         }
         public void RemoveSequence(Guid Id)
         {
-           foreach(var item in Sequences.Where(x => x.RundownSequenceId == Id).ToList())
+            foreach (var item in Sequences.Where(x => x.RundownSequenceId == Id).ToList())
                 Sequences.Remove(item);
         }
         #endregion
@@ -115,19 +114,16 @@ namespace Amsel.Models.Rundown.Persistence
             [JsonProperty(nameof(RundownSequenceId))]
             public Guid RundownSequenceId { get; protected set; }
 
+            [CascadeUpdates, CascadeDelete]
             [JsonProperty(nameof(SequenceValues))]
-            public virtual ICollection<RundownSequenceValue> SequenceValues
-            {
-                get;
-                protected set;
-            } = new List<RundownSequenceValue>();
+            public virtual ICollection<RundownSequenceValue> SequenceValues { get; protected set; } = new List<RundownSequenceValue>();
 
             protected RundownSetSequence() { }
 
             internal RundownSetSequence(RundownSequence rundownSequence, params RundownSequenceValue[] sequenceValues)
             {
                 RundownSequence = rundownSequence;
-                if(sequenceValues != null)
+                if (sequenceValues != null)
                     SequenceValues = sequenceValues;
             }
 
