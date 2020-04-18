@@ -112,7 +112,7 @@ namespace Amsel.Models.Rundown.Persistence
             public virtual RundownSequence RundownSequence { get; set; }
 
             [JsonProperty(nameof(RundownSequenceId))]
-            public Guid RundownSequenceId { get; protected set; }
+            public Guid RundownSequenceId { get;  set; }
 
             [CascadeUpdates, CascadeDelete]
             [JsonProperty(nameof(SequenceValues))]

@@ -17,12 +17,13 @@ namespace Amsel.Models.Rundown.Persistence
     [Owned, ComplexType]
     public partial class RundownElement : LogicEntity, IGuidEntity, INamedEntity
     {
-        public int Delay { get; set; }
+        public int Delay { get; set; } = 0;
 
-        public int Duration { get; set; }
+        public int Duration { get; set; } = 0;
 
-        [Required, JsonProperty]
-        public virtual RundownFunction Function { get; protected set; }
+        [Required, JsonProperty, ForeignKey(nameof(FunctionId))]
+        public virtual RundownFunction Function { get; set; }
+        public Guid FunctionId { get; set; }
 
         [Key] public Guid Id { get; set; }
 
@@ -33,13 +34,18 @@ namespace Amsel.Models.Rundown.Persistence
         [CascadeUpdates, CascadeDelete]
         public virtual ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
 
+
         public RundownElement() { }
 
         public RundownElement(RundownFunction function, ERundownMode? sequenceType = null, int delay = 0)
         {
-            SequenceType = sequenceType ?? function.SequenceType;
+            if (sequenceType.HasValue)
+                SequenceType = sequenceType.Value;
+            else if (Function != null)
+                SequenceType = function.SequenceType;
+
             Function = function;
-            Name = function.Name;
+            Name = function?.Name;
             Delay = delay;
         }
 
@@ -50,10 +56,10 @@ namespace Amsel.Models.Rundown.Persistence
             foreach (RundownParameter current in parameters)
             {
                 RundownElementValue parameterValue = Values.FirstOrDefault(x => x.ParameterName == current.Name);
-                if (parameterValue == null)               
-                    Values.Add(new RundownElementValue(current.Name, value));                
-                else                
-                    parameterValue.Value = value;                
+                if (parameterValue == null)
+                    Values.Add(new RundownElementValue(current.Name, value));
+                else
+                    parameterValue.Value = value;
             }
         }
 
