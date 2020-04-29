@@ -12,28 +12,23 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Amsel.Access.Rundown.Services
-{
+namespace Amsel.Access.Rundown.Services {
     public class RundownFunctionAccess : CRUDAccess<RundownFunction>
     {
+        public RundownFunctionAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService) {
+        }
+
+        public UriBuilder GetByHandlerAddress
+            => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownFunctionControllerResources.GET_BY_HANDLER, RequestLocal);
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
-
         protected override bool RequestLocal => false;
-
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.FUNCTION;
 
-        public RundownFunctionAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService)
-        { }
-
-        public UriBuilder GetByHandlerAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownFunctionControllerResources.GET_BY_HANDLER, RequestLocal);
-
-        public async Task<IEnumerable<RundownFunction>> GetByHandlerAsync(EHandlerType handler)
-        {
+        public async Task<IEnumerable<RundownFunction>> GetByHandlerAsync(EHandlerType handler) {
             HttpResponseMessage response = await GetAsync(GetByHandlerAddress, (nameof(handler), handler.ToString())).ConfigureAwait(false);
             return await response.DeserializeOrDefaultAsync<IEnumerable<RundownFunction>>().ConfigureAwait(false);
-
         }
     }
 }

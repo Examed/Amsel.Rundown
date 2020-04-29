@@ -1,7 +1,7 @@
 ﻿using System;
 
-namespace Amsel.Enums.Rundown.Enums
-{
+namespace Amsel.Enums.Rundown.Enums {
+    #region Enums
     [Flags]
     public enum ERundownFlags
     {
@@ -20,4 +20,5 @@ namespace Amsel.Enums.Rundown.Enums
         DYNAMIC_A = 1 << 7,
         DYNAMIC_B = (1 << 8) & (~DYNAMIC_A)
     }
+    #endregion
 }

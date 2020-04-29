@@ -1,5 +1,4 @@
-﻿namespace Amsel.Resources.Rundown.Endpoints
-{
+﻿namespace Amsel.Resources.Rundown.Endpoints {
     public static class RundownEndpointResources
     {
         public const string COMPOSITES = "composites";

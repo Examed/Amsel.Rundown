@@ -12,67 +12,58 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
-namespace Amsel.Models.Rundown.Persistence
-{
+namespace Amsel.Models.Rundown.Persistence {
     [Owned, ComplexType]
     public partial class RundownElement : LogicEntity, IGuidEntity, INamedEntity
     {
-        public int Delay { get; set; } = 0;
-
-        public int Duration { get; set; } = 0;
-
-        [Required, JsonProperty, ForeignKey(nameof(FunctionId))]
-        public virtual RundownFunction Function { get; set; }
-        public Guid FunctionId { get; set; }
-
-        [Key] public Guid Id { get; set; }
-
-        public string Name { get; set; }
-
-        public ERundownMode SequenceType { get; set; }
-
-        [CascadeUpdates, CascadeDelete]
-        public virtual ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
-
-
         public RundownElement() { }
 
-        public RundownElement(RundownFunction function, ERundownMode? sequenceType = null, int delay = 0)
-        {
-            if (sequenceType.HasValue)
+        public RundownElement(RundownFunction function, ERundownMode? sequenceType = null, int delay = 0) {
+            if(sequenceType.HasValue) {
                 SequenceType = sequenceType.Value;
-            else if (Function != null)
+            } else if(Function != null) {
                 SequenceType = function.SequenceType;
+            }
 
             Function = function;
             Name = function?.Name;
             Delay = delay;
         }
 
-        #region PUBLIC METHODES
-        public void SetValue(string name, string value)
-        {
-            List<RundownParameter> parameters = Function.Parameters.Where(x => x.Name == name).ToList();
-            foreach (RundownParameter current in parameters)
-            {
-                RundownElementValue parameterValue = Values.FirstOrDefault(x => x.ParameterName == current.Name);
-                if (parameterValue == null)
-                    Values.Add(new RundownElementValue(current.Name, value));
-                else
-                    parameterValue.Value = value;
-            }
-        }
+        public int Delay { get; set; } = 0;
+        public int Duration { get; set; } = 0;
+        [Required, JsonProperty, ForeignKey(nameof(FunctionId))]
+        public virtual RundownFunction Function { get; set; }
+        public Guid FunctionId { get; set; }
+        [Key]
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public ERundownMode SequenceType { get; set; }
+        [CascadeUpdates, CascadeDelete]
+        public virtual ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
 
         [NotNull]
-        public Dictionary<string, string> GetValues(bool onlyEditable = false)
-        {
-            Dictionary<string, string> values = Function.Parameters.Where(x => x.HasValue || !onlyEditable).ToDictionary(item => item.Name, item => item.Value);
-            foreach (RundownValue item in Values)
+        public Dictionary<string, string> GetValues(bool onlyEditable = false) {
+            Dictionary<string, string> values = Function.Parameters.Where(x => x.HasValue || !onlyEditable)
+                .ToDictionary(item => item.Name, item => item.Value);
+            foreach(RundownValue item in Values) {
                 values[item.ParameterName] = item.Value;
+            }
 
             return values;
         }
-        #endregion
+
+        public void SetValue(string name, string value) {
+            List<RundownParameter> parameters = Function.Parameters.Where(x => x.Name == name).ToList();
+            foreach(RundownParameter current in parameters) {
+                RundownElementValue parameterValue = Values.FirstOrDefault(x => x.ParameterName == current.Name);
+                if(parameterValue == null) {
+                    Values.Add(new RundownElementValue(current.Name, value));
+                } else {
+                    parameterValue.Value = value;
+                }
+            }
+        }
 
         [Owned, ComplexType]
         public class RundownElementValue : RundownValue

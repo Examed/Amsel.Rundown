@@ -3,38 +3,39 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 
-namespace Amsel.Enums.Rundown.Enums
-{
+namespace Amsel.Enums.Rundown.Enums {
+    #region Enums
     public enum ERundownMode
     {
-        [EnumName("Trigger")]
-        [Description("Trigger that can start the RundownSet")]
+        [EnumName("Trigger"),
+        Description("Trigger that can start the RundownSet")]
         TRIGGER = 0,
 
-        [EnumName("Load")]
-        [Description("Load Resources of the RundownSet")]
+        [EnumName("Load"),
+        Description("Load Resources of the RundownSet")]
         LOAD = 10,
 
-        [EnumName("Show Transition")]
-        [Description("Transition to make the RundownSet visible")]
+        [EnumName("Show Transition"),
+        Description("Transition to make the RundownSet visible")]
         TRANSITION_SHOW = 25,
 
-        [EnumName("Active")]
-        [Description("Activities that should be happen during the RundownSet is visible")]
+        [EnumName("Active"),
+        Description("Activities that should be happen during the RundownSet is visible")]
         ACTIVE = 50,
 
         [EnumName("Wait")]
         WAIT = 65,
 
-        [EnumName("Hide Transition")]
-        [Description("Transition to hide the RundownSet")]
+        [EnumName("Hide Transition"),
+        Description("Transition to hide the RundownSet")]
         TRANSITION_HIDE = 75,
 
         [EnumName("Stop")]
         STOP = 90,
 
-        [EnumName("Cleanup")]
-        [Description("Revert actions that should only be active while the RundownSet is active")]
+        [EnumName("Cleanup"),
+        Description("Revert actions that should only be active while the RundownSet is active")]
         CLEANUP = 100
     }
+    #endregion
 }

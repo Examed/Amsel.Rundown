@@ -5,19 +5,16 @@ using Amsel.Models.Rundown.Persistence;
 using Amsel.Resources.Rundown.Endpoints;
 using System;
 
-namespace Amsel.Access.Rundown.Services
-{
+namespace Amsel.Access.Rundown.Services {
     public class RundownSequenceAccess : CRUDAccess<RundownSequence>
     {
+        public RundownSequenceAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService) {
+        }
+
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
-
         protected override bool RequestLocal => false;
-
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.SEQUENCE;
-
-        public RundownSequenceAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService)
-        { }
     }
 }

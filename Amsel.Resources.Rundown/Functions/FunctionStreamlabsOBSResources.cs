@@ -1,5 +1,4 @@
-﻿namespace Amsel.Resources.Rundown.Functions
-{
+﻿namespace Amsel.Resources.Rundown.Functions {
     public static class FunctionStreamlabsOBSResources
     {
         public const string COLLECTION_NAME = "StreamlabsOBS.SceneCollection.Name";

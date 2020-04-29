@@ -11,39 +11,33 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Amsel.Access.Rundown.Services
-{
+namespace Amsel.Access.Rundown.Services {
     public class RundownCompositesAccess : CRUDAccess<CompositeEntity>
     {
+        public RundownCompositesAccess(IAuthenticationService authenticationService, TenantName tenant)
+        : base(tenant, authenticationService) { }
+
+        public UriBuilder GetComponentsAddress
+            => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownCompositeControllerResources.GET_COMPONENTS, RequestLocal);
+        public UriBuilder GetCompositesAddress
+            => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownCompositeControllerResources.GET_ALL, RequestLocal);
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
-
         protected override bool RequestLocal => false;
-
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.COMPOSITES;
 
-        public UriBuilder GetComponentsAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownCompositeControllerResources.GET_COMPONENTS, RequestLocal);
+        public virtual async Task<IEnumerable<CompositeEntity>> GetComponentsAsync(CompositeEntity composite)
+            => await GetComponentsAsync(composite.Id);
 
-        public UriBuilder GetCompositesAddress => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownCompositeControllerResources.GET_ALL, RequestLocal);
-
-        public RundownCompositesAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService)
-        { }
-
-        #region PUBLIC METHODES
-        public virtual async Task<IEnumerable<CompositeEntity>> GetComponentsAsync(CompositeEntity composite) => await GetComponentsAsync(composite.Id);
-
-        public virtual async Task<IEnumerable<CompositeEntity>> GetComponentsAsync(Guid? id)
-        {
+        public virtual async Task<IEnumerable<CompositeEntity>> GetComponentsAsync(Guid? id) {
             HttpResponseMessage response = await GetAsync(GetComponentsAddress, (nameof(id), id)).ConfigureAwait(false);
             return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeEntity>>().ConfigureAwait(false);
         }
 
-        public virtual async Task<IEnumerable<CompositeEntity>> GetCompositesAsync()
-        {
+        public virtual async Task<IEnumerable<CompositeEntity>> GetCompositesAsync() {
             HttpResponseMessage response = await GetAsync(GetCompositesAddress).ConfigureAwait(false);
             return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeEntity>>().ConfigureAwait(false);
         }
-        #endregion
     }
 }
