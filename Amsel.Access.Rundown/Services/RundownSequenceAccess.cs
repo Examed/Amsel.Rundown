@@ -8,7 +8,9 @@ using System;
 namespace Amsel.Access.Rundown.Services {
     public class RundownSequenceAccess : CRUDAccess<RundownSequence>
     {
-        public RundownSequenceAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService) {
+        public RundownSequenceAccess(IAuthenticationService authenticationService, TenantName tenant)
+        : base(tenant, authenticationService)
+        {
         }
 
         /// <inheritdoc/>

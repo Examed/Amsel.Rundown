@@ -17,11 +17,11 @@ using System.Linq;
 namespace Amsel.Models.Rundown.Persistence {
     [ComplexType]
     /// <summary>
-/// RundownCollection contains a set of RundownElements that get played when the Collection is active
-/// </summary>
+    /// RundownCollection contains a set of RundownElements that get played when the Collection is active
+    /// </summary>
     /// <summary>
-/// RundownCollection contains a set of RundownElements that get played when the Collection is active
-/// </summary>
+    /// RundownCollection contains a set of RundownElements that get played when the Collection is active
+    /// </summary>
     /// <summary>
     /// RundownCollection contains a set of RundownElements that get played when the Collection is active
     /// </summary>
@@ -31,14 +31,18 @@ namespace Amsel.Models.Rundown.Persistence {
     public class RundownSet : RundownSetBase, ITenantEntity
     {
         [JsonConstructor]
-        protected RundownSet() { }
+        protected RundownSet()
+        {
+        }
         public RundownSet([NotNull] string name) => Name = name ?? throw new ArgumentNullException(nameof(name));
 
-        public RundownSet([NotNull] string name, RundownQueue queue, params RundownElement[] elementList) {
+        public RundownSet([NotNull] string name, RundownQueue queue, params RundownElement[] elementList)
+        {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Queue = queue ?? throw new ArgumentNullException(nameof(queue));
 
-            if(elementList != null) {
+            if(elementList != null)
+            {
                 Elements = elementList.ToList();
             }
         }
@@ -58,34 +62,46 @@ namespace Amsel.Models.Rundown.Persistence {
         public virtual TenantEntity Tenant { get; set; }
         public Guid? TenantId { get; set; }
 
-        public void AddSequence(RundownSequence sequence) {
-            if(Sequences.All(x => x.RundownSequenceId != sequence.Id)) {
+        #region public methods
+        public void AddSequence(RundownSequence sequence)
+        {
+            if(Sequences.All(x => x.RundownSequenceId != sequence.Id))
+            {
                 Sequences.Add(new RundownSetSequence(sequence));
             }
         }
 
-        public virtual void AddSequences(params RundownSequence[] rundownSequences) {
-            foreach(RundownSequence sequence in rundownSequences) {
+        public virtual void AddSequences(params RundownSequence[] rundownSequences)
+        {
+            foreach(RundownSequence sequence in rundownSequences)
+            {
                 AddSequence(sequence);
             }
         }
 
         public void RemoveSequence(RundownSequence sequence) => RemoveSequence(sequence.Id);
 
-        public void RemoveSequence(Guid Id) {
-            foreach(RundownSetSequence item in Sequences.Where(x => x.RundownSequenceId == Id).ToList()) {
+        public void RemoveSequence(Guid Id)
+        {
+            foreach(RundownSetSequence item in Sequences.Where(x => x.RundownSequenceId == Id).ToList())
+            {
                 Sequences.Remove(item);
             }
         }
+        #endregion
 
         [Table("RundownSets_Sequences")]
         public class RundownSetSequence
         {
-            protected RundownSetSequence() { }
+            protected RundownSetSequence()
+            {
+            }
 
-            internal RundownSetSequence(RundownSequence rundownSequence, params RundownSequenceValue[] sequenceValues) {
+            internal RundownSetSequence(RundownSequence rundownSequence, params RundownSequenceValue[] sequenceValues)
+            {
                 RundownSequence = rundownSequence;
-                if(sequenceValues != null) {
+                if(sequenceValues != null)
+                {
                     SequenceValues = sequenceValues;
                 }
             }
@@ -96,14 +112,20 @@ namespace Amsel.Models.Rundown.Persistence {
             public Guid RundownSequenceId { get; set; }
             [CascadeUpdates, CascadeDelete,
             JsonProperty(nameof(SequenceValues))]
-            public virtual ICollection<RundownSequenceValue> SequenceValues { get; protected set; } = new List<RundownSequenceValue>();
+            public virtual ICollection<RundownSequenceValue> SequenceValues
+            { get; protected set;
+            } = new List<RundownSequenceValue>();
 
             [Owned, ComplexType,
             Table("RundownSets_Sequences_Value")]
             public class RundownSequenceValue : RundownValue
             {
-                protected RundownSequenceValue() { }
-                public RundownSequenceValue([NotNull] string parameterName, string value) : base(parameterName, value) { }
+                protected RundownSequenceValue()
+                {
+                }
+                public RundownSequenceValue([NotNull] string parameterName, string value) : base(parameterName, value)
+                {
+                }
                 public RundownSequenceValue(Guid elementId, string parameterName, string value) : base(parameterName, value)
                     => ElementId = elementId;
 

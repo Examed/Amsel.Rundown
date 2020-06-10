@@ -15,7 +15,9 @@ namespace Amsel.Access.Rundown.Services {
     public class RundownCompositesAccess : CRUDAccess<CompositeEntity>
     {
         public RundownCompositesAccess(IAuthenticationService authenticationService, TenantName tenant)
-        : base(tenant, authenticationService) { }
+        : base(tenant, authenticationService)
+        {
+        }
 
         public UriBuilder GetComponentsAddress
             => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownCompositeControllerResources.GET_COMPONENTS, RequestLocal);
@@ -27,17 +29,21 @@ namespace Amsel.Access.Rundown.Services {
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.COMPOSITES;
 
+        #region public methods
         public virtual async Task<IEnumerable<CompositeEntity>> GetComponentsAsync(CompositeEntity composite)
             => await GetComponentsAsync(composite.Id);
 
-        public virtual async Task<IEnumerable<CompositeEntity>> GetComponentsAsync(Guid? id) {
+        public virtual async Task<IEnumerable<CompositeEntity>> GetComponentsAsync(Guid? id)
+        {
             HttpResponseMessage response = await GetAsync(GetComponentsAddress, (nameof(id), id)).ConfigureAwait(false);
             return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeEntity>>().ConfigureAwait(false);
         }
 
-        public virtual async Task<IEnumerable<CompositeEntity>> GetCompositesAsync() {
+        public virtual async Task<IEnumerable<CompositeEntity>> GetCompositesAsync()
+        {
             HttpResponseMessage response = await GetAsync(GetCompositesAddress).ConfigureAwait(false);
             return await response.DeserializeOrDefaultAsync<IEnumerable<CompositeEntity>>().ConfigureAwait(false);
         }
+        #endregion
     }
 }

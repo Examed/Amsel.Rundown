@@ -13,9 +13,12 @@ namespace Amsel.Models.Rundown.Persistence {
     [ComplexType]
     public class RundownSequence : LogicEntity, ISharedTenant, INamedEntity, IGuidEntity, IEqualExpression<RundownSequence>
     {
-        protected RundownSequence() { }
+        protected RundownSequence()
+        {
+        }
 
-        public RundownSequence(string name, params RundownElement[] elementList) {
+        public RundownSequence(string name, params RundownElement[] elementList)
+        {
             AddElements(elementList);
             Name = name ?? throw new ArgumentNullException(nameof(name));
         }
@@ -32,17 +35,22 @@ namespace Amsel.Models.Rundown.Persistence {
         public virtual TenantEntity Tenant { get; set; }
         public Guid? TenantId { get; set; }
 
-        public void AddElements(params RundownElement[] elementList) {
-            if(elementList == null) {
+        #region public methods
+        public void AddElements(params RundownElement[] elementList)
+        {
+            if(elementList == null)
+            {
                 return;
             }
 
-            foreach(RundownElement element in elementList) {
+            foreach(RundownElement element in elementList)
+            {
                 Elements.Add(element);
             }
         }
+        #endregion
 
-        #region IEqualExpression methods
+        #region public methods
         public Expression<Func<RundownSequence, bool>> IsEquals()
             => x => (x.Id == Id) || x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase);
         #endregion

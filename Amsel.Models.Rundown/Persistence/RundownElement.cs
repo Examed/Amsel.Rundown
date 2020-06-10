@@ -16,12 +16,17 @@ namespace Amsel.Models.Rundown.Persistence {
     [Owned, ComplexType]
     public partial class RundownElement : LogicEntity, IGuidEntity, INamedEntity
     {
-        public RundownElement() { }
+        public RundownElement()
+        {
+        }
 
-        public RundownElement(RundownFunction function, ERundownMode? sequenceType = null, int delay = 0) {
-            if(sequenceType.HasValue) {
+        public RundownElement(RundownFunction function, ERundownMode? sequenceType = null, int delay = 0)
+        {
+            if(sequenceType.HasValue)
+            {
                 SequenceType = sequenceType.Value;
-            } else if(Function != null) {
+            } else if(Function != null)
+            {
                 SequenceType = function.SequenceType;
             }
 
@@ -42,34 +47,45 @@ namespace Amsel.Models.Rundown.Persistence {
         [CascadeUpdates, CascadeDelete]
         public virtual ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
 
+        #region public methods
         [NotNull]
-        public Dictionary<string, string> GetValues(bool onlyEditable = false) {
+        public Dictionary<string, string> GetValues(bool onlyEditable = false)
+        {
             Dictionary<string, string> values = Function.Parameters.Where(x => x.HasValue || !onlyEditable)
                 .ToDictionary(item => item.Name, item => item.Value);
-            foreach(RundownValue item in Values) {
+            foreach(RundownValue item in Values)
+            {
                 values[item.ParameterName] = item.Value;
             }
 
             return values;
         }
 
-        public void SetValue(string name, string value) {
+        public void SetValue(string name, string value)
+        {
             List<RundownParameter> parameters = Function.Parameters.Where(x => x.Name == name).ToList();
             foreach(RundownParameter current in parameters) {
                 RundownElementValue parameterValue = Values.FirstOrDefault(x => x.ParameterName == current.Name);
-                if(parameterValue == null) {
+                if(parameterValue == null)
+                {
                     Values.Add(new RundownElementValue(current.Name, value));
-                } else {
+                } else
+                {
                     parameterValue.Value = value;
                 }
             }
         }
+        #endregion
 
         [Owned, ComplexType]
         public class RundownElementValue : RundownValue
         {
-            protected RundownElementValue() { }
-            public RundownElementValue([NotNull] string parameterName, string value) : base(parameterName, value) { }
+            protected RundownElementValue()
+            {
+            }
+            public RundownElementValue([NotNull] string parameterName, string value) : base(parameterName, value)
+            {
+            }
         }
     }
 }

@@ -15,7 +15,9 @@ using System.Threading.Tasks;
 namespace Amsel.Access.Rundown.Services {
     public class RundownFunctionAccess : CRUDAccess<RundownFunction>
     {
-        public RundownFunctionAccess(IAuthenticationService authenticationService, TenantName tenant) : base(tenant, authenticationService) {
+        public RundownFunctionAccess(IAuthenticationService authenticationService, TenantName tenant)
+        : base(tenant, authenticationService)
+        {
         }
 
         public UriBuilder GetByHandlerAddress
@@ -26,9 +28,13 @@ namespace Amsel.Access.Rundown.Services {
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.FUNCTION;
 
-        public async Task<IEnumerable<RundownFunction>> GetByHandlerAsync(EHandlerType handler) {
-            HttpResponseMessage response = await GetAsync(GetByHandlerAddress, (nameof(handler), handler.ToString())).ConfigureAwait(false);
+        #region public methods
+        public async Task<IEnumerable<RundownFunction>> GetByHandlerAsync(EHandlerType handler)
+        {
+            HttpResponseMessage response = await GetAsync(GetByHandlerAddress, (nameof(handler), handler.ToString()))
+                .ConfigureAwait(false);
             return await response.DeserializeOrDefaultAsync<IEnumerable<RundownFunction>>().ConfigureAwait(false);
         }
+        #endregion
     }
 }

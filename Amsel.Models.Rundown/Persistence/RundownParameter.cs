@@ -10,9 +10,12 @@ namespace Amsel.Models.Rundown.Persistence {
     [ComplexType, Owned]
     public class RundownParameter : INamedEntity
     {
-        protected RundownParameter() { }
+        protected RundownParameter()
+        {
+        }
 
-        public RundownParameter([NotNull] string name, EParameterType type = EParameterType.TEXTBOX, string description = null) {
+        public RundownParameter([NotNull] string name, EParameterType type = EParameterType.TEXTBOX, string description = null)
+        {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             DisplayName = name.Replace('.', ' ');
             Type = type;
@@ -20,7 +23,8 @@ namespace Amsel.Models.Rundown.Persistence {
         }
 
         /// <inheritdoc/>
-        public RundownParameter([NotNull] string name, string value, EParameterType type = EParameterType.TEXTBOX, string description = null) {
+        public RundownParameter([NotNull] string name, string value, EParameterType type = EParameterType.TEXTBOX, string description = null)
+        {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             DisplayName = name.Replace('.', ' ');
             Type = type;
