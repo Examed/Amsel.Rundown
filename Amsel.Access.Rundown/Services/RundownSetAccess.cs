@@ -16,12 +16,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Amsel.Access.Rundown.Services {
-    public class RundownSetAccess : CRUDAccess<RundownSet>
-    {
+    public class RundownSetAccess : CRUDAccess<RundownSet> {
         public RundownSetAccess(IAuthenticationService authenticationService, TenantName tenant)
-        : base(tenant, authenticationService)
-        {
-        }
+            : base(tenant, authenticationService) { }
 
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
@@ -34,27 +31,21 @@ namespace Amsel.Access.Rundown.Services {
         private UriBuilder GetSequencesAddress
             => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_SEQUENCES, RequestLocal);
 
-        #region public methods
-        public virtual async Task<IEnumerable<RundownSequence>> GetSequences(Guid id)
-        {
+        public virtual async Task<IEnumerable<RundownSequence>> GetSequences(Guid id) {
             HttpResponseMessage response = await GetAsync(GetSequencesAddress, (nameof(id), id)).ConfigureAwait(false);
             return await response.DeserializeOrDefaultAsync<IEnumerable<RundownSequence>>().ConfigureAwait(false);
         }
 
-        public Task<HttpResponseMessage> QueueConnectionAsync(EHandlerType handlerType, [NotNull] string functionName, [NotNull] Dictionary<string, string> values)
-        {
-            if(functionName == null)
-            {
+        public Task<HttpResponseMessage> QueueConnectionAsync(EHandlerType handlerType, [NotNull] string functionName, [NotNull] Dictionary<string, string> values) {
+            if (functionName == null) {
                 throw new ArgumentNullException(nameof(functionName));
             }
 
-            if(values == null)
-            {
+            if (values == null) {
                 throw new ArgumentNullException(nameof(values));
             }
 
-            if(!Enum.IsDefined(typeof(EHandlerType), handlerType))
-            {
+            if (!Enum.IsDefined(typeof(EHandlerType), handlerType)) {
                 throw new InvalidEnumArgumentException(nameof(handlerType), (int)handlerType, typeof(EHandlerType));
             }
 
@@ -62,6 +53,5 @@ namespace Amsel.Access.Rundown.Services {
 
             return PostAsync(GetByConnectionAddress, GetJsonContent(data));
         }
-        #endregion
     }
 }

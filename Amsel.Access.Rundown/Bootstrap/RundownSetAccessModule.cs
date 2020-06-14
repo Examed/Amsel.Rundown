@@ -3,11 +3,8 @@ using Autofac;
 
 namespace Amsel.Access.Rundown.Bootstrap {
     /// <inheritdoc/>
-    public class RundownSetAccessModule : Module
-    {
-        #region protected methods
-        protected override void Load(ContainerBuilder builder)
-        {
+    public class RundownSetAccessModule : Module {
+        protected override void Load(ContainerBuilder builder) {
             builder.RegisterType<RundownSetAccess>();
             builder.RegisterType<RundownSequenceAccess>();
             builder.RegisterType<RundownQueueAccess>();
@@ -17,6 +14,5 @@ namespace Amsel.Access.Rundown.Bootstrap {
 
             base.Load(builder);
         }
-        #endregion
     }
 }

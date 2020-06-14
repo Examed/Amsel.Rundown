@@ -1,7 +1,6 @@
 ﻿namespace Amsel.Enums.Rundown.Enums {
     #region Enums
-    public enum ERundownStatus
-    {
+    public enum ERundownStatus {
         NONE,
         QUEUED,
         ACTIVE,

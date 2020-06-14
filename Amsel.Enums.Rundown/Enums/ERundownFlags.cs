@@ -3,8 +3,7 @@
 namespace Amsel.Enums.Rundown.Enums {
     #region Enums
     [Flags]
-    public enum ERundownFlags
-    {
+    public enum ERundownFlags {
         NONE = 0,
         DEFAULT = NONE | NO_CAM | NO_CHROMA | NO_DUO | DYNAMIC_A,
 

@@ -5,8 +5,7 @@ using System.Linq;
 
 namespace Amsel.Enums.Rundown.Enums {
     #region Enums
-    public enum ERundownMode
-    {
+    public enum ERundownMode {
         [EnumName("Trigger"),
         Description("Trigger that can start the RundownSet")]
         TRIGGER = 0,

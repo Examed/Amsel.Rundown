@@ -14,12 +14,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Amsel.Access.Rundown.Services {
-    public class RundownQueueAccess : CRUDAccess<RundownQueue>
-    {
+    public class RundownQueueAccess : CRUDAccess<RundownQueue> {
         public RundownQueueAccess(IAuthenticationService authenticationService, TenantName tenant)
-        : base(tenant, authenticationService)
-        {
-        }
+            : base(tenant, authenticationService) { }
 
         [NotNull]
         public UriBuilder GetAllAddress
@@ -36,26 +33,21 @@ namespace Amsel.Access.Rundown.Services {
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.QUEUE;
 
-        #region public methods
-        public async Task<IEnumerable<RundownQueue>> GetAllAsync()
-        {
+        public async Task<IEnumerable<RundownQueue>> GetAllAsync() {
             HttpResponseMessage response = await GetAsync(GetAllAddress).ConfigureAwait(false);
             return await response.DeserializeElseThrowAsync<IEnumerable<RundownQueue>>().ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<GuidNameEntity>> GetQueueNamesAsync()
-        {
+        public async Task<IEnumerable<GuidNameEntity>> GetQueueNamesAsync() {
             HttpResponseMessage response = await GetAsync(GetQueueNamesAddress).ConfigureAwait(false);
             return await response.DeserializeElseThrowAsync<IEnumerable<GuidNameEntity>>().ConfigureAwait(false);
         }
 
         public virtual IEnumerable<RundownSet> GetRundownSets(Guid Id) => GetRundownSetsAsync(Id).Result;
 
-        public virtual async Task<IEnumerable<RundownSet>> GetRundownSetsAsync(Guid Id)
-        {
+        public virtual async Task<IEnumerable<RundownSet>> GetRundownSetsAsync(Guid Id) {
             HttpResponseMessage response = await GetAsync(GetRundownSetsAddress, (nameof(Id), Id)).ConfigureAwait(false);
             return await response.DeserializeOrDefaultAsync<IEnumerable<RundownSet>>().ConfigureAwait(false);
         }
-        #endregion
     }
 }

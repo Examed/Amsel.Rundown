@@ -6,12 +6,9 @@ using Amsel.Resources.Rundown.Endpoints;
 using System;
 
 namespace Amsel.Access.Rundown.Services {
-    public class RundownSequenceAccess : CRUDAccess<RundownSequence>
-    {
+    public class RundownSequenceAccess : CRUDAccess<RundownSequence> {
         public RundownSequenceAccess(IAuthenticationService authenticationService, TenantName tenant)
-        : base(tenant, authenticationService)
-        {
-        }
+            : base(tenant, authenticationService) { }
 
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;

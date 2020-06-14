@@ -17,14 +17,10 @@ namespace Amsel.Models.Rundown.Persistence {
     /// A representation of a Action
     /// </summary>
     [ComplexType]
-    public class RundownFunction : LogicEntity, ISharedTenant, INamedEntity, IEqualExpression<RundownFunction>
-    {
-        protected RundownFunction()
-        {
-        }
+    public class RundownFunction : LogicEntity, ISharedTenant, INamedEntity, IEqualExpression<RundownFunction> {
+        protected RundownFunction() { }
 
-        public RundownFunction(string name, EHandlerType handler, ERundownMode sequenceType = ERundownMode.LOAD, bool isTrigger = false)
-        {
+        public RundownFunction(string name, EHandlerType handler, ERundownMode sequenceType = ERundownMode.LOAD, bool isTrigger = false) {
             Name = name;
             IsTrigger = isTrigger;
             HandlerName = handler;
@@ -46,12 +42,9 @@ namespace Amsel.Models.Rundown.Persistence {
         public virtual TenantEntity Tenant { get; set; }
         public Guid? TenantId { get; set; }
 
-        #region public methods
-        public void AddParameter([NotNull] string name, string value = null, EParameterType type = EParameterType.TEXTBOX, string description = null)
-        {
+        public void AddParameter([NotNull] string name, string value = null, EParameterType type = EParameterType.TEXTBOX, string description = null) {
             RundownParameter current = Parameters.FirstOrDefault(x => x.Name == name);
-            if(current != null)
-            {
+            if (current != null) {
                 throw new InvalidOperationException($"There is already a Parameter with the Name {name}");
             }
 
@@ -60,9 +53,8 @@ namespace Amsel.Models.Rundown.Persistence {
                 : (new RundownParameter(name, value, type, description));
             Parameters.Add(parameter);
         }
-        #endregion
 
-        #region public methods
+        #region IEqualExpression methods
         public Expression<Func<RundownFunction, bool>> IsEquals()
             => x
                 => (x.Id == Id)
