@@ -19,15 +19,7 @@ namespace Amsel.Models.Rundown.Persistence {
     /// <summary>
     /// RundownCollection contains a set of RundownElements that get played when the Collection is active
     /// </summary>
-    /// <summary>
-    /// RundownCollection contains a set of RundownElements that get played when the Collection is active
-    /// </summary>
-    /// <summary>
-    /// RundownCollection contains a set of RundownElements that get played when the Collection is active
-    /// </summary>
-    /// <summary>
-    /// RundownCollection contains a set of RundownElements that get played when the Collection is active
-    /// </summary>
+
     public class RundownSet : RundownSetBase, ITenantEntity {
         [JsonConstructor]
         protected RundownSet() { }
