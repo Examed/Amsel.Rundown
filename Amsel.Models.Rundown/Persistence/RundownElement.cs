@@ -17,7 +17,8 @@ namespace Amsel.Models.Rundown.Persistence {
     public partial class RundownElement : LogicEntity, IGuidEntity, INamedEntity {
         public RundownElement() { }
 
-        public RundownElement(RundownFunction function, ERundownMode? sequenceType = null, int delay = 0) {
+        public RundownElement(RundownFunction function, ERundownMode? sequenceType = null, int delay = 0)
+        {
             if (sequenceType.HasValue) {
                 SequenceType = sequenceType.Value;
             }
@@ -43,7 +44,8 @@ namespace Amsel.Models.Rundown.Persistence {
         public virtual ICollection<RundownElementValue> Values { get; protected set; } = new List<RundownElementValue>();
 
         [NotNull]
-        public Dictionary<string, string> GetValues(bool onlyEditable = false) {
+        public Dictionary<string, string> GetValues(bool onlyEditable = false)
+        {
             Dictionary<string, string> values = Function.Parameters.Where(x => x.HasValue || !onlyEditable)
                 .ToDictionary(item => item.Name, item => item.Value);
             foreach (RundownValue item in Values) {
@@ -53,7 +55,8 @@ namespace Amsel.Models.Rundown.Persistence {
             return values;
         }
 
-        public void SetValue(string name, string value) {
+        public void SetValue(string name, string value)
+        {
             List<RundownParameter> parameters = Function.Parameters.Where(x => x.Name == name).ToList();
             foreach (RundownParameter current in parameters) {
                 RundownElementValue parameterValue = Values.FirstOrDefault(x => x.ParameterName == current.Name);

@@ -17,15 +17,16 @@ namespace Amsel.Access.Rundown.Services {
         public RundownFunctionAccess(IAuthenticationService authenticationService, TenantName tenant)
             : base(tenant, authenticationService) { }
 
-        public UriBuilder GetByHandlerAddress
-            => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownFunctionControllerResources.GET_BY_HANDLER, RequestLocal);
+        public UriBuilder GetByHandlerAddress =>
+            UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownFunctionControllerResources.GET_BY_HANDLER, RequestLocal);
         /// <inheritdoc/>
         protected override string Endpoint => RundownEndpointResources.ENDPOINT;
         protected override bool RequestLocal => false;
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.FUNCTION;
 
-        public async Task<IEnumerable<RundownFunction>> GetByHandlerAsync(EHandlerType handler) {
+        public async Task<IEnumerable<RundownFunction>> GetByHandlerAsync(EHandlerType handler)
+        {
             HttpResponseMessage response = await GetAsync(GetByHandlerAddress, (nameof(handler), handler.ToString()))
                 .ConfigureAwait(false);
             return await response.DeserializeOrDefaultAsync<IEnumerable<RundownFunction>>().ConfigureAwait(false);

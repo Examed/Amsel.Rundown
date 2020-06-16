@@ -26,17 +26,19 @@ namespace Amsel.Access.Rundown.Services {
         /// <inheritdoc/>
         protected override string Resource => RundownEndpointResources.SET;
         [NotNull]
-        private UriBuilder GetByConnectionAddress
-            => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.ENQUEUE, RequestLocal);
-        private UriBuilder GetSequencesAddress
-            => UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_SEQUENCES, RequestLocal);
+        private UriBuilder GetByConnectionAddress =>
+            UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.ENQUEUE, RequestLocal);
+        private UriBuilder GetSequencesAddress =>
+            UriBuilderFactory.GetAPIBuilder(Endpoint, Resource, RundownSetControllerResources.GET_SEQUENCES, RequestLocal);
 
-        public virtual async Task<IEnumerable<RundownSequence>> GetSequences(Guid id) {
+        public virtual async Task<IEnumerable<RundownSequence>> GetSequences(Guid id)
+        {
             HttpResponseMessage response = await GetAsync(GetSequencesAddress, (nameof(id), id)).ConfigureAwait(false);
             return await response.DeserializeOrDefaultAsync<IEnumerable<RundownSequence>>().ConfigureAwait(false);
         }
 
-        public Task<HttpResponseMessage> QueueConnectionAsync(EHandlerType handlerType, [NotNull] string functionName, [NotNull] Dictionary<string, string> values) {
+        public Task<HttpResponseMessage> QueueConnectionAsync(EHandlerType handlerType, [NotNull] string functionName, [NotNull] Dictionary<string, string> values)
+        {
             if (functionName == null) {
                 throw new ArgumentNullException(nameof(functionName));
             }

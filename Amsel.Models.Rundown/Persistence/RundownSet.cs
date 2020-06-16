@@ -25,7 +25,8 @@ namespace Amsel.Models.Rundown.Persistence {
         protected RundownSet() { }
         public RundownSet([NotNull] string name) => Name = name ?? throw new ArgumentNullException(nameof(name));
 
-        public RundownSet([NotNull] string name, RundownQueue queue, params RundownElement[] elementList) {
+        public RundownSet([NotNull] string name, RundownQueue queue, params RundownElement[] elementList)
+        {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Queue = queue ?? throw new ArgumentNullException(nameof(queue));
 
@@ -49,13 +50,15 @@ namespace Amsel.Models.Rundown.Persistence {
         public virtual TenantEntity Tenant { get; set; }
         public Guid? TenantId { get; set; }
 
-        public void AddSequence(RundownSequence sequence) {
+        public void AddSequence(RundownSequence sequence)
+        {
             if (Sequences.All(x => x.RundownSequenceId != sequence.Id)) {
                 Sequences.Add(new RundownSetSequence(sequence));
             }
         }
 
-        public virtual void AddSequences(params RundownSequence[] rundownSequences) {
+        public virtual void AddSequences(params RundownSequence[] rundownSequences)
+        {
             foreach (RundownSequence sequence in rundownSequences) {
                 AddSequence(sequence);
             }
@@ -63,7 +66,8 @@ namespace Amsel.Models.Rundown.Persistence {
 
         public void RemoveSequence(RundownSequence sequence) => RemoveSequence(sequence.Id);
 
-        public void RemoveSequence(Guid Id) {
+        public void RemoveSequence(Guid Id)
+        {
             foreach (RundownSetSequence item in Sequences.Where(x => x.RundownSequenceId == Id).ToList()) {
                 Sequences.Remove(item);
             }
@@ -73,7 +77,8 @@ namespace Amsel.Models.Rundown.Persistence {
         public class RundownSetSequence {
             protected RundownSetSequence() { }
 
-            internal RundownSetSequence(RundownSequence rundownSequence, params RundownSequenceValue[] sequenceValues) {
+            internal RundownSetSequence(RundownSequence rundownSequence, params RundownSequenceValue[] sequenceValues)
+            {
                 RundownSequence = rundownSequence;
                 if (sequenceValues != null) {
                     SequenceValues = sequenceValues;
@@ -96,8 +101,8 @@ namespace Amsel.Models.Rundown.Persistence {
             public class RundownSequenceValue : RundownValue {
                 protected RundownSequenceValue() { }
                 public RundownSequenceValue([NotNull] string parameterName, string value) : base(parameterName, value) { }
-                public RundownSequenceValue(Guid elementId, string parameterName, string value) : base(parameterName, value)
-                    => ElementId = elementId;
+                public RundownSequenceValue(Guid elementId, string parameterName, string value) : base(parameterName, value) =>
+                    ElementId = elementId;
 
                 public virtual Guid? ElementId { get; set; }
             }

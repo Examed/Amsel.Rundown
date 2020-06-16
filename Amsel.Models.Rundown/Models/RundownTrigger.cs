@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 namespace Amsel.Models.Rundown.Models {
     public class RundownTrigger {
-        public RundownTrigger(EHandlerType handlerType, Dictionary<string, string> values) {
+        public RundownTrigger(EHandlerType handlerType, Dictionary<string, string> values)
+        {
             Values = values ?? throw new ArgumentNullException(nameof(values));
             HandlerType = handlerType;
         }

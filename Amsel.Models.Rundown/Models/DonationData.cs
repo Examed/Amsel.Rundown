@@ -7,7 +7,8 @@ namespace Amsel.Models.Rundown.Models {
     public class DonationData : DataEntity {
         protected DonationData() { }
 
-        public DonationData(string user, double amount) {
+        public DonationData(string user, double amount)
+        {
             Name = $"{Id}:{user}";
             Amount = amount;
             User = user ?? throw new ArgumentNullException(nameof(user));

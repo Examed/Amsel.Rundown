@@ -11,7 +11,8 @@ namespace Amsel.Models.Rundown.Persistence {
     public class RundownQueue : IGuidEntity, ISharedTenant, INamedEntity, IEqualExpression<RundownQueue> {
         protected RundownQueue() { }
 
-        public RundownQueue(string name, bool stopOnNew = false, bool isPublic = false) {
+        public RundownQueue(string name, bool stopOnNew = false, bool isPublic = false)
+        {
             Name = name;
             StopOnNew = stopOnNew;
             IsPublic = isPublic;
@@ -26,8 +27,8 @@ namespace Amsel.Models.Rundown.Persistence {
         public Guid? TenantId { get; set; }
 
         #region IEqualExpression methods
-        public Expression<Func<RundownQueue, bool>> IsEquals()
-            => x => (x.Id == Id) || x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase);
+        public Expression<Func<RundownQueue, bool>> IsEquals() =>
+            x => (x.Id == Id) || x.Name.Equals(Name, StringComparison.OrdinalIgnoreCase);
         #endregion
     }
 }

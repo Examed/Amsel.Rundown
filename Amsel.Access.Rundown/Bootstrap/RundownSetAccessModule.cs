@@ -4,7 +4,8 @@ using Autofac;
 namespace Amsel.Access.Rundown.Bootstrap {
     /// <inheritdoc/>
     public class RundownSetAccessModule : Module {
-        protected override void Load(ContainerBuilder builder) {
+        protected override void Load(ContainerBuilder builder)
+        {
             builder.RegisterType<RundownSetAccess>();
             builder.RegisterType<RundownSequenceAccess>();
             builder.RegisterType<RundownQueueAccess>();
