@@ -45,7 +45,7 @@ namespace Amsel.Access.Rundown.Services {
             return await response.DeserializeElseThrowAsync<IEnumerable<GuidNameEntity>>().ConfigureAwait(false);
         }
 
-        public virtual IEnumerable<RundownSet> GetRundownSets(Guid Id) => GetRundownSetsAsync(Id).Result;
+        public virtual IEnumerable<RundownSet> GetRundownSets(Guid Id) => GetRundownSetsAsync(Id).GetAwaiter().GetResult();
 
         public virtual async Task<IEnumerable<RundownSet>> GetRundownSetsAsync(Guid Id)
         {
