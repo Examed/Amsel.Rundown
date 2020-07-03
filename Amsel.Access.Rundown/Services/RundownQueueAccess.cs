@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Amsel.Access.Rundown.Services {
     public class RundownQueueAccess : CRUDAccess<RundownQueue> {
-        public RundownQueueAccess(IAuthenticationService authenticationService, TenantName tenant)
+        public RundownQueueAccess(IAuthenticationTokenService authenticationService, TenantName tenant)
             : base(tenant, authenticationService) { }
 
         [NotNull]

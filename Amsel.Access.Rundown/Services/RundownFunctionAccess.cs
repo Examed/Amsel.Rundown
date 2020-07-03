@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Amsel.Access.Rundown.Services {
     public class RundownFunctionAccess : CRUDAccess<RundownFunction> {
-        public RundownFunctionAccess(IAuthenticationService authenticationService, TenantName tenant)
+        public RundownFunctionAccess(IAuthenticationTokenService authenticationService, TenantName tenant)
             : base(tenant, authenticationService) { }
 
         public UriBuilder GetByHandlerAddress =>

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Amsel.Access.Rundown.Services {
     public class RundownCompositesAccess : CRUDAccess<CompositeEntity> {
-        public RundownCompositesAccess(IAuthenticationService authenticationService, TenantName tenant)
+        public RundownCompositesAccess(IAuthenticationTokenService authenticationService, TenantName tenant)
             : base(tenant, authenticationService) { }
 
         public UriBuilder GetComponentsAddress =>
