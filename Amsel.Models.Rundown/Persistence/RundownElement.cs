@@ -72,6 +72,7 @@ namespace Amsel.Models.Rundown.Persistence {
         [Owned, ComplexType]
         public class RundownElementValue : RundownValue {
             protected RundownElementValue() { }
+
             public RundownElementValue([NotNull] string parameterName, string value) : base(parameterName, value) { }
         }
     }

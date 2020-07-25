@@ -23,6 +23,7 @@ namespace Amsel.Models.Rundown.Persistence {
     public class RundownSet : RundownSetBase, ITenantEntity {
         [JsonConstructor]
         protected RundownSet() { }
+
         public RundownSet([NotNull] string name) => Name = name ?? throw new ArgumentNullException(nameof(name));
 
         public RundownSet([NotNull] string name, RundownQueue queue, params RundownElement[] elementList)
@@ -100,7 +101,9 @@ namespace Amsel.Models.Rundown.Persistence {
             Table("RundownSets_Sequences_Value")]
             public class RundownSequenceValue : RundownValue {
                 protected RundownSequenceValue() { }
+
                 public RundownSequenceValue([NotNull] string parameterName, string value) : base(parameterName, value) { }
+
                 public RundownSequenceValue(Guid elementId, string parameterName, string value) : base(parameterName, value) =>
                     ElementId = elementId;
 
