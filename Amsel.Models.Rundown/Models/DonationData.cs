@@ -2,10 +2,13 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Amsel.Models.Rundown.Models {
-    [ComplexType]
-    public class DonationData : DataEntity {
-        protected DonationData() { }
+namespace Amsel.Models.Rundown.Models
+{
+    public class DonationData : DataEntity
+    {
+        protected DonationData()
+        {
+        }
 
         public DonationData(string user, double amount)
         {
@@ -15,6 +18,7 @@ namespace Amsel.Models.Rundown.Models {
         }
 
         public virtual double Amount { get; set; }
+
         public virtual string User { get; set; }
 
         public override object GetData() => new { Amount, User };
