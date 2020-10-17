@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Amsel.Framework\Amsel.Framework.Base\Amsel.Framework.Base.csproj" />
     <ProjectReference Include="..\..\..\Amsel.Framework\Amsel.Framework.Composites\Amsel.Framework.Composites\Amsel.Framework.Composites.csproj" />
+    <ProjectReference Include="..\..\..\Amsel.Rundown\Amsel.Rundown.Domain\Amsel.Rundown.Domain\Amsel.Rundown.Domain.csproj" />
     <ProjectReference Include="..\..\Amsel.Tenant\Amsel.Model.Tenant\Amsel.Model.Tenant.csproj" />
     <ProjectReference Include="..\..\Amsel.Tenant\Amsel.Model.Tenant\Amsel.Model.Tenant.csproj" />
     <ProjectReference Include="..\Amsel.Enums.Rundown\Amsel.Enums.Rundown.csproj" />

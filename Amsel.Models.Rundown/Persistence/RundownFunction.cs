@@ -2,6 +2,7 @@
 using Amsel.Framework.Base.Interfaces;
 using Amsel.Model.Tenant.Interfaces;
 using Amsel.Model.Tenant.TenantModels;
+using Amsel.Rundown.Domain.Models.LogicEntities;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using System;
