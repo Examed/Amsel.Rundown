@@ -1,5 +1,4 @@
-﻿using Amsel.Model.Tenant.TenantModels;
-using Amsel.Rundown.Domain.Models.LogicEntities;
+﻿using Amsel.Rundown.Domain.Models.LogicEntities;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 

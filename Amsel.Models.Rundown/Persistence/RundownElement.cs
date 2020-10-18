@@ -1,7 +1,6 @@
 ﻿using Amsel.Enums.Rundown.Enums;
 using Amsel.Framework.Base.Attributes;
 using Amsel.Framework.Base.Interfaces;
-using Amsel.Model.Tenant.TenantModels;
 using Amsel.Models.Rundown.Models;
 using Amsel.Rundown.Domain.Models.LogicEntities;
 using JetBrains.Annotations;
